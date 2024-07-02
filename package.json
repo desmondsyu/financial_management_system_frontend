@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@heroicons/react": "^2.1.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.3",
+    "flow-bin": "^0.238.3",
+    "fortawesome": "^0.0.1-security",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -15,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   },
   "eslintConfig": {
     "extends": [
