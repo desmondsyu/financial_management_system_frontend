@@ -1,13 +1,15 @@
+import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './style/App.css';
+import Page from './homepage/page.tsx'
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <p className='text-5xl font-bold underline'>
+          Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -17,9 +19,8 @@ function App() {
         >
           Learn React
         </a>
+        <Page />
       </header>
     </div>
   );
 }
-
-export default App;
