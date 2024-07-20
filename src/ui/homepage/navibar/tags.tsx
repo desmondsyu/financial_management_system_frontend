@@ -1,4 +1,3 @@
-import React from "react";
 import { BanknotesIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";

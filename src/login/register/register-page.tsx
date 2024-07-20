@@ -1,5 +1,4 @@
-import React from "react";
-import RegisterForm from "../../ui/login/register-form.tsx";
+import RegisterForm from "../../ui/login/register-form";
 
 export default function Page() {
     return (

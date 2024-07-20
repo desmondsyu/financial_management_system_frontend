@@ -1,5 +1,3 @@
-import React from "react";
-
 type Textfield = {
     type: "text" | "email" | "number" | "date",
     label?: string,

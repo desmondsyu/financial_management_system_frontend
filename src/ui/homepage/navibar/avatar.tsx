@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import MenuItems from "./menuitems.tsx";
+import { useState } from "react";
+import MenuItems from "./menuitems";
 
 export default function Avatar() {
     const [showMenu, setShowMenu] = useState(false);

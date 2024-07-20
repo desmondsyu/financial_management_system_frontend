@@ -1,5 +1,4 @@
-import React from "react";
-import AuthCodeForm from "../../ui/login/authcode-form.tsx";
+import AuthCodeForm from "../../ui/login/authcode-form";
 
 export default function Page() {
     const label = "Register";

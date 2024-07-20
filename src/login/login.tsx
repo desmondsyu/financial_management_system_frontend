@@ -1,6 +1,5 @@
-import React from "react";
-import Button from '../ui/button.tsx';
-import Textfield from "../ui/textfield.tsx";
+import Button from '../ui/button';
+import Textfield from "../ui/textfield";
 import Logo from "../ui/logo.tsx";
 
 export default function Page() {

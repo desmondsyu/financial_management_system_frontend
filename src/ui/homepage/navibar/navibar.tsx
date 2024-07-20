@@ -1,7 +1,6 @@
-import React from "react";
-import Logo from "../../logo.tsx";
-import Tags from "./tags.tsx";
-import Avatar from "./avatar.tsx";
+import Logo from "../../logo";
+import Tags from "./tags";
+import Avatar from "./avatar";
 
 export default function Navibar() {
     return (

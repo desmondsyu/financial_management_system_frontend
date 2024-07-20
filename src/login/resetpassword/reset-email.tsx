@@ -1,5 +1,4 @@
-import React from "react";
-import EnterEmailForm from "../../ui/login/enter-email-form.tsx";
+import EnterEmailForm from "../../ui/login/enter-email-form";
 
 export default function Page(){
     return (

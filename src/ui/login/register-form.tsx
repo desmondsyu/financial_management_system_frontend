@@ -1,7 +1,5 @@
-import React from "react";
-import Button from "../button.tsx";
-import Textfield from "../textfield.tsx";
-import { useNavigate } from "react-router-dom";
+import Button from "../button";
+import Textfield from "../textfield";
 
 export default function RegisterForm() {
 

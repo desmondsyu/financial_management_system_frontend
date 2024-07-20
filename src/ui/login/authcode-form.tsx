@@ -1,8 +1,7 @@
-import React from "react";
-import Button from "../button.tsx";
-import Textfield from "../textfield.tsx";
+import Button from "../button";
+import Textfield from "../textfield";
 
-export default function AuthCodeForm({ label }) {
+export default function AuthCodeForm({ label }: {label: string}) {
     return (
         <div>
             <p className="text-center text-lg font-bold">An email with code have been sent to your mailbox.</p>

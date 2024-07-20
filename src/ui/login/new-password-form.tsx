@@ -1,6 +1,5 @@
-import React from "react";
-import Button from "../button.tsx";
-import Textfield from "../textfield.tsx";
+import Button from "../button";
+import Textfield from "../textfield";
 
 export default function NewPwForm() {
     return (

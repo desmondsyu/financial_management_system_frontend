@@ -1,5 +1,4 @@
-import React from "react";
-import NewPwForm from "../../ui/login/new-password-form.tsx";
+import NewPwForm from "../../ui/login/new-password-form";
 
 export default function Page(){
     return (

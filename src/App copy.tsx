@@ -1,19 +1,19 @@
-import Login from './login/login.tsx';
-import Register from './login/register/register-page.tsx';
-import RegisterAuthCode from './login/register/register-authcode.tsx';
-import RegisterFinish from './login/register/register-finish.tsx';
-import ResetEnterEmail from './login/resetpassword/reset-email.tsx';
-import ResetAuthCode from './login/resetpassword/reset-authcode.tsx';
-import ResetSetNew from './login/resetpassword/reset-newpw.tsx';
-import ResetFinsh from './login/resetpassword/reset-finish.tsx';
+import Login from './login/login';
+import Register from './login/register/register-page';
+import RegisterAuthCode from './login/register/register-authcode';
+import RegisterFinish from './login/register/register-finish';
+import ResetEnterEmail from './login/resetpassword/reset-email';
+import ResetAuthCode from './login/resetpassword/reset-authcode';
+import ResetSetNew from './login/resetpassword/reset-newpw';
+import ResetFinsh from './login/resetpassword/reset-finish';
 
-import Layout from './homepage/layout.tsx';
-import Transactions from './homepage/transactions/transactions.tsx';
-import Dashboard from './homepage/dashboard/dashboard.tsx';
-import Profile from './homepage/menuitems/profile.tsx';
-import Books from './homepage/menuitems/books.tsx';
-import Category from './homepage/menuitems/category.tsx';
-import Report from './homepage/menuitems/report.tsx';
+import Layout from './homepage/layout';
+import Transactions from './homepage/transactions/transactions';
+import Dashboard from './homepage/dashboard/dashboard';
+import Profile from './homepage/menuitems/profile';
+import Books from './homepage/menuitems/books';
+import Category from './homepage/menuitems/category';
+import Report from './homepage/menuitems/report';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
