@@ -1,3 +1,5 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Login from './login/login.tsx';
 import Register from './login/register/register-page.tsx';
 import RegisterAuthCode from './login/register/register-authcode.tsx';
@@ -10,11 +12,11 @@ import ResetFinsh from './login/resetpassword/reset-finish.tsx';
 import Layout from './homepage/layout.tsx';
 import Transactions from './homepage/transactions/transactions.tsx';
 import Dashboard from './homepage/dashboard/dashboard.tsx';
+
 import Profile from './homepage/menuitems/profile.tsx';
 import Books from './homepage/menuitems/books.tsx';
 import Category from './homepage/menuitems/category.tsx';
 import Report from './homepage/menuitems/report.tsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {

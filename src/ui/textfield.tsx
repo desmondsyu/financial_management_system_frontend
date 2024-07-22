@@ -1,5 +1,5 @@
 type Textfield = {
-    type: "text" | "email" | "number" | "date",
+    type: "text" | "email" | "number" | "date" | "button",
     label?: string,
     onChange?: React.ChangeEventHandler<HTMLInputElement>,
     placeholder?: string,

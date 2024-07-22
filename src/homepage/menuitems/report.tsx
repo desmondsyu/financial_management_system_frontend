@@ -1,5 +1,7 @@
+import ReportForm from "../../ui/menuitems/report/report-form";
+
 export default function Page(){
     return (
-        <p>Report page</p>
+        <ReportForm />
     );
 }
