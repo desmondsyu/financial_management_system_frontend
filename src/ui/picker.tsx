@@ -6,7 +6,6 @@ type DataPicker = {
 
 export default function Picker(
     {
-        labelFor,
         labelText,
         options,
     }: DataPicker

@@ -37,12 +37,6 @@ const styles = StyleSheet.create({
     }
 });
 
-// function DataTable() {
-//     return (
-
-//     );
-// }
-
 export const MyDocument = () => {
     return (
         <Document>
