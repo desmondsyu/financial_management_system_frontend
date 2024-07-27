@@ -1,10 +1,5 @@
-type Person = {
-    id: number,
-    first_name: string,
-    last_name: string,
-    email: string,
-    gender: string | null,
-}
+import type { Person, Transactions } from "./definitions";
+
 
 export const people: Person[] = [
     {
@@ -706,5 +701,281 @@ export const people: Person[] = [
         "last_name": "Wilgar",
         "email": "swilgar2r@merriam-webster.com",
         "gender": "Female"
+    }
+];
+
+export const transactions: Transactions[] = [
+    {
+        "id": 1,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash1",
+        "transactionGroup": {
+            "id": 1,
+            "name": "Monthly Income",
+            "transactionType": {
+                "id": 1,
+                "name": "Income"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 1,
+            "name": "Salary"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-01T00:00:00",
+        "amount": 100.0,
+        "description": "Groceries shopping",
+        "balance": 100.0
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash2",
+        "transactionGroup": {
+            "id": 1,
+            "name": "Monthly Income",
+            "transactionType": {
+                "id": 1,
+                "name": "Income"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 1,
+            "name": "Salary"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-02T00:00:00",
+        "amount": 200.0,
+        "description": "Groceries shopping",
+        "balance": 300.0
+    },
+    {
+        "id": 3,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash3",
+        "transactionGroup": {
+            "id": 1,
+            "name": "Monthly Income",
+            "transactionType": {
+                "id": 1,
+                "name": "Income"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 1,
+            "name": "Salary"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-10T00:00:00",
+        "amount": 300.0,
+        "description": "Groceries shopping",
+        "balance": 600.0
+    },
+    {
+        "id": 4,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash4",
+        "transactionGroup": {
+            "id": 1,
+            "name": "Monthly Income",
+            "transactionType": {
+                "id": 1,
+                "name": "Income"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 1,
+            "name": "Salary"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-14T00:00:00",
+        "amount": 400.0,
+        "description": "Groceries shopping",
+        "balance": 400.0
+    },
+    {
+        "id": 5,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash5",
+        "transactionGroup": {
+            "id": 2,
+            "name": "Monthly Outcome",
+            "transactionType": {
+                "id": 2,
+                "name": "Outcome"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 2,
+            "name": "Grocery"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-13T00:00:00",
+        "amount": -100.0,
+        "description": "Groceries shopping",
+        "balance": 0.0
+    },
+    {
+        "id": 6,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash6",
+        "transactionGroup": {
+            "id": 2,
+            "name": "Monthly Outcome",
+            "transactionType": {
+                "id": 2,
+                "name": "Outcome"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 2,
+            "name": "Grocery"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-14T12:00:00",
+        "amount": -200.0,
+        "description": "Groceries shopping",
+        "balance": 200.0
+    },
+    {
+        "id": 7,
+        "user": {
+            "id": 1,
+            "username": "CustomerA",
+            "password": "password",
+            "dob": "1990-01-01T00:00:00",
+            "email": "customerA@example.com",
+            "mStatus": "single",
+            "active": true
+        },
+        "hashcode": "hash7",
+        "transactionGroup": {
+            "id": 2,
+            "name": "Monthly Outcome",
+            "transactionType": {
+                "id": 2,
+                "name": "Outcome"
+            },
+            "user": {
+                "id": 1,
+                "username": "CustomerA",
+                "password": "password",
+                "dob": "1990-01-01T00:00:00",
+                "email": "customerA@example.com",
+                "mStatus": "single",
+                "active": true
+            }
+        },
+        "label": {
+            "id": 2,
+            "name": "Grocery"
+        },
+        "createdAt": "2024-07-20T15:28:14",
+        "transactionDate": "2024-07-10T12:00:00",
+        "amount": -500.0,
+        "description": "Groceries shopping",
+        "balance": 100.0
     }
 ];

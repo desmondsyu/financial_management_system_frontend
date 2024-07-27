@@ -1,5 +1,9 @@
+import TransactionsTable from "../../ui/homepage/transactions/tx-table";
+
 export default function Page(){
     return (
-        <p>Transaction page</p>
+        <>
+            <TransactionsTable />
+        </>
     );
 }
