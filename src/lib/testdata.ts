@@ -1,7 +1,4 @@
-import type { Person, Transactions } from "./definitions";
-
-
-export const people: Person[] = [
+export const people = [
     {
         "id": 1,
         "first_name": "Christabel",
@@ -704,7 +701,7 @@ export const people: Person[] = [
     }
 ];
 
-export const transactions: Transactions[] = [
+export const transactions = [
     {
         "id": 1,
         "user": {

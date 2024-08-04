@@ -1,11 +1,4 @@
-type Textfield = {
-    type: "text" | "email" | "number" | "date" | "button",
-    label?: string,
-    onChange?: React.ChangeEventHandler<HTMLInputElement>,
-    placeholder?: string,
-    disabled: boolean,
-    required: boolean,
-};
+import type { Textfield } from "../lib/definitions";
 
 export default function Textfield(
     {

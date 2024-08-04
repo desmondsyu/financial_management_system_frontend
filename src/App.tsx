@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from "./error-page.tsx";
+import AuthProvider from 'react-auth-kit';
+import createStore from 'react-auth-kit/createStore';
 
 import Login from './login/login.tsx';
 import Register from './login/register/register-page.tsx';
@@ -67,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "transactions/:transactionId/edit"
-        
+
       },
       {
         path: "dashboard",
@@ -93,8 +95,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+// const store = createStore({
+//   authName: '_auth',
+//   authType: 'cookie',
+//   cookieDomain: window.location.hostname,
+//   cookieSecure: window.location.protocol === 'https:',
+// });
+
 export default function App() {
   return (
+    // <AuthProvider store={store}>
       <RouterProvider router={router} />
+    // </AuthProvider>
   );
 }
