@@ -23,7 +23,7 @@ export default function Button(
     };
 
     return (
-        <div className="flex justify-center p-5">
+        <div className="flex justify-center p-5 z-0">
             <button
                 className="w-4/5 leading-10 text-md bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-105 disabled:bg-blue-300 disabled:cursor-not-allowed"
                 onClick={handleClick}

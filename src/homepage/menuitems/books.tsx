@@ -3,7 +3,7 @@ import Button from "../../ui/button";
 import Search from "../../ui/search";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AddBook } from "../../lib/actions";
+import { addBook } from "../../lib/actions";
 import type { Labels } from "../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { fetchBooks } from "../../lib/data";
@@ -34,7 +34,7 @@ export default function Page() {
     const handleCreate = async () => {
         try {
             setLoading(true);
-            await AddBook(newBookName);
+            await addBook(newBookName);
 
             const newBook: Labels = {
                 id: 0,
@@ -67,7 +67,7 @@ export default function Page() {
                 </div>
             </div>
             {isCreating && (
-                <div className="w-3/4 p-4 bg-white border border-gray-200 rounded shadow-sm">
+                <div className="flex w-3/4 p-4 bg-white border border-gray-200 rounded shadow-sm">
                     <input
                         type="text"
                         value={newBookName}

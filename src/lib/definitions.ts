@@ -15,19 +15,18 @@ export type User = {
     id: number,
     username: string,
     password: string,
-    dob?: Date,
+    dob?: string,
     email: string,
-    getmStatus?: string,
+    mStatus?: string,
     active: boolean,
 }
 
 export type Labels = {
     id: number,
     name: string,
-    user?: User,
 }
 
-export type Type = {
+export type TransactionType = {
     id: number,
     name: string,
 }
@@ -35,7 +34,7 @@ export type Type = {
 export type Category = {
     id: number,
     name: string,
-    transactionType: Type,
+    transactionType: TransactionType,
     user?: User,
 }
 

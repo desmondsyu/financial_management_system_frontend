@@ -1,12 +1,23 @@
-import type { Labels, Category } from "./definitions";
-import { curUserEmail, curUserPassword, curUserName } from "./currentuser";
+import type { Labels, Category, TransactionType } from "./definitions";
+import {  testUser1 } from "./currentuser";
+
+export const transactionType: TransactionType[] = [
+    {
+        id: 1,
+        name: "Income",
+    },
+    {
+        id: 2,
+        name: "Outcome",
+    },
+]
 
 export async function fetchBooks(): Promise<Labels[]> {
     try {
         const response = await fetch("/labels", {
             method: "GET",
             headers: {
-                "Authorization": `Basic ${btoa(`${curUserEmail}:${curUserPassword}`)}`,
+                "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
             }
         });
 
@@ -24,10 +35,10 @@ export async function fetchBooks(): Promise<Labels[]> {
 
 export async function fetchCategories(): Promise<Category[]> {
     try {
-        const response = await fetch(`/transaction-groups?username=${curUserName}`, {
+        const response = await fetch(`/transaction-groups?username=${testUser1.username}`, {
             method: "GET",
             headers: {
-                "Authorization": `Basic ${btoa(`${curUserEmail}:${curUserPassword}`)}`,
+                "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
             }
         });
 

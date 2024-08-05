@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchBooks } from "../../../lib/data";
 import type { Labels, FetchError } from "../../../lib/definitions";
 import { PencilIcon, TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { EditBook, DeleteBook } from "../../../lib/actions";
+import { editBook, deleteBook } from "../../../lib/actions";
 
 interface BookListProps {
     searchTerm: string,
@@ -38,7 +37,7 @@ export default function BookList({ searchTerm, books }: BookListProps) {
     const handleDelete = async (id: number) => {
         try {
             setLoading(true);
-            await DeleteBook(id);
+            await deleteBook(id);
             if (data) {
                 setData(data.filter((book) => book.id !== id));
             }
@@ -52,7 +51,7 @@ export default function BookList({ searchTerm, books }: BookListProps) {
     const handleSave = async (id: number) => {
         try {
             setLoading(true);
-            const updatedBook = await EditBook(id, newName);
+            const updatedBook = await editBook(id, newName);
             if (data) {
                 const updatedData = data.map((book) => (book.id === id ? updatedBook : book));
                 setData(updatedData);
@@ -96,7 +95,7 @@ export default function BookList({ searchTerm, books }: BookListProps) {
                                             type="text"
                                             value={newName}
                                             onChange={(e) => setNewName(e.target.value)}
-                                            className="border border-gray-300 px-2 py-1 rounded"
+                                            className="flex-grow border border-gray-300 px-2 py-1 rounded"
                                         />
                                         <div className="flex items-center space-x-2">
                                             <button
@@ -112,7 +111,6 @@ export default function BookList({ searchTerm, books }: BookListProps) {
                                                 <XMarkIcon className="h-5 w-5" />
                                             </button>
                                         </div>
-
                                     </div>
                                 </>
                             ) : (
