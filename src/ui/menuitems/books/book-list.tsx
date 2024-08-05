@@ -5,25 +5,21 @@ import { PencilIcon, TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24
 import { EditBook, DeleteBook } from "../../../lib/actions";
 
 interface BookListProps {
-    searchTerm: string;
+    searchTerm: string,
+    books: Labels[],
 }
 
-export default function BookList({ searchTerm }: BookListProps) {
-    const [data, setData] = useState<Labels[] | null>(null);
+export default function BookList({ searchTerm, books }: BookListProps) {
+    const [data, setData] = useState<Labels[] | null>(books);
     const [filteredData, setFilteredData] = useState<Labels[] | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isEditing, setIsEditing] = useState<number | null>(null);
     const [newName, setNewName] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-
+    
     useEffect(() => {
-        fetchBooks()
-            .then((fetchedData) => {
-                setData(fetchedData);
-                setFilteredData(fetchedData);
-            })
-            .catch(setError);
-    }, []);
+        setData(books);
+    }, [books]);
 
     useEffect(() => {
         if (data) {
@@ -85,42 +81,61 @@ export default function BookList({ searchTerm }: BookListProps) {
     }
 
     return (
-        <div>
-            {loading && <p>Processing...</p>}
+        <div className="w-full p-4">
+            {loading && <p className="text-gray-600">Processing...</p>}
             {filteredData.length === 0 ? (
-                <p>No matching results.</p>
-            ) : (<ul>
-                {filteredData.map((book) => (
-                    <li key={book.id} className="flex items-center space-x-2">
-                        {isEditing === book.id ? (
-                            <>
-                                <input
-                                    type="text"
-                                    value={newName}
-                                    onChange={(e) => setNewName(e.target.value)}
-                                    className="border px-2 py-1"
-                                />
-                                <button onClick={() => handleSave(book.id)} className="text-green-500">
-                                    <CheckIcon className="h-5 w-5" />
-                                </button>
-                                <button onClick={handleCancel} className="text-red-500">
-                                    <XMarkIcon className="h-5 w-5" />
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <span>{book.name}</span>
-                                <button onClick={() => handleEditClick(book.id, book.name)} className="text-blue-500">
-                                    <PencilIcon className="h-5 w-5" />
-                                </button>
-                                <button onClick={() => handleDelete(book.id)} className="text-red-500">
-                                    <TrashIcon className="h-5 w-5" />
-                                </button>
-                            </>
-                        )}
-                    </li>
-                ))}
-            </ul>)}
+                <p className="text-gray-600">No matching results.</p>
+            ) : (
+                <ul className="space-y-2">
+                    {filteredData.map((book) => (
+                        <li key={book.id} className="justify-between p-2 bg-white border border-gray-200 rounded shadow-sm">
+                            {isEditing === book.id ? (
+                                <>
+                                    <div className="flex items-center space-x-2">
+                                        <input
+                                            type="text"
+                                            value={newName}
+                                            onChange={(e) => setNewName(e.target.value)}
+                                            className="border border-gray-300 px-2 py-1 rounded"
+                                        />
+                                        <div className="flex items-center space-x-2">
+                                            <button
+                                                onClick={() => handleSave(book.id)}
+                                                className="text-green-500 hover:text-green-700"
+                                            >
+                                                <CheckIcon className="h-5 w-5" />
+                                            </button>
+                                            <button
+                                                onClick={handleCancel}
+                                                className="text-red-500 hover:text-red-700"
+                                            >
+                                                <XMarkIcon className="h-5 w-5" />
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="flex items-center space-x-2">
+                                    <span className="flex-grow text-gray-800">{book.name}</span>
+                                    <button
+                                        onClick={() => handleEditClick(book.id, book.name)}
+                                        className="text-blue-500 hover:text-blue-700"
+                                    >
+                                        <PencilIcon className="h-5 w-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(book.id)}
+                                        className="text-red-500 hover:text-red-700"
+                                    >
+                                        <TrashIcon className="h-5 w-5" />
+                                    </button>
+                                </div>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }

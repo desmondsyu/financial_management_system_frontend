@@ -1,8 +1,8 @@
 import type { Labels } from "./definitions";
 import { curUserEmail, curUserPassword } from "./currentuser";
 
-export async function AddBook(id: number, name: string) {
-    const reponse = await fetch("/labels", {
+export async function AddBook(name: string): Promise<void> {
+    const response = await fetch("/labels", {
         method: "POST",
         headers: {
             "Accept": "*/*",
@@ -10,14 +10,17 @@ export async function AddBook(id: number, name: string) {
             "Authorization": `Basic ${btoa(`${curUserEmail}:${curUserPassword}`)}`,
         },
         body: JSON.stringify({
-            "id": id,
             "name": name
         }),
-    })
+    });
+
+    if(!response.ok){
+        throw new Error('Failed to create the book');
+    }   
 }
 
 export async function EditBook(id: number, newName: string): Promise<Labels> {
-    const reponse = await fetch("/labels", {
+    const response = await fetch("/labels", {
         method: "PUT",
         headers: {
             "Accept": "*/*",
@@ -30,15 +33,15 @@ export async function EditBook(id: number, newName: string): Promise<Labels> {
         }),
     })
 
-    if(!reponse.ok) {
+    if (!response.ok) {
         throw new Error('Failed to update the book');
     }
 
-    return reponse.json();
+    return response.json();
 }
 
 export async function DeleteBook(id: number): Promise<void> {
-    const reponse = await fetch(`/labels/${id}`, {
+    const response = await fetch(`/labels/${id}`, {
         method: "DELETE",
         headers: {
             "Accept": "*/*",
@@ -46,7 +49,7 @@ export async function DeleteBook(id: number): Promise<void> {
         },
     })
 
-    if(!reponse.ok) {
+    if (!response.ok) {
         throw new Error('Failed to delete the book');
     }
 }

@@ -36,6 +36,6 @@ export type Category = {
     id: number,
     name: string,
     transactionType: Type,
-    user: User,
+    user?: User,
 }
 
