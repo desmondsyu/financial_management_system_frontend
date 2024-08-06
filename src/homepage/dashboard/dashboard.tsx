@@ -1,20 +1,20 @@
-import { Card, ProgressBar } from "@tremor/react";
+import { Card, CategoryBar } from "@tremor/react";
+import { progress } from "../../lib/testdata";
 
 export default function Page() {
     return (
         <>
-            <Card className="mx-auto max-w-md">
-                <h4 className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-                    Sales
-                </h4>
-                <p className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    $71,465
+            <Card className="mx-auto max-w-sm">
+                <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
+                    <span>Monthly spending</span>
+                    <span>{progress.percent_of_spending}</span>
                 </p>
-                <p className="mt-4 flex items-center justify-between text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-                    <span>32% of annual target</span>
-                    <span>$225,000</span>
-                </p>
-                <ProgressBar value={32} className="mt-2" />
+                <CategoryBar
+                    values={[progress.expected_spending, progress.lower_bound_yellow_max - progress.expected_spending, progress.upper_bound_red_max - progress.lower_bound_yellow_max]}
+                    colors={['emerald', 'yellow', 'rose']}
+                    markerValue={progress.current_spending}
+                    className="mt-3"
+                />
             </Card>
         </>
     );

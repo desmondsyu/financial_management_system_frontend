@@ -1,5 +1,3 @@
-
-
 import type { User } from "./definitions";
 
 export const testUser1: User = {

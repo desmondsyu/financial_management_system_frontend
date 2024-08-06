@@ -976,3 +976,11 @@ export const transactions = [
         "balance": 100.0
     }
 ];
+
+export const progress = {
+    'current_spending': 700,
+    'expected_spending': 600,
+    'lower_bound_yellow_max': 800,
+    'upper_bound_red_max': 1000,
+    'percent_of_spending': "117%",
+}

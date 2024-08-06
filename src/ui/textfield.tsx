@@ -8,6 +8,8 @@ export default function Textfield(
         placeholder,
         disabled,
         required,
+        value,
+        name,
     }: Textfield
 ) {
     return (
@@ -20,6 +22,8 @@ export default function Textfield(
                 placeholder={placeholder}
                 disabled={disabled}
                 required={required}
+                name={name}
+                value={value}
             />
         </div>
     );

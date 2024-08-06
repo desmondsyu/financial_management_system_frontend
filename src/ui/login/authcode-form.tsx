@@ -13,7 +13,6 @@ export default function AuthCodeForm({ label }: {label: string}) {
                 <div className="basis-1/2">
                     <Button label="Resend" disabled={false} />
                 </div>
-
             </div>
         </div>
     );
