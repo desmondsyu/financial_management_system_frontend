@@ -1,5 +1,6 @@
 import type { Labels, Category, TransactionType, Transaction } from "./definitions";
 import { testUser1 } from "./currentuser";
+import axios from "axios";
 
 export const transactionType: TransactionType[] = [
     {
@@ -13,21 +14,33 @@ export const transactionType: TransactionType[] = [
 ]
 
 export async function fetchBooks(): Promise<Labels[]> {
+    // try {
+    //     const response = await fetch("http://107.20.240.135:8088/labels", {
+    //         method: "GET",
+    //         headers: {
+    //             "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
+    //         }
+    //     });
+
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+    //     const data: Labels[] = await response.json();
+    //     return data;
+    // } catch (error: any) {
+    //     console.error("Fetch error:", error);
+    //     throw new Error(error.message);
+    // }
     try {
-        const response = await fetch("/labels", {
-            method: "GET",
+        const response = await axios.get("http://107.20.240.135:8088/labels", {
             headers: {
                 "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-            }
+            },
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data: Labels[] = await response.json();
-        return data;
+        return response.data;
     } catch (error: any) {
-        console.error("Fetch error:", error);
+        console.error(error);
         throw new Error(error.message);
     }
 }

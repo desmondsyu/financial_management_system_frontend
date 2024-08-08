@@ -1,7 +1,22 @@
 import { Card, CategoryBar } from "@tremor/react";
 import { progress } from "../../lib/testdata";
+import Button from "../../ui/button";
+import { getSpendingData } from "../../lib/bi-action";
+import { useState } from "react";
 
 export default function Page() {
+    const [spendingData, setSpendingData] = useState<any>(null); // State to store spending data
+
+    const handleClick = async () => {
+        try {
+            const data = await getSpendingData();
+            console.log(data); // Log the fetched data
+            setSpendingData(data); // Update state with fetched data
+        } catch (error) {
+            console.error("Error fetching spending data:", error);
+        }
+    };
+
     return (
         <>
             <Card className="mx-auto max-w-sm">
@@ -16,6 +31,7 @@ export default function Page() {
                     className="mt-3"
                 />
             </Card>
+            <Button label="test" onClick={handleClick} disabled={false}></Button>
         </>
     );
 }

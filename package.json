@@ -1,7 +1,6 @@
 {
   "name": "cashcalm",
   "version": "0.1.0",
-  "proxy": "http://107.20.240.135:8088",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^2.1.2",

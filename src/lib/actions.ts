@@ -2,7 +2,7 @@ import type { Category, Labels, TransactionType, User } from "./definitions";
 import { testUser1 } from "./currentuser";
 
 export async function addBook(name: string): Promise<void> {
-    const response = await fetch("/labels", {
+    const response = await fetch("http://107.20.240.135:8088/labels", {
         method: "POST",
         headers: {
             "Accept": "*/*",
