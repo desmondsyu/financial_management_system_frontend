@@ -1,6 +1,6 @@
 import type { Labels, Category, TransactionType, Transaction } from "./definitions";
-import { testUser1 } from "./currentuser";
 import axios from "axios";
+import { getUserFromStorage } from "./currentuser";
 
 export const transactionType: TransactionType[] = [
     {
@@ -9,34 +9,20 @@ export const transactionType: TransactionType[] = [
     },
     {
         id: 2,
-        name: "Outcome",
+        name: "Expense",
     },
 ]
 
 export async function fetchBooks(): Promise<Labels[]> {
-    // try {
-    //     const response = await fetch("http://107.20.240.135:8088/labels", {
-    //         method: "GET",
-    //         headers: {
-    //             "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-    //         }
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-    //     const data: Labels[] = await response.json();
-    //     return data;
-    // } catch (error: any) {
-    //     console.error("Fetch error:", error);
-    //     throw new Error(error.message);
-    // }
     try {
-        const response = await axios.get("http://107.20.240.135:8088/labels", {
-            headers: {
-                "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
+        const response = await axios.get("http://107.20.240.135:8088/labels",
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
             },
-        });
+        );
 
         return response.data;
     } catch (error: any) {
@@ -47,20 +33,16 @@ export async function fetchBooks(): Promise<Labels[]> {
 
 export async function fetchCategories(): Promise<Category[]> {
     try {
-        const response = await fetch(`/transaction-groups?username=${testUser1.username}`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data: Category[] = await response.json();
-        return data;
+        const response = await axios.get(`http://107.20.240.135:8088/transaction-groups?username=${getUserFromStorage()?.username}`,
+            {
+                headers: {
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+        return response.data;
     } catch (error: any) {
-        console.error("Fetch error:", error);
+        console.error(error);
         throw new Error(error.message);
     }
 }
@@ -87,21 +69,16 @@ export async function fetchTransactions({
     group,
 }: TransactionListProp): Promise<Transaction> {
     try {
-        const response = await fetch(`/transactions?page=${page}&size=${size}&sort=${sort}`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
+        const response = await axios.get(`http://107.20.240.135:8088/transactions?page=${page}&size=${size}&sort=${sort}`,
+            {
+                headers: {
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
             },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data: Transaction = await response.json();
-        console.log(data);
-        return data;
+        );
+        return response.data;
     } catch (error: any) {
-        console.error("Fetch error:", error);
+        console.error(error);
         throw new Error(error.message);
     }
 }

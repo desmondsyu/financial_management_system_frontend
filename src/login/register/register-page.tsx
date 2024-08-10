@@ -1,7 +1,7 @@
 import Textfield from "../../ui/textfield";
 import Button from "../../ui/button";
 import { useState } from "react";
-import { register, allUser } from "../../lib/login-actions";
+import { register } from "../../lib/login-actions";
 import { useNavigate } from "react-router-dom";
 
 export default function Page() {
@@ -33,7 +33,7 @@ export default function Page() {
 
         // const existCheck = async (email: string): Promise<boolean> => {
         //     try{
-        //         const users = await allUser();
+        //         const users = await fetchAllUser();
         //         return users.some((user) => user.email === email);
         //     }catch(error) {
         //         console.error("Error fetching users:", error);
@@ -43,7 +43,6 @@ export default function Page() {
 
         localStorage.setItem("registerFormData", JSON.stringify(formDataWithISODate));
 
-
         try {
             // const emailExists = await existCheck(formDataWithISODate.email);
 
@@ -51,6 +50,7 @@ export default function Page() {
             //     alert("Please use another email!");
             //     return;
             // }
+
             await register(formDataWithISODate);
             
             navigate("/register/auth")

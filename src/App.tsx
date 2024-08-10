@@ -104,8 +104,6 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    // <AuthProvider store={store}>
-      <RouterProvider router={router} />
-    // </AuthProvider>
+    <RouterProvider router={router} />
   );
 }

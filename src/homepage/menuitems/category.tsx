@@ -8,10 +8,8 @@ import type { Category, TransactionType } from "../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { fetchCategories } from "../../lib/data";
 import { clsx } from "clsx";
-
-// temp
-import { testUser1 } from "../../lib/currentuser";
 import { transactionType } from "../../lib/data";
+import { getUserFromStorage } from "../../lib/currentuser";
 
 export default function Page() {
     const [searchParams] = useSearchParams();
@@ -40,13 +38,13 @@ export default function Page() {
     const handleCreate = async () => {
         try {
             setLoading(true);
-            await addCategory(newCategoryName, newCategoryType, testUser1);
+            await addCategory(newCategoryName, newCategoryType, getUserFromStorage());
 
             const newCategory: Category = {
                 id: 0,
                 name: newCategoryName,
                 transactionType: newCategoryType,
-                user: testUser1,
+                user: getUserFromStorage(),
             }
 
             setCategories([newCategory, ...categories]);

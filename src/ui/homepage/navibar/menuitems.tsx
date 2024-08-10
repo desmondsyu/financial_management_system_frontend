@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const links = [
     {
@@ -17,13 +18,17 @@ const links = [
         name: "Report",
         href: "/report",
     },
-    {
-        name: "Log out",
-        href: "/"
-    }
 ];
 
 export default function MenuItems() {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        localStorage.clear();
+        navigate("/");
+    };
+
+
     return (
         <div className="py-1">
             {links.map((link) => {
@@ -37,6 +42,11 @@ export default function MenuItems() {
                     </Link>
                 );
             })}
+            <div
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={handleClick}>
+                Log out
+            </div>
         </div>
     );
 }

@@ -1,56 +1,88 @@
 import Button from '../ui/button';
 import Textfield from "../ui/textfield";
 import Logo from "../ui/logo.tsx";
-// import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import type { User } from '../lib/definitions.ts';
 
 export default function Page() {
-    // const signIn = useSignIn();
-    const [formData, setFormData] = useState({ "email": "", "token": "" });
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState(
+        {
+            "email": "",
+            "password": "",
+        }
+    );
+
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         try {
-            const response = await fetch("/verify", {
-                method: "POST",
-                headers: {
-                    "Accept": "*/*",
-                    "Content-Type": "application/json",
+            await axios.get("http://107.20.240.135:8088/labels",
+                {
+                    headers: {
+                        "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
+                        "Content-Type": "application/json",
+                    },
                 },
-                body: JSON.stringify({
-                    "email": formData.email,
-                    "token": formData.token
-                }),
-            });
+            );
 
-            console.log('Payload:', JSON.stringify({
-                email: formData.email,
-                token: formData.token
-            }));
+            const response = async (): Promise<User> => {
+                try {
+                    const response = await axios("http://107.20.240.135:8088/users",
+                        {
+                            headers: {
+                                "Accept": "*/*",
+                                "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
+                            },
+                        },
+                    );
+                    const users = response.data;
+                    const user = users.find((user: User) => user.email === formData.email);
+                    if (!user) {
+                        throw new Error("User not found");
+                    }
+                    return user;
+                } catch (error: any) {
+                    console.error(error);
+                    throw new Error(error.message);
+                }
+            };
+            const currentUser = await response();
+            localStorage.setItem("currentUserInfo", JSON.stringify(currentUser));
+            localStorage.setItem("authEmail", formData.email);
+            localStorage.setItem("authPw", formData.password);
 
-            if (response.ok) {
-                console.log("succeed");
-            } else {
-                console.log("failed");
-            }
-        } catch (e) {
-            console.error(e);
+            navigate("/transactions");
+        } catch (error: any) {
+            console.error(error);
+            alert("!")
         }
-    };
+    }
 
     return (
         <div className="flex w-screen h-screen">
-            
+
             <div className="w-2/3 px-5">
             </div>
             <form className="w-1/3 px-7 flex-col content-center" onSubmit={onSubmit}>
                 <Logo />
-                <Textfield type="email" label="Email" placeholder="Enter email address" disabled={false} required={true} 
-                // onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+                <Textfield
+                    type="email"
+                    label="Email"
+                    placeholder="Enter email address"
+                    disabled={false}
+                    required={true}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
-                <Textfield type="password" label="Password" placeholder="Enter password" disabled={false} required={true} 
-                // onChange={(e) => setFormData({ ...formData, token: e.target.value })} 
+                <Textfield
+                    type="password"
+                    label="Password"
+                    placeholder="Enter password"
+                    disabled={false}
+                    required={true}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
                 <p className="text-red-500 text-sm text-right"><a href="/resetpassword">Forgot password?</a></p>
                 <Button label="Sign in" disabled={false} />

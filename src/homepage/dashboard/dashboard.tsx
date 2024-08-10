@@ -1,7 +1,7 @@
 import { Card, CategoryBar } from "@tremor/react";
 import { progress } from "../../lib/testdata";
 import Button from "../../ui/button";
-import { getSpendingData } from "../../lib/bi-action";
+import { getSpendingData } from "../../lib/bi-actions";
 import { useState } from "react";
 
 export default function Page() {

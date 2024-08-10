@@ -1,111 +1,149 @@
 import type { Category, Labels, TransactionType, User } from "./definitions";
-import { testUser1 } from "./currentuser";
+import axios from "axios";
 
 export async function addBook(name: string): Promise<void> {
-    const response = await fetch("http://107.20.240.135:8088/labels", {
-        method: "POST",
-        headers: {
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-        body: JSON.stringify({
-            "name": name,
-        }),
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to create the book");
+    try {
+        const response = await axios.post("http://107.20.240.135:8088/labels",
+            {
+                name: name,
+            },
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
 }
 
 export async function editBook(id: number, newName: string): Promise<Labels> {
-    const response = await fetch("/labels", {
-        method: "PUT",
-        headers: {
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-        body: JSON.stringify({
-            "id": id,
-            "name": newName
-        }),
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to update the book");
+    try {
+        const response = await axios.put("http://107.20.240.135:8088/labels",
+            {
+                id: id,
+                name: newName,
+            },
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+        return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
-
-    return response.json();
 }
 
 export async function deleteBook(id: number): Promise<void> {
-    const response = await fetch(`/labels/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Accept": "*/*",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to delete the book");
+    try {
+        const response = await axios.delete(`http://107.20.240.135:8088/labels/${id}`,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
 }
 
-export async function addCategory(name: string, transactionType: TransactionType | null, user: User): Promise<void> {
-    const response = await fetch("/transaction-groups", {
-        method: "POST",
-        headers: {
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-        body: JSON.stringify({
-            "name": name,
-            "transactionType": transactionType,
-            "user": user,
-        }),
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to create the category");
+export async function addCategory(name: string, transactionType: TransactionType, user: User): Promise<void> {
+    try {
+        const response = await axios.post("http://107.20.240.135:8088/transaction-groups",
+            {
+                name: name,
+                transactionType: transactionType,
+                user: user
+            },
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
 }
 
-export async function editCategory(id: number, newName: string, newTransactionType: TransactionType): Promise<Category> {
-    const response = await fetch("/transaction-groups", {
-        method: "PUT",
-        headers: {
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-        body: JSON.stringify({
-
-        })
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to edit the category");
+export async function editCategory(newName: string, newTransactionType: TransactionType): Promise<Category> {
+    try {
+        const response = await axios.put("http://107.20.240.135:8088/transaction-groups",
+            {
+                name: newName,
+                newTransactionType: newTransactionType,
+            },
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+        return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
-
-    return response.json();
 }
 
-export async function deleteCategory(id: number): Promise<Labels> {
-    const response = await fetch(`/transaction-groups/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Accept": "*/*",
-            "Authorization": `Basic ${btoa(`${testUser1.email}:${testUser1.password}`)}`,
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to delete the category")
+export async function deleteCategory(id: number): Promise<void> {
+    try {
+        const response = await axios.delete(`http://107.20.240.135:8088/transaction-groups/${id}`,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
     }
+}
 
-    return response.json();
+export async function getReport({
+    from,
+    to,
+    label,
+    type,
+    group
+}: {
+    from?: string,
+    to?: string,
+    label?: string,
+    type?: number,
+    group?: string,
+}): Promise<any> {
+    try {
+        const response = await axios.get(`http://107.20.240.135:8088/transactions/pdf?from=${from}&to=${to}&label=${label}}&type=${type}&group=${group}`,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+        return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
 }
