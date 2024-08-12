@@ -4,6 +4,7 @@ import type { Category, FetchError, TransactionType } from "../../../lib/definit
 import { PencilIcon, TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { editCategory, deleteCategory } from "../../../lib/actions";
 import { clsx } from "clsx";
+import { getUserFromStorage } from "../../../lib/currentuser";
 
 interface CategoryListProps {
     searchTerm: string,
@@ -15,7 +16,7 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
     const [filteredData, setFilteredData] = useState<Category[] | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isEditing, setIsEditing] = useState<number | null>(null);
-    const [newType, setNewType] = useState<TransactionType>();
+    const [newType, setNewType] = useState<TransactionType | null>(null);
     const [newName, setNewName] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -32,46 +33,49 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
         }
     }, [searchTerm, data]);
 
-    const handleEditClick = (id: number, name: string) => {
+    const handleEditClick = (id: number, name: string, transactionType: TransactionType) => {
         setIsEditing(id);
         setNewName(name);
+        setNewType(transactionType)
     };
 
-    // const handleDelete = async (id: number) => {
-    //     try {
-    //         setLoading(true);
-    //         await deleteCategory(id);
-    //         if (data) {
-    //             setData(data.filter((book) => book.id !== id));
-    //         }
-    //     } catch (error: any) {
-    //         setError(error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    const handleDelete = async (id: number) => {
+        try {
+            setLoading(true);
+            await deleteCategory(id);
+            if (data) {
+                setData(data.filter((book) => book.id !== id));
+            }
+        } catch (error: any) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    // const handleSave = async (id: number) => {
-    //     try {
-    //         setLoading(true);
-    //         const updatedBook = await editCategory(id, newName, newType);
-    //         if (data) {
-    //             const updatedData = data.map((book) => (book.id === id ? updatedBook : book));
-    //             setData(updatedData);
-    //             setFilteredData(updatedData);
-    //         }
-    //         setIsEditing(null);
-    //         setNewName('');
-    //     } catch (err: any) {
-    //         setError(err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    const handleSave = async (id: number) => {
+        try {
+            setLoading(true);
+
+            const updatedCategory = await editCategory(id, newName, newType, getUserFromStorage());
+            if (data) {
+                const updatedData = data.map((category) => (category.id === id ? updatedCategory : category));
+                setData(updatedData);
+                setFilteredData(updatedData);
+            }
+            setIsEditing(null);
+            setNewName('');
+        } catch (err: any) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleCancel = () => {
         setIsEditing(null);
         setNewName("");
+        setNewType(null);
     };
 
     if (error) {
@@ -102,7 +106,7 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 className="hidden"
                                                 id="income"
                                                 type="radio"
-                                                value={transactionType[0].name}
+                                                value={category.transactionType.name}
                                                 checked={newType === transactionType[0]}
                                                 onChange={() => setNewType(transactionType[0])}
                                             />
@@ -111,8 +115,8 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 className={clsx(
                                                     "flex items-center justify-center px-2 py-1  rounded-s-full cursor-pointer",
                                                     {
-                                                        "bg-cyan-500 text-white": newType === transactionType[0],
-                                                        "bg-gray-300 text-black": newType !== transactionType[0],
+                                                        "bg-cyan-500 text-white": newType?.id === transactionType[0].id,
+                                                        "bg-gray-300 text-black": newType?.id !== transactionType[0].id,
                                                     }
                                                 )}
                                             >
@@ -122,7 +126,7 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 className="hidden"
                                                 type="radio"
                                                 id="expense"
-                                                value={transactionType[1].name}
+                                                value={category.transactionType.name}
                                                 checked={newType === transactionType[1]}
                                                 onChange={() => setNewType(transactionType[1])}
                                             />
@@ -131,8 +135,8 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 className={clsx(
                                                     "flex items-center justify-center px-2 py-1 rounded-e-full cursor-pointer",
                                                     {
-                                                        "bg-orange-500 text-white": newType === transactionType[1],
-                                                        "bg-gray-300 text-black": newType !== transactionType[1],
+                                                        "bg-orange-500 text-white": newType?.id === transactionType[1].id,
+                                                        "bg-gray-300 text-black": newType?.id !== transactionType[1].id,
                                                     }
                                                 )}
                                             >
@@ -146,7 +150,7 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                             className="flex-grow border border-gray-300 px-2 py-1 rounded"
                                         />
                                         <button
-                                            // onClick={() => handleSave(category.id)}
+                                            onClick={() => handleSave(category.id)}
                                             className="text-green-500 hover:text-green-700"
                                         >
                                             <CheckIcon className="h-5 w-5" />
@@ -177,15 +181,27 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                     </span>
                                     <button
                                         onClick={() =>
-                                            handleEditClick(category.id, category.name)
+                                            handleEditClick(category.id, category.name, category.transactionType)
                                         }
-                                        className="text-blue-500 hover:text-blue-700"
+                                        className={clsx(
+                                            "text-blue-500 hover:text-blue-700",
+                                            {
+                                                "hidden":
+                                                    category.user === null,
+
+                                            }
+                                        )}
                                     >
                                         <PencilIcon className="h-5 w-5" />
                                     </button>
                                     <button
-                                        // onClick={() => handleDelete(category.id)}
-                                        className="text-red-500 hover:text-red-700"
+                                        onClick={() => handleDelete(category.id)}
+                                        className={clsx("text-red-500 hover:text-red-700",
+                                            {
+                                                "hidden":
+                                                    category.user === null,
+                                            }
+                                        )}
                                     >
                                         <TrashIcon className="h-5 w-5" />
                                     </button>

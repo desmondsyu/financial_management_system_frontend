@@ -19,7 +19,7 @@ export type User = {
     password: string,
     dob?: string,
     email: string,
-    mStatus?: string,
+    gender?: string,
     active: boolean,
 }
 

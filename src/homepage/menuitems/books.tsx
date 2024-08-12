@@ -7,6 +7,7 @@ import { addBook } from "../../lib/actions";
 import type { Labels } from "../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { fetchBooks } from "../../lib/data";
+import { getUserFromStorage } from "../../lib/currentuser";
 
 export default function Page() {
     const [searchParams] = useSearchParams();
@@ -34,7 +35,7 @@ export default function Page() {
     const handleCreate = async () => {
         try {
             setLoading(true);
-            await addBook(newBookName);
+            await addBook(newBookName, getUserFromStorage());
 
             const newBook: Labels = {
                 id: 0,

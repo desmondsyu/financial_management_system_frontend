@@ -9,7 +9,7 @@ export default function Page() {
         email: "",
         username: "",
         password: "",
-        mStatus: "",
+        gender: "",
         dob: "",
     });
     
@@ -31,26 +31,9 @@ export default function Page() {
             dob: formData.dob ? new Date(formData.dob).toISOString() : null,
         };
 
-        // const existCheck = async (email: string): Promise<boolean> => {
-        //     try{
-        //         const users = await fetchAllUser();
-        //         return users.some((user) => user.email === email);
-        //     }catch(error) {
-        //         console.error("Error fetching users:", error);
-        //         return true;
-        //     }
-        // };
-
         localStorage.setItem("registerFormData", JSON.stringify(formDataWithISODate));
 
         try {
-            // const emailExists = await existCheck(formDataWithISODate.email);
-
-            // if(emailExists) {
-            //     alert("Please use another email!");
-            //     return;
-            // }
-
             await register(formDataWithISODate);
             
             navigate("/register/auth")
@@ -66,7 +49,7 @@ export default function Page() {
                     <Textfield type="email" name="email" label="Email" placeholder="Enter email address" disabled={false} required={true} onChange={handleChange} value={formData.email} />
                     <Textfield type="text" name="username" label="Username" placeholder="Enter username" disabled={false} required={true} onChange={handleChange} value={formData.username} />
                     <Textfield type="password" name="password" label="Password" placeholder="Enter password" disabled={false} required={true} onChange={handleChange} value={formData.password} />
-                    <Textfield type="text" name="mStatus" label="Marital Status" placeholder="Enter marital status" disabled={false} required={false} onChange={handleChange} value={formData.mStatus} />
+                    <Textfield type="text" name="gender" label="Gender" placeholder="" disabled={false} required={false} onChange={handleChange} value={formData.gender} />
                     <Textfield type="date" name="dob" label="Date of Birth" disabled={false} required={false} onChange={handleChange} value={formData.dob} />
                         <Button label="Register" disabled={false} />
                 </form>

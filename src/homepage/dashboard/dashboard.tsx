@@ -5,13 +5,13 @@ import { getSpendingData } from "../../lib/bi-actions";
 import { useState } from "react";
 
 export default function Page() {
-    const [spendingData, setSpendingData] = useState<any>(null); // State to store spending data
+    const [spendingData, setSpendingData] = useState<any>(null); 
 
     const handleClick = async () => {
         try {
             const data = await getSpendingData();
-            console.log(data); // Log the fetched data
-            setSpendingData(data); // Update state with fetched data
+            console.log(data); 
+            setSpendingData(data); 
         } catch (error) {
             console.error("Error fetching spending data:", error);
         }
@@ -31,7 +31,6 @@ export default function Page() {
                     className="mt-3"
                 />
             </Card>
-            <Button label="test" onClick={handleClick} disabled={false}></Button>
         </>
     );
 }

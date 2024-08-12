@@ -1,11 +1,12 @@
 import type { Category, Labels, TransactionType, User } from "./definitions";
 import axios from "axios";
 
-export async function addBook(name: string): Promise<void> {
+export async function addBook(name: string, user: User): Promise<void> {
     try {
         const response = await axios.post("http://107.20.240.135:8088/labels",
             {
                 name: name,
+                user: user,
             },
             {
                 headers: {
@@ -65,7 +66,7 @@ export async function addCategory(name: string, transactionType: TransactionType
             {
                 name: name,
                 transactionType: transactionType,
-                user: user
+                user: user,
             },
             {
                 headers: {
@@ -81,12 +82,14 @@ export async function addCategory(name: string, transactionType: TransactionType
     }
 }
 
-export async function editCategory(newName: string, newTransactionType: TransactionType): Promise<Category> {
+export async function editCategory(id: number, newName: string, newTransactionType: TransactionType | null, user: User): Promise<Category> {
     try {
         const response = await axios.put("http://107.20.240.135:8088/transaction-groups",
-            {
+            {   
+                id: id,
                 name: newName,
-                newTransactionType: newTransactionType,
+                transactionType: newTransactionType,
+                user: user,
             },
             {
                 headers: {
