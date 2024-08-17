@@ -1,4 +1,4 @@
-import type { Category, Labels, TransactionType, User } from "./definitions";
+import type { Category, Labels, TransactionType, User, Transaction } from "./definitions";
 import axios from "axios";
 
 export async function addBook(name: string, user: User): Promise<void> {
@@ -85,7 +85,7 @@ export async function addCategory(name: string, transactionType: TransactionType
 export async function editCategory(id: number, newName: string, newTransactionType: TransactionType | null, user: User): Promise<Category> {
     try {
         const response = await axios.put("http://107.20.240.135:8088/transaction-groups",
-            {   
+            {
                 id: id,
                 name: newName,
                 transactionType: newTransactionType,
@@ -122,21 +122,59 @@ export async function deleteCategory(id: number): Promise<void> {
     }
 }
 
-export async function getReport({
-    from,
-    to,
-    label,
-    type,
-    group
-}: {
-    from?: string,
-    to?: string,
-    label?: string,
-    type?: number,
-    group?: string,
-}): Promise<any> {
+export interface TransactionProp {
+    id: number | null,
+    user: User,
+    hashcode: string | null,
+    transactionGroup: Category | null,
+    label: Labels | null,
+    transactionDate: string,
+    amount: number,
+    description: string | null,
+    type: TransactionType | null,
+}
+
+export async function addTransaction(transcation: TransactionProp): Promise<void> {
     try {
-        const response = await axios.get(`http://107.20.240.135:8088/transactions/pdf?from=${from}&to=${to}&label=${label}}&type=${type}&group=${group}`,
+        const response = await axios.post("http://107.20.240.135:8088/transactions",
+            transcation,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+                "responseType": "blob",
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function editTransaction(transaction: TransactionProp): Promise<Transaction | null> {
+    try {
+        const response = await axios.put("http://107.20.240.135:8088/transactions",
+            transaction,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+        return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function deleteTransaction(id: number): Promise<void> {
+    try {
+        const response = await axios.delete(`http://107.20.240.135:8088/transactions/${id}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -144,7 +182,6 @@ export async function getReport({
                 },
             },
         );
-        return response.data;
     } catch (error: any) {
         console.error(error);
         throw new Error(error.message);

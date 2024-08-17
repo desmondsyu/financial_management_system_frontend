@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchCategories, transactionType } from "../../../lib/data";
+import { fetchCategories, transactionTypeData } from "../../../lib/data";
 import type { Category, FetchError, TransactionType } from "../../../lib/definitions";
 import { PencilIcon, TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { editCategory, deleteCategory } from "../../../lib/actions";
@@ -107,16 +107,16 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 id="income"
                                                 type="radio"
                                                 value={category.transactionType.name}
-                                                checked={newType === transactionType[0]}
-                                                onChange={() => setNewType(transactionType[0])}
+                                                checked={newType === transactionTypeData[0]}
+                                                onChange={() => setNewType(transactionTypeData[0])}
                                             />
                                             <label
                                                 htmlFor="income"
                                                 className={clsx(
                                                     "flex items-center justify-center px-2 py-1  rounded-s-full cursor-pointer",
                                                     {
-                                                        "bg-cyan-500 text-white": newType?.id === transactionType[0].id,
-                                                        "bg-gray-300 text-black": newType?.id !== transactionType[0].id,
+                                                        "bg-cyan-500 text-white": newType?.id === transactionTypeData[0].id,
+                                                        "bg-gray-300 text-black": newType?.id !== transactionTypeData[0].id,
                                                     }
                                                 )}
                                             >
@@ -127,16 +127,16 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 type="radio"
                                                 id="expense"
                                                 value={category.transactionType.name}
-                                                checked={newType === transactionType[1]}
-                                                onChange={() => setNewType(transactionType[1])}
+                                                checked={newType === transactionTypeData[1]}
+                                                onChange={() => setNewType(transactionTypeData[1])}
                                             />
                                             <label
                                                 htmlFor="expense"
                                                 className={clsx(
                                                     "flex items-center justify-center px-2 py-1 rounded-e-full cursor-pointer",
                                                     {
-                                                        "bg-orange-500 text-white": newType?.id === transactionType[1].id,
-                                                        "bg-gray-300 text-black": newType?.id !== transactionType[1].id,
+                                                        "bg-orange-500 text-white": newType?.id === transactionTypeData[1].id,
+                                                        "bg-gray-300 text-black": newType?.id !== transactionTypeData[1].id,
                                                     }
                                                 )}
                                             >

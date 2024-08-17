@@ -26,7 +26,7 @@ interface RegisterData {
     email: string,
     username: string,
     password: string,
-    gender: string | null,
+    mStatus: string | null,
     dob: string | null,
 };
 
@@ -85,8 +85,18 @@ export async function resetPassword(token: string, newPassword: string): Promise
     }
 }
 
-// export async function deleteUser(): Promise<void>{
-//     try{
-//         const response = await axios.delete()
-//     }
-// }
+export async function deleteUser(): Promise<void> {
+    try {
+        const response = await axios.delete("http://107.20.240.135:8088/users",
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}

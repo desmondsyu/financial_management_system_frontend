@@ -10,6 +10,8 @@ export default function Textfield(
         required,
         value,
         name,
+        step,
+        min,
     }: Textfield
 ) {
     return (
@@ -24,6 +26,7 @@ export default function Textfield(
                 required={required}
                 name={name}
                 value={value}
+                step={step}
             />
         </div>
     );

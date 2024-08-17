@@ -2,18 +2,22 @@ import Button from "../../ui/button";
 import Textfield from "../../ui/textfield";
 import { getUserFromStorage } from "../../lib/currentuser";
 import { formatDate } from "../../lib/utils";
-import { sendToken, resetPassword } from "../../lib/login-actions";
+import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../../lib/login-actions";
 
 
 export default function Page() {
+    const navigate = useNavigate();
     const image = `https://robohash.org/${getUserFromStorage().username}`;
 
     const handleReset = async () => {
-        await sendToken(localStorage.getItem("authEmail") || "");
+
     };
 
     const handleDelete = async () => {
-        
+        await deleteUser();
+        localStorage.clear();
+        navigate("/");
     };
 
     return (
@@ -33,7 +37,6 @@ export default function Page() {
                     <Textfield type="text" label="Gender" disabled={true} required={true} value={getUserFromStorage().gender} />
                 </div>
             </div>
-
         </div>
     );
 }

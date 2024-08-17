@@ -25,3 +25,10 @@ export function formatDate(dateStr: string | null | undefined) {
 
     return date.toISOString().split("T")[0];
 }
+
+export function getCurrentYearMonth() {
+    const date = new Date();
+    const curYear = date.getFullYear();
+    const curMonth = date.getMonth() + 1;
+    return {curYear, curMonth};
+}

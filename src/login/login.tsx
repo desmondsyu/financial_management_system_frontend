@@ -57,7 +57,7 @@ export default function Page() {
             navigate("/transactions");
         } catch (error: any) {
             console.error(error);
-            alert("!")
+            throw new Error(error.message);
         }
     }
 

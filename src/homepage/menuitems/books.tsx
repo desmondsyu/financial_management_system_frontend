@@ -40,6 +40,7 @@ export default function Page() {
             const newBook: Labels = {
                 id: 0,
                 name: newBookName,
+                user: getUserFromStorage(),
             }
             
             setBooks([newBook, ...books]);

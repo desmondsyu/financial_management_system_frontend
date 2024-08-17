@@ -4,10 +4,10 @@ import Navibar from "../ui/homepage/navibar/navibar";
 export default function Layout() {
     return (
         <>
-            <div className="z-10">
+            <div>
                 <Navibar />
             </div>
-            <div className="z-0">
+            <div>
                 <Outlet />
             </div>
         </>

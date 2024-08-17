@@ -20,7 +20,11 @@ const links = [
     },
 ];
 
-export default function MenuItems() {
+interface MenuItemsProps {
+    onMenuClose: () => void;
+}
+
+export default function MenuItems({ onMenuClose }: MenuItemsProps) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -28,15 +32,15 @@ export default function MenuItems() {
         navigate("/");
     };
 
-
     return (
-        <div className="py-1">
+        <div className="py-1 z-40">
             {links.map((link) => {
                 return (
                     <Link
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         key={link.name}
                         to={link.href}
+                        onClick={onMenuClose}
                     >
                         {link.name}
                     </Link>

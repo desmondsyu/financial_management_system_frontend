@@ -8,13 +8,13 @@ import type { Category, TransactionType } from "../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { fetchCategories } from "../../lib/data";
 import { clsx } from "clsx";
-import { transactionType } from "../../lib/data";
+import { transactionTypeData } from "../../lib/data";
 import { getUserFromStorage } from "../../lib/currentuser";
 
 export default function Page() {
     const [searchParams] = useSearchParams();
     const [isCreating, setIsCreating] = useState<boolean>(false);
-    const [newCategoryType, setNewCategoryType] = useState<TransactionType>(transactionType[0]);
+    const [newCategoryType, setNewCategoryType] = useState<TransactionType>(transactionTypeData[0]);
     const [newCategoryName, setNewCategoryName] = useState<string>("");
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -49,7 +49,7 @@ export default function Page() {
 
             setCategories([newCategory, ...categories]);
             setNewCategoryName("");
-            setNewCategoryType(transactionType[0]);
+            setNewCategoryType(transactionTypeData[0]);
             setIsCreating(false);
         } catch (error) {
             console.error(error);
@@ -61,7 +61,7 @@ export default function Page() {
     const handleCancel = () => {
         setIsCreating(false);
         setNewCategoryName("");
-        setNewCategoryType(transactionType[0]);
+        setNewCategoryType(transactionTypeData[0]);
     };
 
     return (
@@ -81,17 +81,17 @@ export default function Page() {
                             className="hidden"
                             id="income"
                             type="radio"
-                            value={transactionType[0].name}
-                            checked={newCategoryType === transactionType[0]}
-                            onChange={() => setNewCategoryType(transactionType[0])}
+                            value={transactionTypeData[0].name}
+                            checked={newCategoryType === transactionTypeData[0]}
+                            onChange={() => setNewCategoryType(transactionTypeData[0])}
                         />
                         <label
                             htmlFor="income"
                             className={clsx(
                                 "flex items-center justify-center px-2 py-1  rounded-s-full cursor-pointer",
                                 {
-                                    "bg-cyan-500 text-white": newCategoryType === transactionType[0],
-                                    "bg-gray-300 text-black": newCategoryType !== transactionType[0],
+                                    "bg-cyan-500 text-white": newCategoryType === transactionTypeData[0],
+                                    "bg-gray-300 text-black": newCategoryType !== transactionTypeData[0],
                                 }
                             )}
                         >
@@ -101,17 +101,17 @@ export default function Page() {
                             className="hidden"
                             type="radio"
                             id="expense"
-                            value={transactionType[1].name}
-                            checked={newCategoryType === transactionType[1]}
-                            onChange={() => setNewCategoryType(transactionType[1])}
+                            value={transactionTypeData[1].name}
+                            checked={newCategoryType === transactionTypeData[1]}
+                            onChange={() => setNewCategoryType(transactionTypeData[1])}
                         />
                         <label
                             htmlFor="expense"
                             className={clsx(
                                 "flex items-center justify-center px-2 py-1 rounded-e-full cursor-pointer",
                                 {
-                                    "bg-orange-500 text-white": newCategoryType === transactionType[1],
-                                    "bg-gray-300 text-black": newCategoryType !== transactionType[1],
+                                    "bg-orange-500 text-white": newCategoryType === transactionTypeData[1],
+                                    "bg-gray-300 text-black": newCategoryType !== transactionTypeData[1],
                                 }
                             )}
                         >

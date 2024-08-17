@@ -5,6 +5,7 @@ interface ButtonProps {
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
     disabled: boolean,
     navigateTo?: string;
+    type?: string,
 }
 
 export default function Button(

@@ -11,6 +11,8 @@ export type Textfield = {
     placeholder?: string,
     disabled: boolean,
     required: boolean,
+    step?: number,
+    min?: number,
 };
 
 export type User = {
@@ -26,6 +28,7 @@ export type User = {
 export type Labels = {
     id: number,
     name: string,
+    user: User,
 }
 
 export type TransactionType = {
@@ -41,23 +44,61 @@ export type Category = {
 }
 
 export type Transaction = {
-    content: [
-        {
-            user: {
-                username: string,
-            },
-            hashcode: string,
-            label: Labels,
-            transactionDate: string,
-            amount: number,
-            description: string,
-            balance: number,
-            transactionGroup: Category
-        }
-    ],
+    id: number,
+    user: {
+        id?: number,
+        username?: string,
+        dob?: string,
+        email: string,
+        gender?: string,
+        active?: boolean,
+    },
+    hashcode: string,
+    label?: Labels,
+    transactionDate: string,
+    amount: number,
+    description?: string,
+    balance: number,
+    transactionGroup: Category,
+}
+
+export type TransactionPage = {
+    content: Transaction[],
     pageNumber: number,
     pageSize: number,
     totalElements: number,
     totalPages: number,
 }
 
+
+export type SpendingData = {
+    current_spending: number,
+    expected_spending: number,
+    upper_bound_yellow_max: number,
+    max_bound_red_max: number,
+    percent_of_spending: number,
+}
+
+export type TrendData = {
+    date: string,
+    month_spending: number,
+    month_income: number,
+}
+
+export type GroupData = {
+    date: string,
+    group_name: string,
+    amount: number,
+    type: "Income" | "Expense",
+}
+
+export type TypeGroupData = {
+    Income: GroupData[],
+    Expense: GroupData[],
+}
+
+export type LabelGroupData = {
+    data: string,
+    label_name: string,
+    amount: number,
+}

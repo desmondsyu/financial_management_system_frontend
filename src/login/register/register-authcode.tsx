@@ -1,4 +1,3 @@
-import AuthCodeForm from "../../ui/login/authcode-form";
 import Textfield from "../../ui/textfield";
 import Button from "../../ui/button";
 import { useState, useEffect } from "react";
@@ -34,7 +33,6 @@ export default function Page() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         try {
             await authCode(formData);
             navigate("/register/fin");
