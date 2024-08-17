@@ -12,7 +12,7 @@ import { addTransaction } from "../../lib/actions";
 export default function Page() {
     const [booksList, setBooksList] = useState<Labels[]>([]);
     const [categoryList, setCategoryList] = useState<Category[]>([]);
-    const [simbol,setSimbol] = useState<number>();
+    const [simbol, setSimbol] = useState<number>();
     const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
     const typeList = transactionTypeData;
 
@@ -59,11 +59,17 @@ export default function Page() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleCreate}>
-                <div>
-                    <label>Type</label>
+        <div className="w-full flex justify-center contents-center">
+            <form 
+            className="w-[40%]"
+            onSubmit={handleCreate}
+            >
+                <div className="p-2.5">
+                    <label className="block mb-2 text-md font-medium text-gray-900">
+                        Type
+                    </label>
                     <select
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
                             const selectedType = typeList.find(type => type.id === parseInt(e.target.value));
                             if (selectedType) {
@@ -88,9 +94,12 @@ export default function Page() {
                     </select>
                 </div>
 
-                <div>
-                    <label>Category</label>
+                <div className="p-2.5">
+                    <label className="block mb-2 text-md font-medium text-gray-900">
+                        Category
+                    </label>
                     <select
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
                             const selectedCategory = filteredCategories.find(category => category.id === parseInt(e.target.value));
                             if (selectedCategory) {
@@ -133,7 +142,7 @@ export default function Page() {
                     disabled={false}
                     required={true}
                     onChange={(e) => {
-                        if(simbol === 1){
+                        if (simbol === 1) {
                             setFormData((formData) => ({
                                 ...formData,
                                 amount: parseFloat(e.target.value),
@@ -160,9 +169,12 @@ export default function Page() {
                     }}
                 />
 
-                <div>
-                    <label>Books</label>
+                <div className="p-2.5">
+                    <label className="block mb-2 text-md font-medium text-gray-900">
+                        Books
+                    </label>
                     <select
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
                             const selectedBook = booksList.find(book => book.id === parseInt(e.target.value));
                             if (selectedBook) {

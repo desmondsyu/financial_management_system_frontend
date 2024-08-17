@@ -10,7 +10,6 @@ interface TransactionTableProps {
 }
 
 export default function TransactionsTable(transactions: TransactionTableProps) {
-
     const handleDelete = async (id: number) => {
         try {
             await deleteTransaction(id);
@@ -84,7 +83,7 @@ export default function TransactionsTable(transactions: TransactionTableProps) {
                                         >
                                             <PencilSquareIcon className="w-5 h-5 inline-block" />
                                         </Link>
-                                        <TrashIcon className="w-5 h-5 inline-block ml-2 text-red-500 hover:text-red-700 cursor-pointer" />
+                                        <TrashIcon className="w-5 h-5 inline-block ml-2 text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDelete(transaction.id)}/>
                                     </td>
                                 </tr>
                             ))
