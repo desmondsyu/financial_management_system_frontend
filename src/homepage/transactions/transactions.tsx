@@ -6,6 +6,8 @@ import { useState, useEffect, useCallback } from "react";
 import { fetchTransactions } from "../../lib/data";
 import { TransactionPage } from "../../lib/definitions";
 import { useNavigate } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+import {MonthIncomeCard, MonthExpenseCard, ProgressLineChart} from "../../ui/homepage/dashboard/charts"
 
 interface PaginationParams {
     page: number,
@@ -19,6 +21,11 @@ interface FilterParams {
     label: string | null;
     type: number | null;
     group: string | null;
+}
+
+type FetchParams = {
+    paginationParams: PaginationParams;
+    filterParams: FilterParams;
 }
 
 export default function Page() {
@@ -40,31 +47,39 @@ export default function Page() {
 
     const [transactions, setTransactions] = useState<TransactionPage | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await fetchTransactions({
-                    ...paginationParams,
-                    ...filterParams,
-                });
-                setTransactions(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData();
-    }, [paginationParams, filterParams]);
+    const [debouncedParams] = useDebounce({filterParams,paginationParams}, 500);
+
+    const fetchData = useCallback(async (params: FetchParams) => {
+        try {
+            const data = await fetchTransactions({
+                ...params.paginationParams,
+                ...params.filterParams,
+            });
+            setTransactions(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }, []);
+
+    useEffect(()=>{
+        fetchData(debouncedParams);
+    },[debouncedParams,fetchData]);
 
     return (
         <div className="w-full flex justify-center ">
             <div className="w-[90%] flex justify-center contents-center">
-                <div className="w-[20%]">
+                <div className="w-[30%] pl-10 pr-10">
                     <Button label="Create" disabled={false} onClick={() => navigate("create")} />
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>
-                <div className="w-[80%]">
+                <div className="w-[70%]">
+                <div className="flex mt-5 mb-5 w-full">
+                        <MonthIncomeCard />
+                        <MonthExpenseCard />
+                        <ProgressLineChart />
+                    </div>
                     <TransactionsTable transactions={transactions} />
-                    <Pagination paginationParams={paginationParams} setPaginationParams={setPaginationParams} totalPages={transactions?.totalPages || 0}/>
+                    <Pagination paginationParams={paginationParams} setPaginationParams={setPaginationParams} totalPages={transactions?.totalPages || 0} />
                 </div>
             </div>
         </div>

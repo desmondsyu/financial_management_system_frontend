@@ -32,7 +32,7 @@ export function MonthIncomeCard() {
     }, [fetchData]);
 
     return (
-        <div className="ml-5 mr-5">
+        <div className="ml-2 mr-2">
             <Card
                 className="w-auto h-full"
                 decoration="top"
@@ -68,7 +68,7 @@ export function MonthExpenseCard() {
     }, [fetchData]);
 
     return (
-        <div className="ml-5 mr-5">
+        <div className="ml-2 mr-2">
             <Card
                 className="w-auto h-full"
                 decoration="top"
@@ -113,7 +113,7 @@ export function ProgressLineChart() {
     ];
 
     return (
-        <div className="ml-5 mr-5 grow">
+        <div className="ml-2 mr-2 grow">
             <Card className="w-auto h-auto" decoration="top" decorationColor="amber">
                 <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
                     <span>Monthly spending</span>

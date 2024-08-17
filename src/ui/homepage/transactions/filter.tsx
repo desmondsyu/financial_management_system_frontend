@@ -40,7 +40,7 @@ export default function Filter({ filterParams, setFilterParams }: FilterProps) {
 
     return (
         <>
-            <form>
+            <form className="bg-neutral-200 rounded-lg">
                 <Textfield
                     type="date"
                     label="Date from"
@@ -73,13 +73,14 @@ export default function Filter({ filterParams, setFilterParams }: FilterProps) {
                     <select
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
+                            const value = e.target.value === "none" ? null : parseInt(e.target.value);
                             setFilterParams((prevData) => ({
                                 ...prevData,
-                                type: e.target.value ? Number(e.target.value) : null,
+                                type: value,
                             }))
                         }}
                     >
-                        <option defaultChecked>Select type</option>
+                        <option defaultChecked value="none">Select type</option>
                         {typeList.map((type) => (
                             <option key={type.id} value={type.id}>
                                 {type.name}
@@ -95,13 +96,14 @@ export default function Filter({ filterParams, setFilterParams }: FilterProps) {
                     <select
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
+                            const value = e.target.value === "none" ? null : e.target.value;
                             setFilterParams((prevData) => ({
                                 ...prevData,
-                                group: e.target.value,
+                                group: value,
                             }))
                         }}
                     >
-                        <option defaultChecked>Select category</option>
+                        <option defaultChecked value="none">Select category</option>
                         {categoryList ? categoryList.map((category) => (
                             <option key={category.id} value={category.name}>
                                 {category.name}
@@ -119,13 +121,14 @@ export default function Filter({ filterParams, setFilterParams }: FilterProps) {
                     <select
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(e) => {
+                            const value = e.target.value === "none" ? null : e.target.value;
                             setFilterParams((prevData) => ({
                                 ...prevData,
-                                label: e.target.value,
+                                label: value,
                             }))
                         }}
                     >
-                        <option defaultChecked>Select book</option>
+                        <option defaultChecked value="none">Select book</option>
                         {booksList ? booksList.map((book) => (
                             <option key={book.id} value={book.name}>
                                 {book.name}
