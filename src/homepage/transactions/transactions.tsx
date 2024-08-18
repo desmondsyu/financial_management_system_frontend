@@ -68,7 +68,7 @@ export default function Page() {
     return (
         <div className="w-full flex justify-center ">
             <div className="w-[90%] flex justify-center contents-center">
-                <div className="w-[30%] pl-10 pr-10">
+                <div className="w-[30%] pr-20">
                     <Button label="Create" disabled={false} onClick={() => navigate("create")} />
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>

@@ -55,6 +55,7 @@ export type Transaction = {
     },
     hashcode: string,
     label?: Labels,
+    type: TransactionType,
     transactionDate: string,
     amount: number,
     description?: string,

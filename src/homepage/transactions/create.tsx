@@ -42,6 +42,7 @@ export default function Page() {
         amount: 0,
         description: null,
         type: null,
+        balance: 0,
     });
 
     const [type, setType] = useState<number>();
@@ -60,9 +61,9 @@ export default function Page() {
 
     return (
         <div className="w-full flex justify-center contents-center">
-            <form 
-            className="w-[40%]"
-            onSubmit={handleCreate}
+            <form
+                className="w-[40%]"
+                onSubmit={handleCreate}
             >
                 <div className="p-2.5">
                     <label className="block mb-2 text-md font-medium text-gray-900">
@@ -138,20 +139,17 @@ export default function Page() {
                     label="Amount"
                     type="number"
                     step={.01}
-                    min={0}
                     disabled={false}
                     required={true}
                     onChange={(e) => {
-                        if (simbol === 1) {
+                        const value = Math.abs(parseFloat(e.target.value));
+
+                        if (!isNaN(value)) {
+                            const updatedAmount = simbol === 1 ? value : -value;
                             setFormData((formData) => ({
                                 ...formData,
-                                amount: parseFloat(e.target.value),
-                            }))
-                        } else {
-                            setFormData((formData) => ({
-                                ...formData,
-                                amount: - parseFloat(e.target.value),
-                            }))
+                                amount: updatedAmount,
+                            }));
                         }
                     }}
                 />

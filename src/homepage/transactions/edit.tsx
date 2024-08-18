@@ -45,7 +45,8 @@ export default function Page() {
         transactionDate: transaction?.transactionDate || "",
         amount: transaction?.amount || 0,
         description: transaction?.description || "",
-        type: transaction?.transactionGroup?.transactionType || null,
+        type: transaction?.type || null,
+        balance: transaction?.balance || null,
     });
 
     const handleCreate = async (e: React.FormEvent) => {
@@ -72,7 +73,7 @@ export default function Page() {
                     </label>
                     <select
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        value={formData.transactionGroup?.transactionType.id || ""}
+                        value={formData.type?.id || ""}
                         onChange={(e) => {
                             const selectedType = typeList.find(type => type.id === parseInt(e.target.value));
                             if (selectedType) {
@@ -143,21 +144,23 @@ export default function Page() {
                     label="Amount"
                     type="number"
                     step={0.01}
-                    min={0}
                     disabled={false}
                     required={true}
-                    value={formData.amount.toString()}
+                    value={Math.abs(formData.amount).toString()}
                     onChange={(e) => {
-                        if (simbol === 1) {
+                        const value = Math.abs(parseFloat(e.target.value));
+
+                        if (!isNaN(value)) {
+                            const updatedAmount = simbol === 1 ? value : -value;
                             setFormData((formData) => ({
                                 ...formData,
-                                amount: parseFloat(e.target.value),
-                            }))
+                                amount: updatedAmount,
+                            }));
                         } else {
-                            setFormData((formData) => ({
-                                ...formData,
-                                amount: - parseFloat(e.target.value),
-                            }))
+                            setFormData((prevFormData) => ({
+                                ...prevFormData,
+                                amount: 0,
+                            }));
                         }
                     }}
                 />
@@ -184,12 +187,21 @@ export default function Page() {
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value={formData.label?.id || ""}
                         onChange={(e) => {
-                            const selectedBook = booksList.find(book => book.id === parseInt(e.target.value));
-                            if (selectedBook) {
+                            const selectedValue = e.target.value;
+
+                            if (selectedValue === "") {
                                 setFormData((formData) => ({
                                     ...formData,
-                                    label: selectedBook,
+                                    label: null,
                                 }));
+                            } else {
+                                const selectedBook = booksList.find(book => book.id === parseInt(selectedValue));
+                                if (selectedBook) {
+                                    setFormData((formData) => ({
+                                        ...formData,
+                                        label: selectedBook,
+                                    }));
+                                }
                             }
                         }}
                     >

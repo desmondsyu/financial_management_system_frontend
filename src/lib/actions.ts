@@ -132,6 +132,7 @@ export interface TransactionProp {
     amount: number,
     description: string | null,
     type: TransactionType | null,
+    balance: number | null,
 }
 
 export async function addTransaction(transcation: TransactionProp): Promise<void> {
