@@ -10,14 +10,22 @@ export default function Page() {
     const navigate = useNavigate();
     const image = `https://robohash.org/${getUserFromStorage().username}`;
 
-    const handleReset = async () => {
-
+    const handleReset = () => {
+        navigate("/confirmemail");
     };
 
     const handleDelete = async () => {
-        await deleteUser();
-        localStorage.clear();
-        navigate("/");
+        const confirmed = window.confirm("Are you sure you want to delete your account? All your data will be lost. This action cannot be undone.");
+
+        if (confirmed) {
+            try {
+                await deleteUser();
+                localStorage.clear();
+                navigate("/");
+            } catch (error: any) {
+                alert("There was an error deleting your account. Please try again later.");
+            }
+        }
     };
 
     return (

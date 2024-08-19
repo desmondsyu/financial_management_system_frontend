@@ -2,7 +2,7 @@ import TransactionsTable from "../../ui/homepage/transactions/table";
 import Button from "../../ui/button";
 import Filter from "../../ui/homepage/transactions/filter";
 import Pagination from "../../ui/homepage/transactions/pagination";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { fetchTransactions } from "../../lib/data";
 import { TransactionPage } from "../../lib/definitions";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,12 @@ export default function Page() {
 
     const [transactions, setTransactions] = useState<TransactionPage | null>(null);
 
-    const [debouncedParams] = useDebounce({filterParams,paginationParams}, 500);
+    const combinedParams = useMemo(() => ({
+        paginationParams,
+        filterParams,
+    }), [paginationParams, filterParams]);
+
+    const [debouncedParams] = useDebounce(combinedParams, 500);
 
     const fetchData = useCallback(async (params: FetchParams) => {
         try {

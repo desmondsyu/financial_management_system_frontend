@@ -45,8 +45,6 @@ export default function Page() {
         balance: 0,
     });
 
-    const [type, setType] = useState<number>();
-
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {

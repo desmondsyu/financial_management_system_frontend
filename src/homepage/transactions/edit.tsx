@@ -17,7 +17,7 @@ export default function Page() {
     const navigate = useNavigate();
     const location = useLocation();
     const transaction = location.state?.transaction as TransactionProp;
-    const [simbol, setSimbol] = useState<number>();
+    // const [simbol, setSimbol] = useState<number>();
     const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
 
     useEffect(() => {
@@ -34,7 +34,6 @@ export default function Page() {
         };
         fetchData();
     }, []);
-
 
     const [formData, setFormData] = useState<TransactionProp>({
         id: transaction?.id,
@@ -83,7 +82,7 @@ export default function Page() {
                                 }));
                                 const filtered = categoryList.filter(category => category.transactionType.id === selectedType.id);
                                 setFilteredCategories(filtered);
-                                setSimbol(selectedType.id);
+                                // setSimbol(selectedType.id);
                             } else {
                                 setFilteredCategories([]);
                             }
@@ -151,7 +150,7 @@ export default function Page() {
                         const value = Math.abs(parseFloat(e.target.value));
 
                         if (!isNaN(value)) {
-                            const updatedAmount = simbol === 1 ? value : -value;
+                            const updatedAmount = formData.type?.id === 1 ? value : -value;
                             setFormData((formData) => ({
                                 ...formData,
                                 amount: updatedAmount,

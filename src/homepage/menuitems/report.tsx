@@ -24,7 +24,6 @@ export default function Page() {
                 throw new Error(error.message);
             }
         };
-
         fetchData();
     }, []);
 
@@ -42,44 +41,70 @@ export default function Page() {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const formDataWithISODate = {
-            ...formData,
-            from: formData.from ? new Date(formData.from).toISOString() : null,
-            to: formData.to ? new Date(formData.to).toISOString() : null,
-        };
-
         try {
-            const pdf = await getReport(formDataWithISODate);
+            const pdf = await getReport(formData);
             const url = URL.createObjectURL(new Blob([pdf], { type: "application/pdf" }));
-            setPdfUrl(url);
+            
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "report.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url);
         } catch (error) {
             console.error("Error fetching the report:", error);
         }
     }
 
     return (
-        <div>
-            <div>
-                <form onSubmit={onSubmit}>
+        <div className="w-full flex justify-center contents-center">
+            <div className="w-4/5 flex flex-col justify-center contents-center">
+                <form
+                    className="w-1/2"
+                    onSubmit={onSubmit}>
                     <Textfield
                         type="date"
                         label="Date From"
                         disabled={false}
                         required={false}
-                        onChange={(e) => setFormData({ ...formData, from: e.target.value })}
+                        onChange={(e) => {
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                from: formData.from ? new Date(e.target.value).toISOString() : null,
+                            }))
+                        }}
                     />
+
                     <Textfield
                         type="date"
                         label="Date To"
                         disabled={false}
                         required={false}
-                        onChange={(e) => setFormData({ ...formData, to: e.target.value })} />
-                    <div>
-                        <label>Type</label>
+                        onChange={(e) => {
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                to: formData.to ? new Date(e.target.value).toISOString() : null,
+                            }))
+                        }}
+                    />
+
+                    <div className="p-2.5">
+                        <label className="block mb-2 text-md font-medium text-gray-900">
+                            Type
+                        </label>
                         <select
-                            onChange={(e) => setFormData({ ...formData, type: e.target.value ? Number(e.target.value) : null })}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            onChange={(e) => {
+                                const value = e.target.value === "none" ? null : parseInt(e.target.value);
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    type: value,
+                                }))
+                            }}
                         >
-                            <option defaultChecked>Select type</option>
+                            <option defaultChecked value="none">Select type</option>
                             {typeList.map((type) => (
                                 <option key={type.id} value={type.id}>
                                     {type.name}
@@ -88,15 +113,49 @@ export default function Page() {
                         </select>
                     </div>
 
-                    <div>
-                        <label>Category</label>
+                    <div className="p-2.5">
+                        <label className="block mb-2 text-md font-medium text-gray-900">
+                            Category
+                        </label>
                         <select
-                            onChange={(e) => setFormData({ ...formData, group: e.target.value })}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            onChange={(e) => {
+                                const value = e.target.value === "none" ? null : e.target.value;
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    group: value,
+                                }))
+                            }}
                         >
-                            <option defaultChecked>Select category</option>
+                            <option defaultChecked value="none">Select category</option>
                             {categoryList ? categoryList.map((category) => (
                                 <option key={category.id} value={category.name}>
                                     {category.name}
+                                </option>
+                            )) : (
+                                <option disabled>No category available</option>
+                            )}
+                        </select>
+                    </div>
+
+                    <div className="p-2.5">
+                        <label className="block mb-2 text-md font-medium text-gray-900">
+                            Books
+                        </label>
+                        <select
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            onChange={(e) => {
+                                const value = e.target.value === "none" ? null : e.target.value;
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    label: value,
+                                }))
+                            }}
+                        >
+                            <option defaultChecked value="none">Select book</option>
+                            {booksList ? booksList.map((book) => (
+                                <option key={book.id} value={book.name}>
+                                    {book.name}
                                 </option>
                             )) : (
                                 <option disabled>No books available</option>
@@ -105,29 +164,16 @@ export default function Page() {
                     </div>
 
                     <div>
-                        <label>Books</label>
-                        <select
-                            onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-                        >
-                            <option defaultChecked>Select category</option>
-                            {booksList ? booksList.map((book) => (
-                                <option key={book.id}>
-                                    {book.name}
-                                </option>
-                            )) : (
-                                <option disabled>No books available</option>
-                            )}
-                        </select>
+                        <Button label="Generate report" disabled={false} />
                     </div>
-                    <Button label="Download" disabled={false} />
                 </form>
+                {/* {pdfUrl && (
+                    <div>
+                        <iframe src={pdfUrl} width="100%" height="600px"></iframe>
+                        <a href={pdfUrl} download="report.pdf">Generate PDF</a>
+                    </div>
+                )} */}
             </div>
-            {pdfUrl && (
-                <div>
-                    <iframe src={pdfUrl} width="100%" height="600px"></iframe>
-                    <a href={pdfUrl} download="report.pdf">Download PDF</a>
-                </div>
-            )}
         </div>
     );
 }

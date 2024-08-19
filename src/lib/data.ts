@@ -125,7 +125,9 @@ export async function getReport({
                     "Accept": "*/*",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
+                responseType: "blob",
             },
+            
         );
         return response.data;
     } catch (error: any) {

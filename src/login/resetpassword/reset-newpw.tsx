@@ -1,20 +1,21 @@
 import Textfield from "../../ui/textfield";
 import Button from "../../ui/button";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { resetPassword } from "../../lib/login-actions";
 
 export default function Page() {
     const navigate = useNavigate();
-    const [token, setToken] = useState<string>("");
+    const [searchParams] = useSearchParams();
     const [newPassword, setNewPassword] = useState<string>("");
-    const [newPasswordRe, setNewPasswordRe] = useState<string>("");
+    const [confirmPassword, setConfirmPasswordRe] = useState<string>("");
+    const token = searchParams.get("token");
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            if (newPasswordRe !== newPassword) {
-                alert("Re enter password must be same.")
+            if (confirmPassword !== newPassword) {
+                alert("Passwords do not match.")
             }
             await resetPassword(token, newPassword);
             navigate("/resetpassword/fin")
@@ -26,14 +27,7 @@ export default function Page() {
 
     return (
         <div className="flex justify-center items-center pt-20">
-            <form onSubmit={onSubmit}>
-                <Textfield
-                    type="text"
-                    label="Code"
-                    placeholder="Enter code here"
-                    disabled={false}
-                    required={true}
-                    onChange={(e) => setToken(e.target.value)} />
+            <form onSubmit={handleSubmit}>
                 <Textfield
                     type="password"
                     label="New Password"
@@ -47,7 +41,7 @@ export default function Page() {
                     placeholder="Enter password again"
                     disabled={false}
                     required={true}
-                    onChange={(e) => setNewPasswordRe(e.target.value)}
+                    onChange={(e) => setConfirmPasswordRe(e.target.value)}
                 />
                 <Button label="Reset" disabled={false} />
             </form>

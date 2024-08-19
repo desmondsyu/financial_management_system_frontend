@@ -47,7 +47,7 @@ export async function register(formData: RegisterData): Promise<void> {
     }
 }
 
-export async function sendToken(email: string): Promise<void> {
+export async function sendResetEmail(email: string): Promise<void> {
     try {
         const response = await axios.post("http://107.20.240.135:8088/forgot-password",
             {
@@ -66,7 +66,7 @@ export async function sendToken(email: string): Promise<void> {
     }
 }
 
-export async function resetPassword(token: string, newPassword: string): Promise<void> {
+export async function resetPassword(token: string | null, newPassword: string): Promise<void> {
     try {
         const response = await axios.post(`http://107.20.240.135:8088/reset-password?token=${token}`,
             {

@@ -84,7 +84,7 @@ export default function Page() {
                     required={true}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
-                <p className="text-red-500 text-sm text-right"><a href="/resetpassword">Forgot password?</a></p>
+                <p className="text-red-500 text-sm text-right"><a href="/confirmemail">Forgot password?</a></p>
                 <Button label="Sign in" disabled={false} />
                 <p className="text-sm">Don't have an account? <a className="underline" href="/register">Register</a></p>
             </form>

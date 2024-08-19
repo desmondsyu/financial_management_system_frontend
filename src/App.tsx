@@ -2,9 +2,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from "./error-page.tsx";
 
 import Login from './login/login.tsx';
+
 import Register from './login/register/register-page.tsx';
 import RegisterAuthCode from './login/register/register-authcode.tsx';
 import RegisterFinish from './login/register/register-finish.tsx';
+
 import ResetEnterEmail from './login/resetpassword/reset-email.tsx';
 import ResetSetNew from './login/resetpassword/reset-newpw.tsx';
 import ResetFinsh from './login/resetpassword/reset-finish.tsx';
@@ -39,11 +41,11 @@ const router = createBrowserRouter([
     element: <RegisterFinish />,
   },
   {
-    path: "/resetpassword",
+    path: "/confirmemail",
     element: <ResetEnterEmail />,
   },
   {
-    path: "/resetpassword/reset-password?token=",
+    path: "/reset-password",
     element: <ResetSetNew />,
   },
   {
