@@ -589,13 +589,13 @@ export function LabelTrendChart() {
             const response = await getTrendLabelData(params);
             
             const processedData = response.reduce((acc: Record<string, number>, item: { label_name: string; amount: number }) => {
-                acc[item.label_name] = (acc[item.label_name] || 0) + item.amount;
+                acc[item.label_name] = (acc[item.label_name] || 0) + Math.abs(item.amount);
                 return acc;
             }, {} as Record<string, number>);
 
             const formattedData = Object.entries(processedData).map(([label_name, totalAmount]) => ({
                 label_name,
-                totalAmount
+                totalAmount,
             }));
            
             setProcessedData(formattedData);

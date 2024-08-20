@@ -10,11 +10,11 @@ import { fetchBooks } from "../../lib/data";
 import { getUserFromStorage } from "../../lib/currentuser";
 
 export default function Page() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isCreating, setIsCreating] = useState<boolean>(false);
     const [newBookName, setNewBookName] = useState<string>("");
     const [books, setBooks] = useState<Labels[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    // const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const loadBooks = async () => {
@@ -23,9 +23,14 @@ export default function Page() {
                 setBooks(initialBooks);
             } catch (error) {
                 console.error(error);
+                window.alert("Unable to load book list");
             }
         };
         loadBooks();
+
+        if (searchParams.toString()) {
+            setSearchParams({});
+        }
     }, []);
 
     const handleCreateClick = () => {
@@ -34,7 +39,7 @@ export default function Page() {
 
     const handleCreate = async () => {
         try {
-            setLoading(true);
+            // setLoading(true);
             await addBook(newBookName, getUserFromStorage());
 
             const newBook: Labels = {
@@ -42,14 +47,14 @@ export default function Page() {
                 name: newBookName,
                 user: getUserFromStorage(),
             }
-            
+
             setBooks([newBook, ...books]);
             setNewBookName("");
             setIsCreating(false);
         } catch (error) {
             console.error(error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 

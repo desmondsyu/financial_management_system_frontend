@@ -11,6 +11,7 @@ export default function Page() {
     const [booksList, setBooksList] = useState<Labels[]>([]);
     const [categoryList, setCategoryList] = useState<Category[]>([]);
     const typeList = transactionTypeData;
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,15 +37,15 @@ export default function Page() {
             group: null,
         }
     );
-    const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
 
         try {
             const pdf = await getReport(formData);
             const url = URL.createObjectURL(new Blob([pdf], { type: "application/pdf" }));
-            
+
             const link = document.createElement("a");
             link.href = url;
             link.download = "report.pdf";
@@ -55,6 +56,7 @@ export default function Page() {
             URL.revokeObjectURL(url);
         } catch (error) {
             console.error("Error fetching the report:", error);
+            setError("Generating report failed")
         }
     }
 
@@ -166,13 +168,8 @@ export default function Page() {
                     <div>
                         <Button label="Generate report" disabled={false} />
                     </div>
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
                 </form>
-                {/* {pdfUrl && (
-                    <div>
-                        <iframe src={pdfUrl} width="100%" height="600px"></iframe>
-                        <a href={pdfUrl} download="report.pdf">Generate PDF</a>
-                    </div>
-                )} */}
             </div>
         </div>
     );

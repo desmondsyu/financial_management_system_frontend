@@ -5,7 +5,6 @@ import { formatDate } from "../../lib/utils";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../../lib/login-actions";
 
-
 export default function Page() {
     const navigate = useNavigate();
     const image = `https://robohash.org/${getUserFromStorage().username}`;

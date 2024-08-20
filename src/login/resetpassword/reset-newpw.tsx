@@ -10,18 +10,26 @@ export default function Page() {
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmPassword, setConfirmPasswordRe] = useState<string>("");
     const token = searchParams.get("token");
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
+
         try {
+            if (!token) {
+                setError("Invalid or missing token.");
+                return;
+            }
             if (confirmPassword !== newPassword) {
-                alert("Passwords do not match.")
+                setError("Passwords do not match.");
+                return;
             }
             await resetPassword(token, newPassword);
             navigate("/resetpassword/fin")
         } catch (error: any) {
             console.error(error);
-            throw new Error(error.message);
+            window.alert("Reset failed. Please try again.")
         }
     };
 
@@ -43,6 +51,7 @@ export default function Page() {
                     required={true}
                     onChange={(e) => setConfirmPasswordRe(e.target.value)}
                 />
+                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <Button label="Reset" disabled={false} />
             </form>
         </div>

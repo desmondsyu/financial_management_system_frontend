@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import type { User } from '../lib/definitions.ts';
 
 export default function Page() {
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const [formData, setFormData] = useState(
         {
@@ -15,9 +16,10 @@ export default function Page() {
         }
     );
 
-
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
+
         try {
             await axios.get("http://107.20.240.135:8088/labels",
                 {
@@ -28,45 +30,35 @@ export default function Page() {
                 },
             );
 
-            const response = async (): Promise<User> => {
-                try {
-                    const response = await axios("http://107.20.240.135:8088/users",
-                        {
-                            headers: {
-                                "Accept": "*/*",
-                                "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
-                            },
-                        },
-                    );
-                    const users = response.data;
-                    const user = users.find((user: User) => user.email === formData.email);
-                    if (!user) {
-                        throw new Error("User not found");
-                    }
-                    return user;
-                } catch (error: any) {
-                    console.error(error);
-                    throw new Error(error.message);
-                }
-            };
-            const currentUser = await response();
-            localStorage.setItem("currentUserInfo", JSON.stringify(currentUser));
+            const response = await axios("http://107.20.240.135:8088/users",
+                {
+                    headers: {
+                        "Accept": "*/*",
+                        "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
+                    },
+                },
+            );
+            const users = response.data;
+            const user = users.find((user: User) => user.email === formData.email);
+            if (!user) {
+                throw new Error("User not found");
+            }
+            localStorage.setItem("currentUserInfo", JSON.stringify(user));
             localStorage.setItem("authEmail", formData.email);
             localStorage.setItem("authPw", formData.password);
 
             navigate("/transactions");
         } catch (error: any) {
             console.error(error);
-            throw new Error(error.message);
+            setError("Incorrect credentials");
         }
     }
 
     return (
         <div className="flex w-screen h-screen">
-
             <div className="w-2/3 px-5">
             </div>
-            <form className="w-1/3 px-7 flex-col content-center" onSubmit={onSubmit}>
+            <form className="w-1/3 px-7 flex-col content-center" onSubmit={handleSubmit}>
                 <Logo />
                 <Textfield
                     type="email"
@@ -85,7 +77,8 @@ export default function Page() {
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
                 <p className="text-red-500 text-sm text-right"><a href="/confirmemail">Forgot password?</a></p>
-                <Button label="Sign in" disabled={false} />
+                {error && <p className="text-red-500 text-sm">{error}</p>}
+                <Button label="Sign in" disabled={false} type="submit" />
                 <p className="text-sm">Don't have an account? <a className="underline" href="/register">Register</a></p>
             </form>
         </div>

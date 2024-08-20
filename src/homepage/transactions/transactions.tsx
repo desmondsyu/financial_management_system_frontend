@@ -7,7 +7,7 @@ import { fetchTransactions } from "../../lib/data";
 import { TransactionPage } from "../../lib/definitions";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-import {MonthIncomeCard, MonthExpenseCard, ProgressLineChart} from "../../ui/homepage/dashboard/charts"
+import { MonthIncomeCard, MonthExpenseCard, ProgressLineChart } from "../../ui/homepage/dashboard/charts"
 
 interface PaginationParams {
     page: number,
@@ -66,9 +66,9 @@ export default function Page() {
         }
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchData(debouncedParams);
-    },[debouncedParams,fetchData]);
+    }, [debouncedParams, fetchData]);
 
     return (
         <div className="w-full flex justify-center ">
@@ -77,8 +77,8 @@ export default function Page() {
                     <Button label="Create" disabled={false} onClick={() => navigate("create")} />
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>
-                <div className="w-[70%]">
-                <div className="flex mt-5 mb-5 w-full">
+                <div className="w-[70%] flex flex-col justify-center contents-center">
+                    <div className="flex mt-5 mb-5 w-full">
                         <MonthIncomeCard />
                         <MonthExpenseCard />
                         <ProgressLineChart />

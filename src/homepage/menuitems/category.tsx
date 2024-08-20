@@ -12,12 +12,12 @@ import { transactionTypeData } from "../../lib/data";
 import { getUserFromStorage } from "../../lib/currentuser";
 
 export default function Page() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isCreating, setIsCreating] = useState<boolean>(false);
     const [newCategoryType, setNewCategoryType] = useState<TransactionType>(transactionTypeData[0]);
     const [newCategoryName, setNewCategoryName] = useState<string>("");
     const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    // const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -26,9 +26,14 @@ export default function Page() {
                 setCategories(initialCategories);
             } catch (error) {
                 console.error(error);
+                window.alert("Unable to load category list");
             }
         };
         loadCategories();
+
+        if (searchParams.toString()) {
+            setSearchParams({});
+        }
     }, []);
 
     const handleCreateClick = () => {
@@ -37,7 +42,7 @@ export default function Page() {
 
     const handleCreate = async () => {
         try {
-            setLoading(true);
+            // setLoading(true);
             await addCategory(newCategoryName, newCategoryType, getUserFromStorage());
 
             const newCategory: Category = {
@@ -54,7 +59,7 @@ export default function Page() {
         } catch (error) {
             console.error(error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 

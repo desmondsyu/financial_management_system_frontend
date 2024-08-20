@@ -1,6 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { useState } from 'react';
 
 interface PaginationParams {
     page: number,
@@ -14,9 +13,7 @@ interface PaginationProps {
     totalPages: number;
 }
 
-export default function Pagination(
-    { paginationParams, setPaginationParams, totalPages }: PaginationProps,
-) {
+export default function Pagination({ paginationParams, setPaginationParams, totalPages }: PaginationProps,) {
     const handlePageChange = (newPage: number) => {
         if (newPage >= 0 && newPage < totalPages) {
             setPaginationParams((prevData) => ({
@@ -26,14 +23,21 @@ export default function Pagination(
         }
     };
 
+    if (totalPages === 0) {
+        return null
+    };
+
     return (
-        <div className="flex items-center space-x-2">
+        <div className="flex justify-center space-x-2 mt-3 w-full">
             <ArrowLeftIcon
                 className={clsx('w-6 h-6 cursor-pointer', {
                     'text-gray-300 pointer-events-none': paginationParams.page === 0,
                 })}
                 onClick={() => handlePageChange(paginationParams.page - 1)}
             />
+            <span className="text-md font-medium">
+                Page {paginationParams.page + 1} of {totalPages}
+            </span>
             <ArrowRightIcon
                 className={clsx('w-6 h-6 cursor-pointer', {
                     'text-gray-300 pointer-events-none': paginationParams.page === totalPages - 1,

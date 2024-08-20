@@ -10,21 +10,21 @@ export default function Page() {
     const [email, setEmail] = useState("");
     const [isSent, setIsSent] = useState<boolean>(false);
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             await sendResetEmail(email);
             setIsSent(true);
         } catch (error: any) {
             console.error(error);
-            throw new Error(error.message);
+            window.alert("Failed to send email, please try again");
         }
     };
 
     return (
         <div className="flex justify-center items-center pt-20">
             {!isSent ? (
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSubmit}>
                     <p className="text-center text-lg font-bold">Enter your registered email address.</p>
                     <Textfield
                         type="email"
@@ -36,7 +36,7 @@ export default function Page() {
                 </form>
             ) : (
                 <div>
-                    <p className="text-center text-lg font-bold">Use the link in the email to reset.</p>
+                    <p className="text-center text-lg font-bold">Use the link in the email to reset password.</p>
                     <Button label="Close" disabled={false} onClick={() => navigate('/')} />
                 </div>
             )}

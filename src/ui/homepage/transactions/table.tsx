@@ -9,7 +9,7 @@ interface TransactionTableProps {
     transactions: TransactionPage | null;
 }
 
-export default function TransactionsTable(transactions: TransactionTableProps) {
+export default function TransactionsTable({ transactions }: TransactionTableProps) {
     const handleDelete = async (id: number) => {
         try {
             await deleteTransaction(id);
@@ -49,44 +49,43 @@ export default function TransactionsTable(transactions: TransactionTableProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            transactions.transactions?.content.map((transaction) => (
-                                <tr key={transaction.id} className="hover:bg-gray-50">
-                                    <td className="w-[18%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
-                                        {transaction.transactionGroup.name}
-                                    </td>
-                                    <td className="w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
-                                        {formatDateToLocal(transaction.transactionDate)}
-                                    </td>
-                                    <td className="w-[28%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
-                                        {transaction.description}
-                                    </td>
-                                    <td
-                                        className={clsx(
-                                            "w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal",
-                                            {
-                                                "text-green-500": transaction.amount > 0,
-                                                "text-red-500": transaction.amount <= 0,
-                                            }
-                                        )}
+                        {transactions?.content.map((transaction) => (
+                            <tr key={transaction.id} className="hover:bg-gray-50">
+                                <td className="w-[18%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
+                                    {transaction.transactionGroup.name}
+                                </td>
+                                <td className="w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
+                                    {formatDateToLocal(transaction.transactionDate)}
+                                </td>
+                                <td className="w-[28%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
+                                    {transaction.description}
+                                </td>
+                                <td
+                                    className={clsx(
+                                        "w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal",
+                                        {
+                                            "text-green-500": transaction.amount > 0,
+                                            "text-red-500": transaction.amount <= 0,
+                                        }
+                                    )}
+                                >
+                                    ${transaction.amount}
+                                </td>
+                                <td className="w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
+                                    {transaction.label ? transaction.label.name : ""}
+                                </td>
+                                <td className="w-[10%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
+                                    <Link
+                                        to={`${transaction.id}/edit`}
+                                        state={{ transaction: transaction }}
+                                        className="text-blue-500 hover:text-blue-700"
                                     >
-                                        ${transaction.amount}
-                                    </td>
-                                    <td className="w-[14%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
-                                        {transaction.label ? transaction.label.name : ""}
-                                    </td>
-                                    <td className="w-[10%] px-4 py-2 border-b truncate max-h-12 overflow-hidden hover:overflow-visible hover:whitespace-normal">
-                                        <Link
-                                            to={`${transaction.id}/edit`}
-                                            state={{ transaction: transaction }}
-                                            className="text-blue-500 hover:text-blue-700"
-                                        >
-                                            <PencilSquareIcon className="w-5 h-5 inline-block" />
-                                        </Link>
-                                        <TrashIcon className="w-5 h-5 inline-block ml-2 text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDelete(transaction.id)}/>
-                                    </td>
-                                </tr>
-                            ))
+                                        <PencilSquareIcon className="w-5 h-5 inline-block" />
+                                    </Link>
+                                    <TrashIcon className="w-5 h-5 inline-block ml-2 text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDelete(transaction.id)} />
+                                </td>
+                            </tr>
+                        ))
                         }
                     </tbody>
                 </table>

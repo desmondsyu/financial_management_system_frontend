@@ -23,14 +23,6 @@ export default function Page() {
         }
     }, []);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -38,6 +30,7 @@ export default function Page() {
             navigate("/register/fin");
         } catch (error) {
             console.error(error);
+            window.alert("Submit failed")
         }
     }
 
@@ -45,8 +38,19 @@ export default function Page() {
         <div className="flex justify-center items-center pt-20">
             <form onSubmit={handleSubmit}>
                 <p className="text-center text-lg font-bold">An email with code have been sent to your mailbox.</p>
-                <Textfield type="text" name="token" placeholder="Enter code here" disabled={false} required={true} onChange={handleChange} value={formData.token} />
-                <Button label="Register" disabled={false} />
+                <Textfield
+                    type="text"
+                    placeholder="Enter code here"
+                    disabled={false}
+                    required={true}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setFormData((prevData) => ({
+                            ...prevData,
+                            token: e.target.value,
+                        }));
+                    }}
+                    value={formData.token} />
+                <Button label="Register" disabled={false} type="submit" />
             </form>
         </div>
     );
