@@ -77,7 +77,7 @@ export default function Page() {
                     <Button label="Create" disabled={false} onClick={() => navigate("create")} />
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>
-                <div className="w-[70%] flex flex-col justify-center contents-center">
+                <div className="w-[70%] flex flex-col contents-center">
                     <div className="flex mt-5 mb-5 w-full">
                         <MonthIncomeCard />
                         <MonthExpenseCard />
