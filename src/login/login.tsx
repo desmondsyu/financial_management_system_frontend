@@ -19,7 +19,7 @@ export default function Page() {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.get("http://107.20.240.135:8088/labels",
+            await axios.get("https://107.20.240.135:8088/labels",
                 {
                     headers: {
                         "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
