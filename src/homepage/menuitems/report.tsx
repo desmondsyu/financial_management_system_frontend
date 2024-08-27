@@ -74,7 +74,7 @@ export default function Page() {
                         onChange={(e) => {
                             setFormData((prevData) => ({
                                 ...prevData,
-                                from: formData.from ? new Date(e.target.value).toISOString() : null,
+                                from: e.target.value ? new Date(e.target.value).toISOString() : null,
                             }))
                         }}
                     />
@@ -87,7 +87,7 @@ export default function Page() {
                         onChange={(e) => {
                             setFormData((prevData) => ({
                                 ...prevData,
-                                to: formData.to ? new Date(e.target.value).toISOString() : null,
+                                to: e.target.value ? new Date(e.target.value).toISOString() : null,
                             }))
                         }}
                     />
