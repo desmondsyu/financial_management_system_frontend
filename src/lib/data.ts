@@ -13,6 +13,18 @@ export const transactionTypeData: TransactionType[] = [
     },
 ]
 
+export const feedbackTopics = [
+    {
+        name: "Bug Report",
+    },
+    {
+        name: "Feature Request",
+    },
+    {
+        name: "General Inquiry",
+    },
+]
+
 export async function fetchBooks(): Promise<Labels[]> {
     try {
         const response = await axios.get("http://107.20.240.135:8088/labels",
@@ -75,7 +87,7 @@ export async function fetchTransactions({
             sort: sort.join(','),
         });
 
-        if (fromDate !== null ) queryParams.append("from", fromDate);
+        if (fromDate !== null) queryParams.append("from", fromDate);
         if (toDate !== null) queryParams.append("to", toDate);
         if (label !== null) queryParams.append("label", label);
         if (type !== null) queryParams.append("type", type.toString());
@@ -127,7 +139,7 @@ export async function getReport({
                 },
                 responseType: "blob",
             },
-            
+
         );
         return response.data;
     } catch (error: any) {

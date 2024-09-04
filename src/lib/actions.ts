@@ -188,3 +188,27 @@ export async function deleteTransaction(id: number): Promise<void> {
         throw new Error(error.message);
     }
 }
+
+export interface FeedbackProp {
+    subject: string | null,
+    message: string | null,
+    userEmail: string | null,
+}
+
+export async function sendFeedback(feedback: FeedbackProp): Promise<void> {
+    try {
+        const response = await axios.post("http://107.20.240.135:8088/feedback/submit",
+            feedback,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
