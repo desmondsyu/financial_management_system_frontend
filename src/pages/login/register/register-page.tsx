@@ -1,7 +1,7 @@
-import Textfield from "../../ui/textfield";
-import Button from "../../ui/button";
+import Textfield from "../../../ui/textfield";
+import Button from "../../../ui/button";
 import { useState } from "react";
-import { register } from "../../lib/login-actions";
+import { register } from "../../../lib/login-actions";
 import { useNavigate } from "react-router-dom";
 
 export default function Page() {

@@ -1,9 +1,9 @@
-import Button from "../../ui/button";
-import Textfield from "../../ui/textfield";
-import { getUserFromStorage } from "../../lib/currentuser";
-import { formatDate } from "../../lib/utils";
+import Button from "../../../ui/button";
+import Textfield from "../../../ui/textfield";
+import { getUserFromStorage } from "../../../lib/currentuser";
+import { formatDate } from "../../../lib/utils";
 import { useNavigate } from "react-router-dom";
-import { deleteUser } from "../../lib/login-actions";
+import { deleteUser } from "../../../lib/login-actions";
 
 export default function Page() {
     const navigate = useNavigate();

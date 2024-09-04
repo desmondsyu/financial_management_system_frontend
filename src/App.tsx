@@ -1,26 +1,26 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from "./error-page.tsx";
 
-import Login from './login/login.tsx';
+import Login from './pages/login/login.tsx';
 
-import Register from './login/register/register-page.tsx';
-import RegisterAuthCode from './login/register/register-authcode.tsx';
-import RegisterFinish from './login/register/register-finish.tsx';
+import Register from './pages/login/register/register-page.tsx';
+import RegisterAuthCode from './pages/login/register/register-authcode.tsx';
+import RegisterFinish from './pages/login/register/register-finish.tsx';
 
-import ResetEnterEmail from './login/resetpassword/reset-email.tsx';
-import ResetSetNew from './login/resetpassword/reset-newpw.tsx';
-import ResetFinsh from './login/resetpassword/reset-finish.tsx';
+import ResetEnterEmail from './pages/login/resetpassword/reset-email.tsx';
+import ResetSetNew from './pages/login/resetpassword/reset-newpw.tsx';
+import ResetFinsh from './pages/login/resetpassword/reset-finish.tsx';
 
-import HomeLayout from './homepage/layout.tsx';
-import Transactions from './homepage/transactions/transactions.tsx';
-import CreateTransaction from './homepage/transactions/create.tsx';
-import EditTransaction from './homepage/transactions/edit.tsx';
-import Dashboard from './homepage/dashboard/dashboard.tsx';
+import HomeLayout from './pages/homepage/layout.tsx';
+import Transactions from './pages/homepage/transactions/transactions.tsx';
+import CreateTransaction from './pages/homepage/transactions/create.tsx';
+import EditTransaction from './pages/homepage/transactions/edit.tsx';
+import Dashboard from './pages/homepage/dashboard/dashboard.tsx';
 
-import Profile from './homepage/menuitems/profile.tsx';
-import Books from './homepage/menuitems/books.tsx';
-import Category from './homepage/menuitems/category.tsx';
-import Report from './homepage/menuitems/report.tsx';
+import Profile from './pages/homepage/menuitems/profile.tsx';
+import Books from './pages/homepage/menuitems/books.tsx';
+import Category from './pages/homepage/menuitems/category.tsx';
+import Report from './pages/homepage/menuitems/report.tsx';
 
 const router = createBrowserRouter([
   {

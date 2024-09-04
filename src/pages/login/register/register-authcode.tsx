@@ -1,8 +1,8 @@
-import Textfield from "../../ui/textfield";
-import Button from "../../ui/button";
+import Textfield from "../../../ui/textfield";
+import Button from "../../../ui/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authCode } from "../../lib/login-actions";
+import { authCode } from "../../../lib/login-actions";
 
 export default function Page() {
     const [formData, setFormData] = useState({

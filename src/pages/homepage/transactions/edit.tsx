@@ -1,34 +1,25 @@
-import Textfield from "../../ui/textfield";
-import Button from "../../ui/button";
+import Textfield from "../../../ui/textfield";
+import Button from "../../../ui/button";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { TransactionProp } from "../../lib/actions";
-import { getUserFromStorage } from "../../lib/currentuser";
-import type { Labels, Category } from "../../lib/definitions";
-import { transactionTypeData } from "../../lib/data";
-import { fetchBooks, fetchCategories } from "../../lib/data";
-import { addTransaction } from "../../lib/actions";
+import { transactionTypeData } from "../../../lib/data";
+import { fetchBooks, fetchCategories } from "../../../lib/data";
+import type { Labels, Category } from "../../../lib/definitions";
+import { useLocation, useNavigate } from "react-router-dom";
+import { TransactionProp } from "../../../lib/actions";
+import { getUserFromStorage } from "../../../lib/currentuser";
+import { editTransaction } from "../../../lib/actions";
+import { formatDate } from "../../../lib/utils";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
     const [booksList, setBooksList] = useState<Labels[]>([]);
     const [categoryList, setCategoryList] = useState<Category[]>([]);
-    const [simbol, setSimbol] = useState<number>();
-    const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
     const typeList = transactionTypeData;
     const navigate = useNavigate();
-    const [formData, setFormData] = useState<TransactionProp>({
-        id: null,
-        user: getUserFromStorage(),
-        hashcode: null,
-        transactionGroup: null,
-        label: null,
-        transactionDate: "",
-        amount: 0,
-        description: null,
-        type: null,
-        balance: 0,
-    });
+    const location = useLocation();
+    const transaction = location.state?.transaction as TransactionProp;
+    // const [simbol, setSimbol] = useState<number>();
+    const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,21 +30,30 @@ export default function Page() {
                 setCategoryList(categories || []);
             } catch (error: any) {
                 console.error(error);
+                throw new Error(error.message);
             }
         };
         fetchData();
     }, []);
 
+    const [formData, setFormData] = useState<TransactionProp>({
+        id: transaction?.id,
+        user: transaction?.user || getUserFromStorage(),
+        hashcode: transaction?.hashcode,
+        transactionGroup: transaction?.transactionGroup || null,
+        label: transaction?.label || null,
+        transactionDate: transaction?.transactionDate || "",
+        amount: transaction?.amount || 0,
+        description: transaction?.description || "",
+        type: transaction?.type || null,
+        balance: transaction?.balance || null,
+    });
+
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.type || !formData.transactionGroup) {
-            alert("Please fill out all required fields.");
-            return;
-        }
-
         try {
 
-            await addTransaction(formData);
+            await editTransaction(formData);
             navigate("/transactions");
         } catch (error: any) {
             console.error(error);
@@ -78,6 +78,7 @@ export default function Page() {
                         </label>
                         <select
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            value={formData.type?.id || ""}
                             onChange={(e) => {
                                 const selectedType = typeList.find(type => type.id === parseInt(e.target.value));
                                 if (selectedType) {
@@ -87,14 +88,13 @@ export default function Page() {
                                     }));
                                     const filtered = categoryList.filter(category => category.transactionType.id === selectedType.id);
                                     setFilteredCategories(filtered);
-                                    setSimbol(selectedType.id);
+                                    // setSimbol(selectedType.id);
                                 } else {
                                     setFilteredCategories([]);
                                 }
                             }}
-                            required={true}
                         >
-                            <option disabled selected>Select type</option>
+                            <option disabled value="">Select type</option>
                             {typeList.map((type) => (
                                 <option key={type.id} value={type.id}>
                                     {type.name}
@@ -109,8 +109,9 @@ export default function Page() {
                         </label>
                         <select
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            value={formData.transactionGroup?.id || ""}
                             onChange={(e) => {
-                                const selectedCategory = filteredCategories.find(category => category.id === parseInt(e.target.value));
+                                const selectedCategory = categoryList.find(category => category.id === parseInt(e.target.value));
                                 if (selectedCategory) {
                                     setFormData((formData) => ({
                                         ...formData,
@@ -118,15 +119,14 @@ export default function Page() {
                                     }));
                                 }
                             }}
-                            required={true}
                         >
-                            <option selected disabled>Select category</option>
-                            {filteredCategories ? filteredCategories.map((category) => (
+                            <option disabled value="">Select category</option>
+                            {categoryList ? categoryList.map((category) => (
                                 <option key={category.id} value={category.id}>
                                     {category.name}
                                 </option>
                             )) : (
-                                <option disabled>No category available</option>
+                                <option disabled>No books available</option>
                             )}
                         </select>
                     </div>
@@ -136,6 +136,7 @@ export default function Page() {
                         type="date"
                         disabled={false}
                         required={true}
+                        value={formatDate(formData.transactionDate)}
                         onChange={(e) => {
                             setFormData((formData) => ({
                                 ...formData,
@@ -147,17 +148,23 @@ export default function Page() {
                     <Textfield
                         label="Amount"
                         type="number"
-                        step={.01}
+                        step={0.01}
                         disabled={false}
                         required={true}
+                        value={Math.abs(formData.amount).toString()}
                         onChange={(e) => {
                             const value = Math.abs(parseFloat(e.target.value));
 
                             if (!isNaN(value)) {
-                                const updatedAmount = simbol === 1 ? value : -value;
+                                const updatedAmount = formData.type?.id === 1 ? value : -value;
                                 setFormData((formData) => ({
                                     ...formData,
                                     amount: updatedAmount,
+                                }));
+                            } else {
+                                setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    amount: 0,
                                 }));
                             }
                         }}
@@ -168,6 +175,7 @@ export default function Page() {
                         type="text"
                         disabled={false}
                         required={false}
+                        value={formData.description || ""}
                         onChange={(e) => {
                             setFormData((formData) => ({
                                 ...formData,
@@ -182,17 +190,27 @@ export default function Page() {
                         </label>
                         <select
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            value={formData.label?.id || ""}
                             onChange={(e) => {
-                                const selectedBook = booksList.find(book => book.id === parseInt(e.target.value));
-                                if (selectedBook) {
+                                const selectedValue = e.target.value;
+
+                                if (selectedValue === "") {
                                     setFormData((formData) => ({
                                         ...formData,
-                                        label: selectedBook,
+                                        label: null,
                                     }));
+                                } else {
+                                    const selectedBook = booksList.find(book => book.id === parseInt(selectedValue));
+                                    if (selectedBook) {
+                                        setFormData((formData) => ({
+                                            ...formData,
+                                            label: selectedBook,
+                                        }));
+                                    }
                                 }
                             }}
                         >
-                            <option defaultChecked>Select book</option>
+                            <option value="">Select book</option>
                             {booksList ? booksList.map((book) => (
                                 <option key={book.id} value={book.id}>
                                     {book.name}

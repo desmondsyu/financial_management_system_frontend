@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Navibar from "../ui/homepage/navibar/navibar";
-import FeedBack from "../ui/feedback";
+import Navibar from "../../ui/homepage/navibar/navibar";
+import FeedBack from "../../ui/feedback";
 
 export default function Layout() {
     return (

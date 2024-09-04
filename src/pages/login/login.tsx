@@ -1,10 +1,10 @@
-import Button from '../ui/button';
-import Textfield from "../ui/textfield";
-import Logo from "../ui/logo.tsx";
+import Button from '../../ui/button';
+import Textfield from "../../ui/textfield";
+import Logo from "../../ui/logo.tsx";
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import type { User } from '../lib/definitions.ts';
+import type { User } from '../../lib/definitions.ts';
 
 export default function Page() {
     const [error, setError] = useState<string | null>(null);

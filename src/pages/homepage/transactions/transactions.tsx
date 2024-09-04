@@ -1,13 +1,13 @@
-import TransactionsTable from "../../ui/homepage/transactions/table";
-import Button from "../../ui/button";
-import Filter from "../../ui/homepage/transactions/filter";
-import Pagination from "../../ui/homepage/transactions/pagination";
+import TransactionsTable from "../../../ui/homepage/transactions/table";
+import Button from "../../../ui/button";
+import Filter from "../../../ui/homepage/transactions/filter";
+import Pagination from "../../../ui/homepage/transactions/pagination";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { fetchTransactions } from "../../lib/data";
-import { TransactionPage } from "../../lib/definitions";
+import { fetchTransactions } from "../../../lib/data";
+import { TransactionPage } from "../../../lib/definitions";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-import { MonthIncomeCard, MonthExpenseCard, ProgressLineChart } from "../../ui/homepage/dashboard/charts";
+import { MonthIncomeCard, MonthExpenseCard, ProgressLineChart } from "../../../ui/homepage/dashboard/charts";
 
 interface PaginationParams {
     page: number,

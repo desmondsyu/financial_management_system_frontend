@@ -1,13 +1,13 @@
-import BookList from "../../ui/menuitems/books/book-list";
-import Button from "../../ui/button";
-import Search from "../../ui/search";
+import BookList from "../../../ui/menuitems/books/book-list";
+import Button from "../../../ui/button";
+import Search from "../../../ui/search";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { addBook } from "../../lib/actions";
-import type { Labels } from "../../lib/definitions";
+import { addBook } from "../../../lib/actions";
+import type { Labels } from "../../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { fetchBooks } from "../../lib/data";
-import { getUserFromStorage } from "../../lib/currentuser";
+import { fetchBooks } from "../../../lib/data";
+import { getUserFromStorage } from "../../../lib/currentuser";
 
 export default function Page() {
     const [searchParams, setSearchParams] = useSearchParams();

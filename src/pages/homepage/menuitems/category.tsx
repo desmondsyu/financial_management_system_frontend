@@ -1,15 +1,15 @@
-import CategoryList from "../../ui/menuitems/category/category-list";
-import Button from "../../ui/button";
-import Search from "../../ui/search";
+import CategoryList from "../../../ui/menuitems/category/category-list";
+import Button from "../../../ui/button";
+import Search from "../../../ui/search";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { addCategory } from "../../lib/actions";
-import type { Category, TransactionType } from "../../lib/definitions";
+import { addCategory } from "../../../lib/actions";
+import type { Category, TransactionType } from "../../../lib/definitions";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { fetchCategories } from "../../lib/data";
+import { fetchCategories } from "../../../lib/data";
 import { clsx } from "clsx";
-import { transactionTypeData } from "../../lib/data";
-import { getUserFromStorage } from "../../lib/currentuser";
+import { transactionTypeData } from "../../../lib/data";
+import { getUserFromStorage } from "../../../lib/currentuser";
 
 export default function Page() {
     const [searchParams, setSearchParams] = useSearchParams();

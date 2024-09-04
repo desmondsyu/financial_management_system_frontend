@@ -103,3 +103,11 @@ export type LabelGroupData = {
     label_name: string,
     amount: number,
 }
+
+export type UploadResult = {
+    successfulTransactions: Transaction[],
+    failedTransactions: {
+        line: number,
+        reason: string,
+    }[],
+}

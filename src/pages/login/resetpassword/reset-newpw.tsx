@@ -1,8 +1,8 @@
-import Textfield from "../../ui/textfield";
-import Button from "../../ui/button";
+import Textfield from "../../../ui/textfield";
+import Button from "../../../ui/button";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { resetPassword } from "../../lib/login-actions";
+import { resetPassword } from "../../../lib/login-actions";
 
 export default function Page() {
     const navigate = useNavigate();

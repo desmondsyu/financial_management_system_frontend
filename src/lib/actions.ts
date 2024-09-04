@@ -1,4 +1,4 @@
-import type { Category, Labels, TransactionType, User, Transaction } from "./definitions";
+import type { Category, Labels, TransactionType, User, Transaction, UploadResult } from "./definitions";
 import axios from "axios";
 
 export async function addBook(name: string, user: User): Promise<void> {
@@ -207,6 +207,25 @@ export async function sendFeedback(feedback: FeedbackProp): Promise<void> {
                 },
             },
         );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function sendUploadFile(file: string): Promise<UploadResult> {
+    try {
+        const response = await axios.post("http://107.20.240.135:8088/transactions/parse",
+            file,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+        return response.data;
     } catch (error: any) {
         console.error(error);
         throw new Error(error.message);

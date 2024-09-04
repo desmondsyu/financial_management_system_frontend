@@ -27,40 +27,41 @@ export default function FeedBack() {
         }
     }
     return (
-        <div className="fixed right-3 bottom-3 flex flex-col items-end">            {formShow && (
-            <div className="mt-2 mb-1 p-4 bg-gray-200 rounded ">
-                <form onSubmit={handleSubmit} >
-                    <label className="block mb-2 text-sm font-sm text-gray-900">Topic</label>
-                    <select
-                        className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        onChange={(e) => {
-                            setFormData((prevData) => ({
-                                ...prevData,
-                                subject: "CashCalm Feedback - [" + e.target.value + "]",
-                            }))
-                        }}>
-                        <option defaultChecked disabled value="">Select a topic</option>
-                        {feedbackTopics.map((topic) => {
-                            return (<option value={topic.name}>{topic.name}</option>);
-                        })}
-                    </select>
+        <div className="fixed right-3 bottom-3 flex flex-col items-end">
+            {formShow && (
+                <div className="mt-2 mb-1 p-4 bg-gray-200 rounded ">
+                    <form onSubmit={handleSubmit} >
+                        <label className="block mb-2 text-sm font-sm text-gray-900">Topic</label>
+                        <select
+                            className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            onChange={(e) => {
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    subject: "CashCalm Feedback - [" + e.target.value + "]",
+                                }))
+                            }}>
+                            <option defaultChecked disabled value="">Select a topic</option>
+                            {feedbackTopics.map((topic) => {
+                                return (<option value={topic.name}>{topic.name}</option>);
+                            })}
+                        </select>
 
-                    <label className="block mb-1 text-sm font-sm text-gray-900">Message</label>
-                    <textarea
-                        className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required
-                        rows={4}
-                        placeholder="Your message here..."
-                        onChange={(e) => {
-                            setFormData((prevData) => ({
-                                ...prevData,
-                                message: e.target.value,
-                            }))
-                        }} />
-                    <button type="submit" className="w-full bg-blue-500 text-white py-2 px-2 rounded">Submit</button>
-                </form>
-            </div>
-        )}
+                        <label className="block mb-1 text-sm font-sm text-gray-900">Message</label>
+                        <textarea
+                            className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            required
+                            rows={4}
+                            placeholder="Your message here..."
+                            onChange={(e) => {
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    message: e.target.value,
+                                }))
+                            }} />
+                        <button type="submit" className="w-full bg-blue-500 text-sm text-white py-2 px-2 rounded">Submit</button>
+                    </form>
+                </div>
+            )}
 
             <div
                 onClick={handleClick}

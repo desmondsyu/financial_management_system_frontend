@@ -1,10 +1,10 @@
-import Textfield from "../../ui/textfield";
-import Button from "../../ui/button";
+import Textfield from "../../../ui/textfield";
+import Button from "../../../ui/button";
 import { useState, useEffect } from "react";
-import { getReport, ReportProp } from "../../lib/data";
-import { Labels, Category } from "../../lib/definitions";
-import { transactionTypeData } from "../../lib/data";
-import { fetchBooks, fetchCategories } from "../../lib/data";
+import { getReport, ReportProp } from "../../../lib/data";
+import { Labels, Category } from "../../../lib/definitions";
+import { transactionTypeData } from "../../../lib/data";
+import { fetchBooks, fetchCategories } from "../../../lib/data";
 
 
 export default function Page() {
