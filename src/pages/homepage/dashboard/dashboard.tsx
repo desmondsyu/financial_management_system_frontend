@@ -5,11 +5,6 @@ export default function Page() {
         <>
             <div className="w-full flex justify-center">
                 <div className="w-[90%] justify-center">
-                    <div className="flex mt-5 mb-5 w-full">
-                        <MonthIncomeCard />
-                        <MonthExpenseCard />
-                        <ProgressLineChart />
-                    </div>
                     <div className="mt-5 mb-5 w-full">
                         <TotalTrendChart />
                     </div>
