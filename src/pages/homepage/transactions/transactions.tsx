@@ -78,7 +78,7 @@ export default function Page() {
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>
                 <div className="w-[70%] flex flex-col contents-center">
-                    <div className="flex mt-5 mb-5 w-full">
+                    <div className="flex mt-5 mb-5 w-full overflow-hidden">
                         <MonthIncomeCard />
                         <MonthExpenseCard />
                         <ProgressLineChart />
