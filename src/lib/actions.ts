@@ -213,7 +213,7 @@ export async function sendFeedback(feedback: FeedbackProp): Promise<void> {
     }
 }
 
-export async function sendUploadFile(file: string): Promise<UploadResult> {
+export async function sendUploadFile(file: any): Promise<UploadResult> {
     try {
         const response = await axios.post("http://107.20.240.135:8088/transactions/parse",
             file,
@@ -221,7 +221,7 @@ export async function sendUploadFile(file: string): Promise<UploadResult> {
                 headers: {
                     "Accept": "*/*",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                 },
             },
         );

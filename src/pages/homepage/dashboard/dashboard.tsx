@@ -1,4 +1,4 @@
-import { MonthIncomeCard, MonthExpenseCard, ProgressLineChart, MonthGroupChart, GroupTrendChart, TotalTrendChart, LabelTrendChart, LabelGroupChart } from "../../../ui/homepage/dashboard/charts";
+import { MonthGroupChart, GroupTrendChart, TotalTrendChart, LabelTrendChart, LabelGroupChart } from "../../../ui/homepage/dashboard/charts";
 
 export default function Page() {
     return (

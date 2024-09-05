@@ -14,7 +14,6 @@ export default function Page() {
     const [isCreating, setIsCreating] = useState<boolean>(false);
     const [newBookName, setNewBookName] = useState<string>("");
     const [books, setBooks] = useState<Labels[]>([]);
-    // const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const loadBooks = async () => {
@@ -39,7 +38,6 @@ export default function Page() {
 
     const handleCreate = async () => {
         try {
-            // setLoading(true);
             await addBook(newBookName, getUserFromStorage());
 
             const newBook: Labels = {
@@ -53,8 +51,6 @@ export default function Page() {
             setIsCreating(false);
         } catch (error) {
             console.error(error);
-        } finally {
-            // setLoading(false);
         }
     };
 

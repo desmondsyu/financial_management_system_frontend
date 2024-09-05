@@ -1,10 +1,12 @@
 import Button from '../../ui/button';
 import Textfield from "../../ui/textfield";
 import Logo from "../../ui/logo.tsx";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import type { User } from '../../lib/definitions.ts';
+import dashboardImage from "../../ui/dashboard.png";
+import transactionImage from "../../ui/transactionpage.png";
 
 export default function Page() {
     const [error, setError] = useState<string | null>(null);
@@ -54,9 +56,34 @@ export default function Page() {
         }
     }
 
+    const images = [
+        transactionImage,
+        dashboardImage,
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [images.length]);
+
     return (
         <div className="flex w-screen h-screen">
-            <div className="w-2/3 px-5">
+            <div className="w-2/3 px-5 m-5 flex justify-center items-center">
+                <div className="relative w-full h-full">
+                    {images.map((image, index) => (
+                        <img
+                            key={index}
+                            src={image}
+                            alt={`Slide ${index + 1}`}
+                            className={`absolute inset-0 w-auto h-auto max-w-full max-h-full m-auto transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"}`}
+                        />
+                    ))}
+                </div>
             </div>
             <form className="w-1/3 px-7 flex-col content-center" onSubmit={handleSubmit}>
                 <Logo />
