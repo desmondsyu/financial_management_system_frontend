@@ -30,6 +30,7 @@ export default function ImportTransaction() {
     return (
         <>
             <form onSubmit={handleSubmit}>
+                <p>Download template</p>
                 <input type="file" accept=".csv" onChange={handleChange} />
                 <button type="submit">
                     Upload
