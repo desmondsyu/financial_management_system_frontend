@@ -241,7 +241,7 @@ export function MonthGroupChart() {
     const [expenseDataMinus1, setExpenseDataMinus1] = useState<PieChartData[]>([]);
     const [incomeDataMinus2, setIncomeDataMinus2] = useState<PieChartData[]>([]);
     const [expenseDataMinus2, setExpenseDataMinus2] = useState<PieChartData[]>([]);
-    
+
     const [params, setParams] = useState<TimeSpot>({
         year: currentYearMonth.curYear,
         month: currentYearMonth.curMonth,
@@ -469,7 +469,10 @@ export function GroupTrendChart() {
     const fetchData = useCallback(async (params: TimeRange) => {
         try {
             const response = await getTrendGroupData(params);
-            setGroupNames(response.map(item => item.group_name));
+
+            const categories = response.map(item => item.group_name).filter((value, index, self) => self.indexOf(value) === index);
+
+            setGroupNames(categories);
 
             const groupedData: { [key: string]: any } = {};
 
@@ -481,6 +484,7 @@ export function GroupTrendChart() {
             });
 
             const processedData = Object.values(groupedData);
+
             setProcessedData(processedData);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -494,7 +498,7 @@ export function GroupTrendChart() {
     return (
         <div>
             <Card
-                className="w-auto h-full"
+                className="w-auto h-full z-10"
                 decoration="top"
                 decorationColor="teal">
                 <div className="flex">
@@ -555,7 +559,58 @@ export function GroupTrendChart() {
                         data={processedData}
                         index="date"
                         categories={groupNames}
-                        colors={['blue-700', 'fuchsia-700', '#f0652f']}
+                        colors={[
+                            "rose-500",   // Tremor Rose 500
+                            "pink-500",   // Tremor Pink 500
+                            "fuchsia-500",// Tremor Fuchsia 500
+                            "violet-500", // Tremor Violet 500
+                            "purple-500", // Tremor Purple 500
+                            "indigo-500", // Tremor Indigo 500
+                            "blue-500",   // Tremor Blue 500
+                            "sky-500",    // Tremor Sky 500
+                            "cyan-500",   // Tremor Cyan 500
+                            "teal-500",   // Tremor Teal 500
+                            "emerald-500",// Tremor Emerald 500
+                            "green-500",  // Tremor Green 500
+                            "lime-500",   // Tremor Lime 500
+                            "yellow-500", // Tremor Yellow 500
+                            "amber-500",  // Tremor Amber 500
+                            "orange-500", // Tremor Orange 500
+                            "red-500",    // Tremor Red 500
+                            "rose-400",   // Tremor Rose 400
+                            "pink-400",   // Tremor Pink 400
+                            "fuchsia-400",// Tremor Fuchsia 400
+                            "violet-400", // Tremor Violet 400
+                            "purple-400", // Tremor Purple 400
+                            "indigo-400", // Tremor Indigo 400
+                            "blue-400",   // Tremor Blue 400
+                            "sky-400",    // Tremor Sky 400
+                            "cyan-400",   // Tremor Cyan 400
+                            "teal-400",   // Tremor Teal 400
+                            "emerald-400",// Tremor Emerald 400
+                            "green-400",  // Tremor Green 400
+                            "lime-400",   // Tremor Lime 400
+                            "yellow-400", // Tremor Yellow 400
+                            "amber-400",  // Tremor Amber 400
+                            "orange-400", // Tremor Orange 400
+                            "red-400",    // Tremor Red 400
+                            "rose-600",   // Tremor Rose 600
+                            "pink-600",   // Tremor Pink 600
+                            "fuchsia-600",// Tremor Fuchsia 600
+                            "violet-600", // Tremor Violet 600
+                            "purple-600", // Tremor Purple 600
+                            "indigo-600", // Tremor Indigo 600
+                            "blue-600",   // Tremor Blue 600
+                            "sky-600",    // Tremor Sky 600
+                            "cyan-600",   // Tremor Cyan 600
+                            "teal-600",   // Tremor Teal 600
+                            "emerald-600",// Tremor Emerald 600
+                            "green-600",  // Tremor Green 600
+                            "lime-600",   // Tremor Lime 600
+                            "yellow-600", // Tremor Yellow 600
+                            "amber-600",  // Tremor Amber 600
+                            "orange-600", // Tremor Orange 600
+                        ]}
                         yAxisWidth={30}
                         showLegend={false}
                     />
@@ -587,7 +642,7 @@ export function LabelTrendChart() {
     const fetchData = useCallback(async (params: TimeRange) => {
         try {
             const response = await getTrendLabelData(params);
-            
+
             const processedData = response.reduce((acc: Record<string, number>, item: { label_name: string; amount: number }) => {
                 acc[item.label_name] = (acc[item.label_name] || 0) + Math.abs(item.amount);
                 return acc;
@@ -597,7 +652,7 @@ export function LabelTrendChart() {
                 label_name,
                 totalAmount,
             }));
-           
+
             setProcessedData(formattedData);
         } catch (error) {
             console.error("Error fetching book data:", error);
@@ -672,7 +727,7 @@ export function LabelTrendChart() {
                         data={processedData}
                         index="label_name"
                         categories={["totalAmount"]}
-                        colors={["teal","sky","indigo","violet","purple"]}
+                        colors={["teal", "sky", "indigo", "violet", "purple"]}
                         yAxisWidth={30}
                         showLegend={false}
                     />
