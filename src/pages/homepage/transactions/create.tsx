@@ -52,7 +52,6 @@ export default function Page() {
         }
 
         try {
-
             await addTransaction(formData);
             navigate("/transactions");
         } catch (error: any) {

@@ -97,13 +97,7 @@ export default function Page() {
                                         onClick={() => navigate("import")}
                                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
                                     >
-                                        Import File
-                                    </button>
-                                    <button
-                                        onClick={() => navigate("recurring")}
-                                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                                    >
-                                        Recurring Transactions
+                                        File Import
                                     </button>
                                 </div>
                             </div>
