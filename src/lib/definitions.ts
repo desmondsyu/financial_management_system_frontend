@@ -71,7 +71,6 @@ export type TransactionPage = {
     totalPages: number,
 }
 
-
 export type SpendingData = {
     current_spending: number,
     expected_spending: number,
@@ -111,3 +110,11 @@ export type UploadResult = {
         reason: string,
     }[],
 }
+
+export type RecurringTransaction = {
+    id: number,
+    transaction: Transaction,
+    frequency: string,
+    endDate: string,
+}
+

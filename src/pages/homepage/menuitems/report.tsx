@@ -61,10 +61,9 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full flex justify-center contents-center">
-            <div className="w-4/5 flex flex-col justify-center contents-center">
+        <div className="flex justify-center items-center w-full">
+            <div className="w-96 flex flex-col justify-center contents-center">
                 <form
-                    className="w-1/2"
                     onSubmit={onSubmit}>
                     <Textfield
                         type="date"

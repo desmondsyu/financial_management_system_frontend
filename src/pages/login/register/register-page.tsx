@@ -44,7 +44,7 @@ export default function Page() {
 
     return (
         <div className="flex justify-center items-center pt-20">
-            <div className="w-1/3">
+            <div className="w-96">
                 <form onSubmit={handleSubmit}>
                     <Textfield type="email" name="email" label="Email" placeholder="Enter email address" disabled={false} required={true} onChange={handleChange} value={formData.email} />
                     <Textfield type="text" name="username" label="Username" placeholder="Enter username" disabled={false} required={true} onChange={handleChange} value={formData.username} />

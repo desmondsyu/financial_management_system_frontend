@@ -21,7 +21,10 @@ import Dashboard from './pages/homepage/dashboard/dashboard.tsx';
 import Profile from './pages/homepage/menuitems/profile.tsx';
 import Books from './pages/homepage/menuitems/books.tsx';
 import Category from './pages/homepage/menuitems/category.tsx';
+import Recurring from './pages/homepage/menuitems/recurring.tsx';
 import Report from './pages/homepage/menuitems/report.tsx';
+
+import ScreenTest from './pages/screentestpage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -90,11 +93,19 @@ const router = createBrowserRouter([
         element: <Category />,
       },
       {
+        path: "recurringlist",
+        element: <Recurring />
+      },
+      {
         path: "report",
         element: <Report />,
       },
     ],
   },
+  {
+    path: "screentest",
+    element: <ScreenTest />
+  }
 ]);
 
 export default function App() {

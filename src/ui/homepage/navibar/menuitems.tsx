@@ -15,6 +15,10 @@ const links = [
         href: "/category",
     },
     {
+        name: "RecurTrans",
+        href: "/recurringlist",
+    },
+    {
         name: "Report",
         href: "/report",
     },

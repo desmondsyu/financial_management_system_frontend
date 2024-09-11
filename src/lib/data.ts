@@ -11,19 +11,41 @@ export const transactionTypeData: TransactionType[] = [
         id: 2,
         name: "Expense",
     },
-]
+];
 
 export const feedbackTopics = [
     {
+        id: 1,
         name: "Bug Report",
     },
     {
+        id: 2,
         name: "Feature Request",
     },
     {
+        id: 3,
         name: "General Inquiry",
     },
-]
+];
+
+export const frequency = [
+    {
+        id: 1,
+        name: "DAILY",
+    },
+    {
+        id: 2,
+        name: "WEEKLY",
+    },
+    {
+        id: 3,
+        name: "MONTHLY",
+    },
+    {
+        id: 4,
+        name: "YEARY",
+    },
+];
 
 export async function fetchBooks(): Promise<Labels[]> {
     try {

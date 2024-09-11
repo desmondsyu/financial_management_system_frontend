@@ -87,7 +87,7 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
     }
 
     return (
-        <div className="w-full p-4">
+        <div className="w-full p-2">
             {loading && <p className="text-gray-600">Processing...</p>}
             {filteredData.length === 0 ? (
                 <p className="text-gray-600">No matching results.</p>

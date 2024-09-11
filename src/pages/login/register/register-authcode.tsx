@@ -36,7 +36,9 @@ export default function Page() {
 
     return (
         <div className="flex justify-center items-center pt-20">
-            <form onSubmit={handleSubmit}>
+            <form
+                className="w-96"
+                onSubmit={handleSubmit}>
                 <p className="text-center text-lg font-bold">An email with code have been sent to your mailbox.</p>
                 <Textfield
                     type="text"

@@ -70,84 +70,95 @@ export default function Page() {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center w-full">
-            <div className="flex flex-row justify-between items-center w-4/5">
-                <div className="basis-3/4">
-                    <Search placeholder="Search categories..." />
-                </div>
-                <div className="basis-1/4">
-                    <Button label="Create" disabled={isCreating} onClick={handleCreateClick} />
-                </div>
-            </div>
-            {isCreating && (
-                <div className="flex items-center contents-center w-3/4 p-4 bg-white border border-gray-200 rounded shadow-sm">
-                    <div className="flex mr-5 ml-5">
-                        <input
-                            className="hidden"
-                            id="income"
-                            type="radio"
-                            value={transactionTypeData[0].name}
-                            checked={newCategoryType === transactionTypeData[0]}
-                            onChange={() => setNewCategoryType(transactionTypeData[0])}
-                        />
-                        <label
-                            htmlFor="income"
-                            className={clsx(
-                                "flex items-center justify-center px-2 py-1  rounded-s-full cursor-pointer",
-                                {
-                                    "bg-cyan-500 text-white": newCategoryType === transactionTypeData[0],
-                                    "bg-gray-300 text-black": newCategoryType !== transactionTypeData[0],
-                                }
-                            )}
-                        >
-                            Income
-                        </label>
-                        <input
-                            className="hidden"
-                            type="radio"
-                            id="expense"
-                            value={transactionTypeData[1].name}
-                            checked={newCategoryType === transactionTypeData[1]}
-                            onChange={() => setNewCategoryType(transactionTypeData[1])}
-                        />
-                        <label
-                            htmlFor="expense"
-                            className={clsx(
-                                "flex items-center justify-center px-2 py-1 rounded-e-full cursor-pointer",
-                                {
-                                    "bg-orange-500 text-white": newCategoryType === transactionTypeData[1],
-                                    "bg-gray-300 text-black": newCategoryType !== transactionTypeData[1],
-                                }
-                            )}
-                        >
-                            Expense
-                        </label>
+        <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center flex-col w-96">
+                <div className="flex flex-row justify-between items-center">
+                    <div className="w-72">
+                        <Search placeholder="Search categories..." />
                     </div>
-                    <input
-                        type="text"
-                        value={newCategoryName}
-                        onChange={(e) => { setNewCategoryName(e.target.value) }}
-                        placeholder="Enter category name"
-                        className="border border-gray-300 px-2 py-1 rounded mb-2 w-full"
-                    />
-                    <div className="flex justify-end space-x-2">
+                    <div className="w-24 pl-5">
                         <button
-                            onClick={() => handleCreate()}
-                            className="text-green-500 hover:text-green-700"
+                            className="w-full leading-10 text-md bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-105 disabled:bg-blue-300 disabled:cursor-not-allowed"
+                            disabled={isCreating}
+                            onClick={handleCreateClick}
                         >
-                            <CheckIcon className="h-5 w-5" />
-                        </button>
-                        <button
-                            onClick={handleCancel}
-                            className="text-red-500 hover:text-red-700"
-                        >
-                            <XMarkIcon className="h-5 w-5" />
+                            Create
                         </button>
                     </div>
                 </div>
-            )}
-            <div className="w-3/4">
-                <CategoryList searchTerm={searchParams.get("query") || ""} categories={categories} />
+                {isCreating && (
+                    <div className="flex flex-col w-full mt-5 px-2 py-1 bg-white border border-gray-200 rounded shadow-sm">
+                        <div className="flex mx-5 justify-between h-8">
+                            <div className="flex">
+                                <input
+                                    className="hidden"
+                                    id="income"
+                                    type="radio"
+                                    value={transactionTypeData[0].name}
+                                    checked={newCategoryType === transactionTypeData[0]}
+                                    onChange={() => setNewCategoryType(transactionTypeData[0])}
+                                />
+                                <label
+                                    htmlFor="income"
+                                    className={clsx(
+                                        "flex items-center justify-center px-2 rounded-s-full cursor-pointer",
+                                        {
+                                            "bg-cyan-500 text-white": newCategoryType === transactionTypeData[0],
+                                            "bg-gray-300 text-black": newCategoryType !== transactionTypeData[0],
+                                        }
+                                    )}
+                                >
+                                    Income
+                                </label>
+                                <input
+                                    className="hidden"
+                                    type="radio"
+                                    id="expense"
+                                    value={transactionTypeData[1].name}
+                                    checked={newCategoryType === transactionTypeData[1]}
+                                    onChange={() => setNewCategoryType(transactionTypeData[1])}
+                                />
+                                <label
+                                    htmlFor="expense"
+                                    className={clsx(
+                                        "flex items-center justify-center px-2 rounded-e-full cursor-pointer",
+                                        {
+                                            "bg-orange-500 text-white": newCategoryType === transactionTypeData[1],
+                                            "bg-gray-300 text-black": newCategoryType !== transactionTypeData[1],
+                                        }
+                                    )}
+                                >
+                                    Expense
+                                </label>
+                            </div>
+                            <div className="flex justify-end space-x-2">
+                                <button
+                                    onClick={() => handleCreate()}
+                                    className="text-green-500 hover:text-green-700"
+                                >
+                                    <CheckIcon className="h-5 w-5" />
+                                </button>
+                                <button
+                                    onClick={handleCancel}
+                                    className="text-red-500 hover:text-red-700"
+                                >
+                                    <XMarkIcon className="h-5 w-5" />
+                                </button>
+                            </div>
+                        </div>
+                        <input
+                            type="text"
+                            value={newCategoryName}
+                            onChange={(e) => { setNewCategoryName(e.target.value) }}
+                            placeholder="Enter category name"
+                            className="border border-gray-300 rounded mt-1 w-full"
+                        />
+
+                    </div>
+                )}
+                <div className="w-full">
+                    <CategoryList searchTerm={searchParams.get("query") || ""} categories={categories} />
+                </div>
             </div>
         </div>
     );

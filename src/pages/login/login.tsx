@@ -72,8 +72,8 @@ export default function Page() {
     }, [images.length]);
 
     return (
-        <div className="flex w-screen h-screen">
-            <div className="w-2/3 px-5 m-5 flex justify-center items-center">
+        <div className="flex w-screen h-screen justify-center">
+            <div className="w-2/3 px-5 m-5 justify-center items-center hidden lg:block">
                 <div className="relative w-full h-full">
                     {images.map((image, index) => (
                         <img
@@ -85,7 +85,7 @@ export default function Page() {
                     ))}
                 </div>
             </div>
-            <form className="w-1/3 px-7 flex-col content-center" onSubmit={handleSubmit}>
+            <form className="w-4/5 px-7 flex-col content-center md:w-3/4 lg:w-1/3" onSubmit={handleSubmit}>
                 <Logo />
                 <Textfield
                     type="email"

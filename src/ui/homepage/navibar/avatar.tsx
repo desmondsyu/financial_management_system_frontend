@@ -36,8 +36,8 @@ export default function Avatar() {
                 onClick={handleClick}
                 style={{ cursor: "pointer" }}
             >
-                <img src={image} alt="profile-img" className="mr-2 w-auto h-10 rounded-full border-2 border-grey bg-white" />
-                <p>Hi, {getUserFromStorage().username}!</p>
+                <img src={image} alt="profile-img" className="mr-2 w-10 h-10 rounded-full border-2 border-grey bg-white" />
+                <p className="hidden md:block">Hi, {getUserFromStorage().username}!</p>
             </a>
 
             {showMenu && (

@@ -222,12 +222,69 @@ export async function sendUploadFile(file: FormData): Promise<UploadResult> {
                     "Accept": "*/*",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                     "Content-Type": "multipart/form-data",
-                    // "Content-Type": "application/json",
-                    // "Content-Type": "text/csv",
                 },
             },
         );
         return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export interface RecurringTransactionProp {
+    id?: number,
+    transaction: TransactionProp,
+    frequency: string,
+    endDate?: string,
+}
+
+export async function addRecurringRule(transaction: RecurringTransactionProp): Promise<void> {
+    try {
+        const response = await axios.post("http://107.20.240.135:8088/recurring-transactions",
+
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function editRecurringRule(transaction: RecurringTransactionProp): Promise<void> {
+    try {
+        const response = await axios.put("http://107.20.240.135:8088/recurring-transactions",
+
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function deleteRecurringRule(id: number): Promise<void> {
+    try {
+        const response = await axios.delete(`http://107.20.240.135:8088/recurring-transactions/${id}`,
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            },
+        );
     } catch (error: any) {
         console.error(error);
         throw new Error(error.message);

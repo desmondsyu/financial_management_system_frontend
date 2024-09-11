@@ -15,7 +15,7 @@ export default function BookList({ searchTerm, books }: BookListProps) {
     const [isEditing, setIsEditing] = useState<number | null>(null);
     const [newName, setNewName] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    
+
     useEffect(() => {
         setData(books);
     }, [books]);
@@ -80,7 +80,7 @@ export default function BookList({ searchTerm, books }: BookListProps) {
     }
 
     return (
-        <div className="w-full p-4">
+        <div className="w-full p-2">
             {loading && <p className="text-gray-600">Processing...</p>}
             {filteredData.length === 0 ? (
                 <p className="text-gray-600">No matching results.</p>

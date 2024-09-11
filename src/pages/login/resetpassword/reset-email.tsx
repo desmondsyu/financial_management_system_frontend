@@ -24,7 +24,9 @@ export default function Page() {
     return (
         <div className="flex justify-center items-center pt-20">
             {!isSent ? (
-                <form onSubmit={handleSubmit}>
+                <form
+                    className="w-96"
+                    onSubmit={handleSubmit}>
                     <p className="text-center text-lg font-bold">Enter your registered email address.</p>
                     <Textfield
                         type="email"
