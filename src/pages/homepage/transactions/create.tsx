@@ -67,7 +67,8 @@ export default function Page() {
                     <ArrowLeftCircleIcon
                         onClick={() => navigate(-1)}
                         className="mr-2 p-2 rounded-full hover:bg-gray-200 w-10 h-10"
-                        aria-label="Go back" />
+                        aria-label="Go back"
+                    />
                     <h2 className="text-lg font-semibold text-gray-900">Back</h2>
                 </div>
                 <form onSubmit={handleCreate}>

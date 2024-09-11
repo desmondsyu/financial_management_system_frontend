@@ -8,6 +8,9 @@ import { TransactionPage } from "../../../lib/definitions";
 import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import { MonthIncomeCard, MonthExpenseCard, ProgressLineChart } from "../../../ui/homepage/dashboard/charts";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import CreateSingleImage from "../../../ui/SingleTrx.jpg";
+import CreateImportImage from "../../../ui/ImportBatch.jpg";
 
 interface PaginationParams {
     page: number,
@@ -76,35 +79,51 @@ export default function Page() {
         <div className="w-full flex justify-center">
             <div className="w-[90%] flex justify-center contents-center">
                 <div className="w-[30%] pr-20">
-                    <div className=" inline-block text-left w-full mb-5">
+                    <div className="inline-block text-left w-full mb-5 relative">
                         <button
-                            className="relative w-4/5 mx-[10%] leading-10 text-md bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-105 disabled:bg-blue-300 disabled:cursor-not-allowed"
+                            className="w-4/5 mx-[10%] leading-10 text-md bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-105 disabled:bg-blue-300 disabled:cursor-not-allowed"
                             onClick={() => setCreateBtnClick(!createBtnClick)}
                         >
                             Create
                         </button>
 
                         {createBtnClick && (
-                            <div className="absolute mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-                                <div className="py-1">
-                                    <button
-                                        onClick={() => navigate("create")}
-                                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                                    >
-                                        New Transaction
-                                    </button>
-                                    <button
-                                        onClick={() => navigate("import")}
-                                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                                    >
-                                        File Import
-                                    </button>
+                            <div className="fixed w-[90%] md:w-[60%] lg:w-[50%] h-[50%] bg-gray-200 bg-opacity-50 backdrop-blur-sm z-10 flex items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-4 md:p-8">
+                                <div className="flex items-center mb-4 fixed top-5 right-5">
+                                    <XCircleIcon
+                                        onClick={() => setCreateBtnClick(false)}
+                                        className="mr-2 p-2 rounded-full hover:bg-gray-200 w-10 h-10 cursor-pointer transition duration-300 ease-in-out"
+                                        aria-label="Cancel"
+                                    />
+                                </div>
+                                <div className="flex flex-col md:flex-row justify-around w-full gap-4 md:gap-8">
+                                    <div className="flex flex-col items-center justify-center bg-white p-4 md:p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105 w-full md:w-auto">
+                                        <div className="w-40 h-20 md:w-24 md:h-12 mb-4">
+                                            <img src={CreateSingleImage} alt="Create Single Transaction" className="w-full h-full object-cover rounded-lg" />
+                                        </div>
+                                        <button
+                                            onClick={() => navigate("create")}
+                                            className="w-28 md:w-32 text-center px-4 py-2 text-sm text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-300 ease-in-out rounded-lg shadow-sm"
+                                        >
+                                            New Transaction
+                                        </button>
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-center bg-white p-4 md:p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105 w-full md:w-auto">
+                                        <div className="w-40 h-20 md:w-24 md:h-24 mb-4">
+                                            <img src={CreateImportImage} alt="Import File Batch" className="w-full h-full object-cover rounded-lg" />
+                                        </div>
+                                        <button
+                                            onClick={() => navigate("import")}
+                                            className="w-28 md:w-32 text-center px-4 py-2 text-sm text-white bg-green-500 hover:bg-green-600 transition-colors duration-300 ease-in-out rounded-lg shadow-sm"
+                                        >
+                                            File Import
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}
                     </div>
-
-                    {/* <Button label="Create" disabled={false} onClick={() => navigate("create")} /> */}
                     <Filter filterParams={filterParams} setFilterParams={setFilterParams} />
                 </div>
                 <div className="w-[70%] flex flex-col contents-center">
@@ -118,6 +137,5 @@ export default function Page() {
                 </div>
             </div>
         </div>
-
     );
 }

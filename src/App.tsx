@@ -15,7 +15,6 @@ import HomeLayout from './pages/homepage/layout.tsx';
 import Transactions from './pages/homepage/transactions/transactions.tsx';
 import CreateTransaction from './pages/homepage/transactions/create.tsx';
 import ImportTransaction from './pages/homepage/transactions/import.tsx';
-import RecurringTransaction from './pages/homepage/transactions/recurring.tsx';
 import EditTransaction from './pages/homepage/transactions/edit.tsx';
 import Dashboard from './pages/homepage/dashboard/dashboard.tsx';
 
@@ -69,10 +68,6 @@ const router = createBrowserRouter([
       {
         path: "transactions/import",
         element: <ImportTransaction />,
-      },
-      {
-        path: "transactions/recurring",
-        element: <RecurringTransaction />,
       },
       {
         path: "transactions/:transactionId/edit",
