@@ -1,5 +1,4 @@
 import CategoryList from "../../../ui/menuitems/category/category-list";
-import Button from "../../../ui/button";
 import Search from "../../../ui/search";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -17,7 +16,6 @@ export default function Page() {
     const [newCategoryType, setNewCategoryType] = useState<TransactionType>(transactionTypeData[0]);
     const [newCategoryName, setNewCategoryName] = useState<string>("");
     const [categories, setCategories] = useState<Category[]>([]);
-    // const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const loadCategories = async () => {
