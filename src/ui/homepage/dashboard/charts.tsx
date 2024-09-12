@@ -162,54 +162,59 @@ export function TotalTrendChart() {
                 className="w-auto h-full"
                 decoration="top"
                 decorationColor="cyan">
-                <div className="flex">
-                    <YearPicker
-                        labelName="Start year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_year: year,
-                                }
-                            ));
-                        }} />
-                    <MonthPicker
-                        labelName="Start month"
-                        defaultValue={getCurrentYearMonth().curMonth - 3}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_month: month,
-                                }
-                            ));
-                        }}
-                    />
-                    <YearPicker
-                        labelName="End year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_year: year,
-                                }
-                            ));
-                        }}
-                    />
-                    <MonthPicker
-                        labelName="End month"
-                        defaultValue={getCurrentYearMonth().curMonth}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_month: month,
-                                }
-                            ));
-                        }}
-                    />
+                <div className="flex flex-col lg:flex-row">
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="Start year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_year: year,
+                                    }
+                                ));
+                            }} />
+                        <MonthPicker
+                            labelName="Start month"
+                            defaultValue={getCurrentYearMonth().curMonth - 3}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="End year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_year: year,
+                                    }
+                                ));
+                            }}
+                        />
+                        <MonthPicker
+                            labelName="End month"
+                            defaultValue={getCurrentYearMonth().curMonth}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
+
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -344,8 +349,8 @@ export function MonthGroupChart() {
                         }}
                     />
                 </div>
-                <div className="flex">
-                    <div className="flex justify-center items-center w-1/2 p-1">
+                <div className="flex flex-col md:flex-row">
+                    <div className="flex justify-center items-center w-full p-1 md:w-1/2">
                         <Card
                             className="w-full h-full flex flex-col justify-center items-center"
                             decoration="top"
@@ -364,30 +369,9 @@ export function MonthGroupChart() {
                             />
                         </Card>
                     </div>
-                    <div className="flex  justify-center items-center w-1/2 p-1">
+                    <div className="flex justify-center items-center w-full p-1 md:w-1/2">
                         <Card
-                            className="w-full h-full flex flex-col justify-center items-center"
-                            decoration="top"
-                            decorationColor="yellow-800">
-                            <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                                Monthly Expense Breakdown
-                            </h3>
-                            <BarChart
-                                data={expenseData}
-                                index="group_name"
-                                categories={['amount']}
-                                colors={['orange-400']}
-                                yAxisWidth={48}
-                                onValueChange={(v) => console.log(v)}
-                                showLegend={false}
-                            />
-                        </Card>
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="flex justify-center items-center w-1/2 p-1">
-                        <Card
-                            className="w-full h-auto flex justify-center items-center"
+                            className="w-full h-full flex justify-center items-center"
                             decoration="top"
                             decorationColor="green"
                         >
@@ -411,12 +395,32 @@ export function MonthGroupChart() {
                                     onValueChange={(v) => console.log(v)}
                                 />
                             </div>
-
                         </Card>
                     </div>
-                    <div className="flex justify-center items-center w-1/2 p-1">
+                </div>
+                <div className="flex flex-col md:flex-row">
+                    <div className="flex justify-center items-center w-full p-1 md:w-1/2">
                         <Card
-                            className="w-full h-auto flex justify-center items-center"
+                            className="w-full h-full flex flex-col justify-center items-center"
+                            decoration="top"
+                            decorationColor="yellow-800">
+                            <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                Monthly Expense Breakdown
+                            </h3>
+                            <BarChart
+                                data={expenseData}
+                                index="group_name"
+                                categories={['amount']}
+                                colors={['orange-400']}
+                                yAxisWidth={48}
+                                onValueChange={(v) => console.log(v)}
+                                showLegend={false}
+                            />
+                        </Card>
+                    </div>
+                    <div className="flex justify-center items-center w-full p-1 md:w-1/2">
+                        <Card
+                            className="w-full h-full flex justify-center items-center"
                             decoration="top"
                             decorationColor="green-800">
                             <div className="w-1/2 flex flex-col justify-center items-center">
@@ -501,54 +505,58 @@ export function GroupTrendChart() {
                 className="w-auto h-full z-10"
                 decoration="top"
                 decorationColor="teal">
-                <div className="flex">
-                    <YearPicker
-                        labelName="Start year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_year: year,
-                                }
-                            ));
-                        }} />
-                    <MonthPicker
-                        labelName="Start month"
-                        defaultValue={getCurrentYearMonth().curMonth - 3}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_month: month,
-                                }
-                            ));
-                        }}
-                    />
-                    <YearPicker
-                        labelName="End year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_year: year,
-                                }
-                            ));
-                        }}
-                    />
-                    <MonthPicker
-                        labelName="End month"
-                        defaultValue={getCurrentYearMonth().curMonth}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_month: month,
-                                }
-                            ));
-                        }}
-                    />
+                <div className="flex flex-col lg:flex-row">
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="Start year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_year: year,
+                                    }
+                                ));
+                            }} />
+                        <MonthPicker
+                            labelName="Start month"
+                            defaultValue={getCurrentYearMonth().curMonth - 3}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="End year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_year: year,
+                                    }
+                                ));
+                            }}
+                        />
+                        <MonthPicker
+                            labelName="End month"
+                            defaultValue={getCurrentYearMonth().curMonth}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -669,54 +677,58 @@ export function LabelTrendChart() {
                 className="w-auto h-auto"
                 decoration="top"
                 decorationColor="sky">
-                <div className="flex">
-                    <YearPicker
-                        labelName="Start year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_year: year,
-                                }
-                            ));
-                        }} />
-                    <MonthPicker
-                        labelName="Start month"
-                        defaultValue={getCurrentYearMonth().curMonth - 3}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    from_month: month,
-                                }
-                            ));
-                        }}
-                    />
-                    <YearPicker
-                        labelName="End year"
-                        defaultValue={getCurrentYearMonth().curYear}
-                        onChange={(year: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_year: year,
-                                }
-                            ));
-                        }}
-                    />
-                    <MonthPicker
-                        labelName="End month"
-                        defaultValue={getCurrentYearMonth().curMonth}
-                        onChange={(month: number) => {
-                            setParams((prevData) => (
-                                {
-                                    ...prevData,
-                                    to_month: month,
-                                }
-                            ));
-                        }}
-                    />
+                <div className="flex flex-col lg:flex-row">
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="Start year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_year: year,
+                                    }
+                                ));
+                            }} />
+                        <MonthPicker
+                            labelName="Start month"
+                            defaultValue={getCurrentYearMonth().curMonth - 3}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        from_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
+                    <div className="flex mt-1">
+                        <YearPicker
+                            labelName="End year"
+                            defaultValue={getCurrentYearMonth().curYear}
+                            onChange={(year: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_year: year,
+                                    }
+                                ));
+                            }}
+                        />
+                        <MonthPicker
+                            labelName="End month"
+                            defaultValue={getCurrentYearMonth().curMonth}
+                            onChange={(month: number) => {
+                                setParams((prevData) => (
+                                    {
+                                        ...prevData,
+                                        to_month: month,
+                                    }
+                                ));
+                            }}
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -780,9 +792,9 @@ export function LabelGroupChart() {
     }, [params]);
 
     return (
-        <div className="w-full m-0 mt-5 md:w-1/2 md:ml-2 md:mt-0">
+        <div className="w-full  m-0 mt-5 md:w-1/2 md:ml-2 md:mt-0">
             <Card
-                className="w-auto h-auto"
+                className="w-auto h-full"
                 decoration="top"
                 decorationColor="indigo"
             >
