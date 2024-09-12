@@ -27,10 +27,12 @@ export default function FeedBack() {
         }
     }
     return (
-        <div className="fixed right-3 bottom-3 flex flex-col items-end">
+        <div className="fixed right-3 bottom-16 sm:bottom-3 flex flex-col items-end z-10">
             {formShow && (
-                <div className="mt-2 mb-1 p-4 bg-gray-200 rounded ">
+                <div className="mt-2 mb-1 p-4 bg-gray-200 rounded flex flex-col justify-center">
+                    <p className="text-center">Contact Us</p>
                     <form onSubmit={handleSubmit} >
+
                         <label className="block mb-2 text-sm font-sm text-gray-900">Topic</label>
                         <select
                             className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

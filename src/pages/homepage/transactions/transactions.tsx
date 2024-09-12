@@ -74,7 +74,7 @@ export default function Page() {
     }, [debouncedParams, fetchData]);
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center pb-12">
             <div className="w-[90%] flex justify-center contents-center">
                 <div className="w-[30%] pr-20">
                     <div className="relative inline-block text-left w-full mb-5">
