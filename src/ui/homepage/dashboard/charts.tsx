@@ -664,7 +664,7 @@ export function LabelTrendChart() {
     }, [debouncedParams, fetchData]);
 
     return (
-        <div className="w-1/2 mr-2">
+        <div className="w-full m-0 md:w-1/2 md:mr-2">
             <Card
                 className="w-auto h-auto"
                 decoration="top"
@@ -780,7 +780,7 @@ export function LabelGroupChart() {
     }, [params]);
 
     return (
-        <div className="w-1/2 ml-2">
+        <div className="w-full m-0 mt-5 md:w-1/2 md:ml-2 md:mt-0">
             <Card
                 className="w-auto h-auto"
                 decoration="top"
