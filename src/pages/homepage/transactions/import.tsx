@@ -45,7 +45,7 @@ export default function ImportTransaction() {
 
     return (
         <div className="w-full flex justify-center contents-center">
-            <div className="w-[40%]">
+            <div className="w-96">
                 <div className="flex items-center mb-4">
                     <ArrowLeftCircleIcon
                         onClick={() => navigate(-1)}

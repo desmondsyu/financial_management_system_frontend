@@ -24,13 +24,14 @@ export default function TransactionsTable({ transactions }: TransactionTableProp
     );
 
     return (
-        <div className="overflow-x-auto ">
+        <div className="hidden md:block">
             <div className="w-full">
                 <table className="w-full bg-white border border-gray-200 table-fixed">
                     <thead>
                         <tr>
                             <th className="w-[18%] px-4 py-2 text-left text-sm font-semibold text-gray-600 border-b">
-                                Category</th>
+                                Category
+                            </th>
                             <th className="w-[14%] px-4 py-2 text-left text-sm font-semibold text-gray-600 border-b">
                                 Date
                             </th>
@@ -85,8 +86,7 @@ export default function TransactionsTable({ transactions }: TransactionTableProp
                                     <TrashIcon className="w-5 h-5 inline-block ml-2 text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDelete(transaction.id)} />
                                 </td>
                             </tr>
-                        ))
-                        }
+                        ))}
                     </tbody>
                 </table>
             </div>

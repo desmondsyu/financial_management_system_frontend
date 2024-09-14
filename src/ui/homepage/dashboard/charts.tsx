@@ -32,15 +32,18 @@ export function MonthIncomeCard() {
     }, [fetchData]);
 
     return (
-        <div className="ml-2 mr-2">
+        <div className="m-1">
             <Card
-                className="w-auto h-full"
+                className="w-auto h-full hidden md:block"
                 decoration="top"
                 decorationColor="indigo"
             >
-                <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">MTD Income</p>
-                <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">${monthIncome}</p>
+                <p className="text-tremor-default text-tremor-content md:pb-2">Income</p>
+                <p className="md:text-xl text-tremor-content-strong font-semibold">${monthIncome}</p>
             </Card>
+            <div className="w-auto h-full block md:hidden text-gray-700 font-semibold">
+                <p>Imcome: ${monthIncome}</p>
+            </div>
         </div>
     );
 }
@@ -68,15 +71,18 @@ export function MonthExpenseCard() {
     }, [fetchData]);
 
     return (
-        <div className="ml-2 mr-2">
+        <div className="m-1">
             <Card
-                className="w-auto h-full"
+                className="w-auto h-full hidden md:block"
                 decoration="top"
                 decorationColor="orange"
             >
-                <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">MTD Expense</p>
-                <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">${monthExpense}</p>
+                <p className="text-tremor-default text-tremor-content md:pb-2">Expense</p>
+                <p className="md:text-xl text-tremor-content-strong font-semibold">${monthExpense}</p>
             </Card>
+            <div className="w-auto h-full block md:hidden text-gray-700 font-semibold">
+                <p>Expense: ${monthExpense}</p>
+            </div>
         </div>
     );
 }
@@ -107,15 +113,15 @@ export function ProgressLineChart() {
     }, [data]);
 
     const categoryValues = [
-        data.expected_spending,
-        data.upper_bound_yellow_max - data.expected_spending,
-        data.max_bound_red_max - data.upper_bound_yellow_max,
+        Math.round(data.expected_spending),
+        Math.round(data.upper_bound_yellow_max - data.expected_spending),
+        Math.round(data.max_bound_red_max - data.upper_bound_yellow_max),
     ];
 
     return (
-        <div className="ml-2 mr-2 grow">
+        <div className="m-1 grow">
             <Card className="w-auto h-auto" decoration="top" decorationColor="amber">
-                <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
+                <p className="text-tremor-default text-tremor-content flex items-center justify-between">
                     <span>Monthly spending</span>
                     <span>{data.percent_of_spending}%</span>
                 </p>
@@ -217,7 +223,7 @@ export function TotalTrendChart() {
 
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    <h3 className="text-lg font-medium text-tremor-content-strong">
                         Monthly Trending
                     </h3>
                     <AreaChart
@@ -355,7 +361,7 @@ export function MonthGroupChart() {
                             className="w-full h-full flex flex-col justify-center items-center"
                             decoration="top"
                             decorationColor="yellow">
-                            <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                            <h3 className="text-lg font-medium text-tremor-content-strong">
                                 Monthly Income Breakdown
                             </h3>
                             <BarChart
@@ -376,7 +382,7 @@ export function MonthGroupChart() {
                             decorationColor="green"
                         >
                             <div className="w-1/2 flex flex-col justify-center items-center">
-                                <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                <h3 className="text-lg font-medium text-tremor-content-strong">
                                     {paramsMinus1.year} - {paramsMinus1.month}
                                 </h3>
                                 <DonutChart
@@ -386,7 +392,7 @@ export function MonthGroupChart() {
                                 />
                             </div>
                             <div className="w-1/2 flex flex-col justify-center items-center">
-                                <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                <h3 className="text-lg font-medium text-tremor-content-strong">
                                     {paramsMinus2.year} - {paramsMinus2.month}
                                 </h3>
                                 <DonutChart
@@ -404,7 +410,7 @@ export function MonthGroupChart() {
                             className="w-full h-full flex flex-col justify-center items-center"
                             decoration="top"
                             decorationColor="yellow-800">
-                            <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                            <h3 className="text-lg font-medium text-tremor-content-strong">
                                 Monthly Expense Breakdown
                             </h3>
                             <BarChart
@@ -424,7 +430,7 @@ export function MonthGroupChart() {
                             decoration="top"
                             decorationColor="green-800">
                             <div className="w-1/2 flex flex-col justify-center items-center">
-                                <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                <h3 className="text-lg font-medium text-tremor-content-strong">
                                     {paramsMinus1.year} - {paramsMinus1.month}
                                 </h3>
                                 <DonutChart
@@ -434,7 +440,7 @@ export function MonthGroupChart() {
                                 />
                             </div>
                             <div className="w-1/2 flex flex-col justify-center items-center">
-                                <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                <h3 className="text-lg font-medium text-tremor-content-strong">
                                     {paramsMinus2.year} - {paramsMinus2.month}
                                 </h3>
                                 <DonutChart
@@ -559,7 +565,7 @@ export function GroupTrendChart() {
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    <h3 className="text-lg font-medium text-tremor-content-strong">
                         Categories Trending
                     </h3>
                     <LineChart
@@ -731,7 +737,7 @@ export function LabelTrendChart() {
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    <h3 className="text-lg font-medium text-tremor-content-strong">
                         Book's Total
                     </h3>
                     <BarChart
@@ -822,7 +828,7 @@ export function LabelGroupChart() {
                     </select>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    <h3 className="text-lg font-medium text-tremor-content-strong">
                         Categories of book
                     </h3>
                     <div className="w-full">

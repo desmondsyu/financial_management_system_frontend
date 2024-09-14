@@ -1,5 +1,5 @@
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { feedbackTopics } from "../lib/data";
 import { sendFeedback, FeedbackProp } from "../lib/actions";
 
@@ -66,7 +66,7 @@ export default function FeedBack() {
 
             <div
                 onClick={handleClick}
-                className="p-2 rounded-full bg-blue-500 text-white w-10 h-10 flex items-center justify-center cursor-pointer shadow-lg">
+                className="p-2 rounded-full bg-sky-700 text-white w-10 h-10 flex items-center justify-center cursor-pointer shadow-lg">
                 <ChatBubbleOvalLeftEllipsisIcon />
             </div>
         </div>

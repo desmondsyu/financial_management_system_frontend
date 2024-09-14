@@ -85,7 +85,7 @@ export default function Page() {
                     ))}
                 </div>
             </div>
-            <form className="w-4/5 px-7 flex-col content-center md:w-3/4 lg:w-1/3" onSubmit={handleSubmit}>
+            <form className="w-4/5 px-7 flex flex-col justify-center content-center md:w-3/4 lg:w-1/3" onSubmit={handleSubmit}>
                 <Logo />
                 <Textfield
                     type="email"
