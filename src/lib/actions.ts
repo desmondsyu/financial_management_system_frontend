@@ -233,10 +233,10 @@ export async function sendUploadFile(file: FormData): Promise<UploadResult> {
 }
 
 export interface RecurringTransactionProp {
-    id?: number,
-    transaction: TransactionProp,
-    frequency: string,
-    endDate?: string,
+    id?: number | null,
+    transaction: TransactionProp | null,
+    frequency: string | null,
+    endDate?: string | null,
 }
 
 export async function addRecurringRule(transaction: RecurringTransactionProp): Promise<void> {

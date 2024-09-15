@@ -2,15 +2,15 @@ import Textfield from "../../../ui/textfield";
 import Button from "../../../ui/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TransactionProp } from "../../../lib/actions";
+import { TransactionProp, RecurringTransactionProp, addTransaction, addRecurringRule } from "../../../lib/actions";
 import { getUserFromStorage } from "../../../lib/currentuser";
 import type { Labels, Category } from "../../../lib/definitions";
 import { transactionTypeData } from "../../../lib/data";
-import { fetchBooks, fetchCategories } from "../../../lib/data";
-import { addTransaction } from "../../../lib/actions";
+import { fetchBooks, fetchCategories, frequency } from "../../../lib/data";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
+    const [recurChecked, setRecurChecked] = useState<boolean>(false);
     const [booksList, setBooksList] = useState<Labels[]>([]);
     const [categoryList, setCategoryList] = useState<Category[]>([]);
     const [simbol, setSimbol] = useState<number>();
@@ -30,6 +30,13 @@ export default function Page() {
         balance: 0,
     });
 
+    const [recurFormData, setRecurFormData] = useState<RecurringTransactionProp>({
+        id: null,
+        transaction: formData,
+        frequency: null,
+        endDate: null,
+    });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -46,17 +53,29 @@ export default function Page() {
 
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
+
+
         if (!formData.type || !formData.transactionGroup) {
             alert("Please fill out all required fields.");
             return;
         }
 
-        try {
-            await addTransaction(formData);
-            navigate("/transactions");
-        } catch (error: any) {
-            console.error(error);
-            throw new Error(error.message);
+        if (!recurChecked) {
+            try {
+                await addTransaction(formData);
+                navigate("/transactions");
+            } catch (error: any) {
+                console.error(error);
+                throw new Error(error.message);
+            }
+        } else {
+            try {
+                await addRecurringRule(recurFormData);
+                navigate("/transactions");
+            } catch (error: any) {
+                console.error(error);
+                throw new Error(error.message);
+            }
         }
     }
 
@@ -202,6 +221,50 @@ export default function Page() {
                             )}
                         </select>
                     </div>
+
+                    <div>
+                        <input type="checkbox" onChange={() => setRecurChecked(!recurChecked)} />
+                        <label>Recurring transaction</label>
+                    </div>
+
+                    {recurChecked &&
+                        <>
+                            <div className="p-2.5">
+                                <label className="block mb-2 text-md font-medium text-gray-900">
+                                    Frequency
+                                </label>
+                                <select
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    onChange={(e) => {
+
+                                        setFormData((formData) => ({
+                                            ...formData,
+                                            frequency: e.target.value,
+                                        }));
+
+                                    }}
+                                >
+                                    {frequency.map((fre) => (
+                                        <option key={fre.id} value={fre.name}>
+                                            {fre.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <Textfield
+                                label="Till Date"
+                                type="date"
+                                disabled={false}
+                                required={false}
+                                onChange={(e) => {
+                                    setRecurFormData((recurFormData) => ({
+                                        ...recurFormData,
+                                        endDate: new Date(e.target.value).toISOString(),
+                                    }))
+                                }}
+                            />
+                        </>
+                    }
 
                     <div>
                         <Button label="Save" type="submit" disabled={false} />
