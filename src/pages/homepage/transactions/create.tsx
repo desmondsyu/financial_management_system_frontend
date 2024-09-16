@@ -60,22 +60,22 @@ export default function Page() {
             return;
         }
 
-        if (!recurChecked) {
-            try {
+        try {
+            if (!recurChecked) {
+                console.log(formData);
                 await addTransaction(formData);
-                navigate("/transactions");
-            } catch (error: any) {
-                console.error(error);
-                throw new Error(error.message);
+            } else {
+                const updatedRecurFormData = {
+                    ...recurFormData,
+                    transaction: formData,
+                };
+                console.log(updatedRecurFormData);
+                await addRecurringRule(updatedRecurFormData);
             }
-        } else {
-            try {
-                await addRecurringRule(recurFormData);
-                navigate("/transactions");
-            } catch (error: any) {
-                console.error(error);
-                throw new Error(error.message);
-            }
+            navigate("/transactions");
+        } catch (error: any) {
+            console.error(error);
+            throw new Error(error.message);
         }
     }
 
@@ -236,14 +236,14 @@ export default function Page() {
                                 <select
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     onChange={(e) => {
-
-                                        setFormData((formData) => ({
+                                        setRecurFormData((formData) => ({
                                             ...formData,
                                             frequency: e.target.value,
                                         }));
-
                                     }}
+                                    defaultValue=""
                                 >
+                                    <option value="" disabled>Select frequency</option>
                                     {frequency.map((fre) => (
                                         <option key={fre.id} value={fre.name}>
                                             {fre.name}
@@ -259,7 +259,7 @@ export default function Page() {
                                 onChange={(e) => {
                                     setRecurFormData((recurFormData) => ({
                                         ...recurFormData,
-                                        endDate: new Date(e.target.value).toISOString(),
+                                        endDate: new Date(e.target.value).toISOString().split('T')[0],
                                     }))
                                 }}
                             />
