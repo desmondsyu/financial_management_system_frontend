@@ -43,9 +43,10 @@ export async function getTrendData({ from_year, from_month, to_year, to_month }:
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/income-expense/in-range?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/income-expense/in-range?${queryParams}`,
             {
                 headers: {
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
@@ -67,9 +68,10 @@ export async function getGroupData({year, month, return_in_type}: TimeSpot): Pro
             return_in_type: return_in_type.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/transection-group/in-month/?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/transection-group/in-month/?${queryParams}`,
             {
                 headers: {
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
@@ -92,9 +94,10 @@ export async function getTrendGroupData({ from_year, from_month, to_year, to_mon
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/transaction-group/in-range?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/transaction-group/in-range?${queryParams}`,
             {
                 headers: {
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
@@ -117,9 +120,10 @@ export async function getTrendLabelData({ from_year, from_month, to_year, to_mon
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/lable/in-range?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/lable/in-range?${queryParams}`,
             {
                 headers: {
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
@@ -135,9 +139,10 @@ export async function getTrendLabelData({ from_year, from_month, to_year, to_mon
 // get group spending in label
 export async function getLabelGroupData(id: number): Promise<GroupData[]>{
     try {
-        const response = await axios.get(`http://18.220.232.147/spending/label/in-transaction-group?label_id=${id}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/label/in-transaction-group?label_id=${id}`,
             {
                 headers: {
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
