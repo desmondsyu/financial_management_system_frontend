@@ -32,7 +32,9 @@ export default function Page() {
 
     const [recurFormData, setRecurFormData] = useState<RecurringTransactionProp>({
         id: null,
-        transaction: formData,
+        transaction: {
+            id: null,
+        },
         frequency: null,
         endDate: null,
     });
@@ -54,22 +56,21 @@ export default function Page() {
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
 
-
         if (!formData.type || !formData.transactionGroup) {
             alert("Please fill out all required fields.");
             return;
         }
 
         try {
-            if (!recurChecked) {
-                console.log(formData);
-                await addTransaction(formData);
-            } else {
-                const updatedRecurFormData = {
+            const res = await addTransaction(formData);
+            console.log(res);
+            if (recurChecked) {
+                const updatedRecurFormData: RecurringTransactionProp = {
                     ...recurFormData,
-                    transaction: formData,
+                    transaction: {
+                        id: res.id,
+                    },
                 };
-                console.log(updatedRecurFormData);
                 await addRecurringRule(updatedRecurFormData);
             }
             navigate("/transactions");

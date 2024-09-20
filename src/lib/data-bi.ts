@@ -17,7 +17,7 @@ export interface TimeSpot {
 // Get spending analysis
 export async function getSpendingData(): Promise<SpendingData> {
     try {
-        const response = await axios.get("http://18.220.232.147/spending/analysis",
+        const response = await axios.get("https://primary-mustang-eagerly.ngrok-free.app/spending/analysis",
             {
                 headers: {
                     "Accept": "application/json",
@@ -42,7 +42,7 @@ export async function getTrendData({ from_year, from_month, to_year, to_month }:
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/income-expense/in-range?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/income-expense/in-range?${queryParams}`,
             {
                 headers: {
                     "Accept": "application/json",
@@ -66,7 +66,7 @@ export async function getGroupData({year, month, return_in_type}: TimeSpot): Pro
             return_in_type: return_in_type.toString(),
         });
 
-        const response = await axios.get(`http://18.220.232.147/spending/transection-group/in-month/?${queryParams}`,
+        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/transection-group/in-month/?${queryParams}`,
             {
                 headers: {
                     "Accept": "application/json",

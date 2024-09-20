@@ -1,4 +1,4 @@
-import type { Labels, Category, TransactionType, TransactionPage } from "./definitions";
+import type { Labels, Category, TransactionType, TransactionPage, RecurringTransaction } from "./definitions";
 import axios from "axios";
 import { getUserFromStorage } from "./currentuser";
 
@@ -162,6 +162,23 @@ export async function getReport({
                 responseType: "blob",
             },
 
+        );
+        return response.data;
+    } catch (error: any) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+}
+
+export async function getRecurringRules(): Promise<RecurringTransaction[]> {
+    try {
+        const response = await axios.get('http://107.20.240.135:8088/recurring-transactions',
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
+                },
+            }
         );
         return response.data;
     } catch (error: any) {
