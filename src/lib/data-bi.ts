@@ -20,7 +20,7 @@ export async function getSpendingData(): Promise<SpendingData> {
         const response = await axios.get("https://primary-mustang-eagerly.ngrok-free.app/spending/analysis",
             {
                 headers: {
-                    "ngrox-skip-browser-warning": "20230",
+                    "ngrok-skip-browser-warning": "20230",
                     "Accept": "application/json",
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
                 },
