@@ -170,7 +170,7 @@ export async function getReport({
     }
 }
 
-export async function getRecurringRules(): Promise<RecurringTransaction[]> {
+export async function fetchRecurringRules(): Promise<RecurringTransaction[]> {
     try {
         const response = await axios.get('http://107.20.240.135:8088/recurring-transactions',
             {

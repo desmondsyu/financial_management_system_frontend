@@ -1,16 +1,32 @@
-import { getRecurringRules } from "../../../lib/data";
+import { fetchRecurringRules } from "../../../lib/data";
+import { useState, useEffect } from "react";
+import type { RecurringTransaction } from "../../../lib/definitions";
+import RuleList from "../../../ui/menuitems/recurring/rule-list";
+
 
 export default function Recurring() {
-    const handleClick = async (e: React.MouseEvent<HTMLParagraphElement>)=> {
-        try{
-            const response = await getRecurringRules();
-            console.log(response);
-        } catch(error){
-            console.error(error);
-        }
-    }
+    const [rules, setRules] = useState<RecurringTransaction[]>([]);
+
+    useEffect(() => {
+        const loadRules = async () => {
+            try {
+                const initialRules = await fetchRecurringRules();
+                setRules(initialRules);
+            } catch (error) {
+                console.error(error);
+                window.alert("Unable to load rule list");
+            }
+        };
+        loadRules();
+    }, []);
 
     return (
-        <p onClick={handleClick}>Recurring Transactions</p>
+        <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center flex-col w-96">
+                <div className="w-full">
+                    <RuleList rules={rules} />
+                </div>
+            </div>
+        </div>
     );
 }
