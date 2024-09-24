@@ -243,7 +243,7 @@ export interface RecurringTransactionProp {
 
 export async function addRecurringRule(rule: RecurringTransactionProp): Promise<void> {
     try {
-        await axios.post("http://107.20.240.135:8088/recurring-transactions",
+        await axios.post("https://107.20.240.135:8088/recurring-transactions",
             rule,
             {
                 headers: {
