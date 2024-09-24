@@ -3,7 +3,7 @@ import axios from "axios";
 
 export async function addBook(name: string, user: User): Promise<void> {
     try {
-        await axios.post("http://107.20.240.135:8088/labels",
+        await axios.post("https://107.20.240.135:8088/labels",
             {
                 name: name,
                 user: user,
@@ -24,7 +24,7 @@ export async function addBook(name: string, user: User): Promise<void> {
 
 export async function editBook(id: number, newName: string): Promise<Labels> {
     try {
-        const response = await axios.put("http://107.20.240.135:8088/labels",
+        const response = await axios.put("https://107.20.240.135:8088/labels",
             {
                 id: id,
                 name: newName,
@@ -46,7 +46,7 @@ export async function editBook(id: number, newName: string): Promise<Labels> {
 
 export async function deleteBook(id: number): Promise<void> {
     try {
-        await axios.delete(`http://107.20.240.135:8088/labels/${id}`,
+        await axios.delete(`https://107.20.240.135:8088/labels/${id}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -62,7 +62,7 @@ export async function deleteBook(id: number): Promise<void> {
 
 export async function addCategory(name: string, transactionType: TransactionType, user: User): Promise<void> {
     try {
-        await axios.post("http://107.20.240.135:8088/transaction-groups",
+        await axios.post("https://107.20.240.135:8088/transaction-groups",
             {
                 name: name,
                 transactionType: transactionType,
@@ -84,7 +84,7 @@ export async function addCategory(name: string, transactionType: TransactionType
 
 export async function editCategory(id: number, newName: string, newTransactionType: TransactionType | null, user: User): Promise<Category> {
     try {
-        const response = await axios.put("http://107.20.240.135:8088/transaction-groups",
+        const response = await axios.put("https://107.20.240.135:8088/transaction-groups",
             {
                 id: id,
                 name: newName,
@@ -108,7 +108,7 @@ export async function editCategory(id: number, newName: string, newTransactionTy
 
 export async function deleteCategory(id: number): Promise<void> {
     try {
-        await axios.delete(`http://107.20.240.135:8088/transaction-groups/${id}`,
+        await axios.delete(`https://107.20.240.135:8088/transaction-groups/${id}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -137,7 +137,7 @@ export interface TransactionProp {
 
 export async function addTransaction(transcation: TransactionProp): Promise<Transaction> {
     try {
-        const response = await axios.post("http://107.20.240.135:8088/transactions",
+        const response = await axios.post("https://107.20.240.135:8088/transactions",
             transcation,
             {
                 headers: {
@@ -156,7 +156,7 @@ export async function addTransaction(transcation: TransactionProp): Promise<Tran
 
 export async function editTransaction(transaction: TransactionProp): Promise<Transaction | null> {
     try {
-        const response = await axios.put("http://107.20.240.135:8088/transactions",
+        const response = await axios.put("https://107.20.240.135:8088/transactions",
             transaction,
             {
                 headers: {
@@ -175,7 +175,7 @@ export async function editTransaction(transaction: TransactionProp): Promise<Tra
 
 export async function deleteTransaction(id: number): Promise<void> {
     try {
-        await axios.delete(`http://107.20.240.135:8088/transactions/${id}`,
+        await axios.delete(`https://107.20.240.135:8088/transactions/${id}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -197,7 +197,7 @@ export interface FeedbackProp {
 
 export async function sendFeedback(feedback: FeedbackProp): Promise<void> {
     try {
-        await axios.post("http://107.20.240.135:8088/feedback/submit",
+        await axios.post("https://107.20.240.135:8088/feedback/submit",
             feedback,
             {
                 headers: {
@@ -215,7 +215,7 @@ export async function sendFeedback(feedback: FeedbackProp): Promise<void> {
 
 export async function sendUploadFile(file: FormData): Promise<UploadResult> {
     try {
-        const response = await axios.post("http://107.20.240.135:8088/transactions/parse",
+        const response = await axios.post("https://107.20.240.135:8088/transactions/parse",
             file,
             {
                 headers: {
@@ -261,7 +261,7 @@ export async function addRecurringRule(rule: RecurringTransactionProp): Promise<
 
 export async function editRecurringRule(transaction: RecurringTransactionProp): Promise<void> {
     try {
-        await axios.put("http://107.20.240.135:8088/recurring-transactions",
+        await axios.put("https://107.20.240.135:8088/recurring-transactions",
             transaction,
             {
                 headers: {
@@ -279,7 +279,7 @@ export async function editRecurringRule(transaction: RecurringTransactionProp): 
 
 export async function deleteRecurringRule(id: number): Promise<void> {
     try {
-        await axios.delete(`http://107.20.240.135:8088/recurring-transactions/${id}`,
+        await axios.delete(`https://107.20.240.135:8088/recurring-transactions/${id}`,
             {
                 headers: {
                     "Accept": "*/*",
