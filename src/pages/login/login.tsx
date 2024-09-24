@@ -23,7 +23,7 @@ export default function Page() {
         setError(null);
 
         try {
-            await axios.get("http://107.20.240.135:8088/labels",
+            await axios.get("https://107.20.240.135:8088/labels",
                 {
                     headers: {
                         "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
@@ -32,7 +32,7 @@ export default function Page() {
                 },
             );
 
-            const response = await axios("http://107.20.240.135:8088/users",
+            const response = await axios("https://107.20.240.135:8088/users",
                 {
                     headers: {
                         "Accept": "*/*",
