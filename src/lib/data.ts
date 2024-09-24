@@ -49,7 +49,7 @@ export const frequency = [
 
 export async function fetchBooks(): Promise<Labels[]> {
     try {
-        const response = await axios.get("http://107.20.240.135:8088/labels",
+        const response = await axios.get("https://107.20.240.135:8088/labels",
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export async function fetchBooks(): Promise<Labels[]> {
 
 export async function fetchCategories(): Promise<Category[]> {
     try {
-        const response = await axios.get(`http://107.20.240.135:8088/transaction-groups?username=${getUserFromStorage()?.username}`,
+        const response = await axios.get(`https://107.20.240.135:8088/transaction-groups?username=${getUserFromStorage()?.username}`,
             {
                 headers: {
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
@@ -115,7 +115,7 @@ export async function fetchTransactions({
         if (type !== null) queryParams.append("type", type.toString());
         if (group !== null) queryParams.append("group", group);
 
-        const response = await axios.get(`http://107.20.240.135:8088/transactions?${queryParams.toString()}`,
+        const response = await axios.get(`https://107.20.240.135:8088/transactions?${queryParams.toString()}`,
             {
                 headers: {
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
@@ -153,7 +153,7 @@ export async function getReport({
         if (type !== null) queryParams.append("type", type.toString());
         if (group !== null) queryParams.append("group", group);
 
-        const response = await axios.get(`http://107.20.240.135:8088/transactions/pdf?${queryParams.toString()}`,
+        const response = await axios.get(`https://107.20.240.135:8088/transactions/pdf?${queryParams.toString()}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -172,7 +172,7 @@ export async function getReport({
 
 export async function fetchRecurringRules(): Promise<RecurringTransaction[]> {
     try {
-        const response = await axios.get('http://107.20.240.135:8088/recurring-transactions',
+        const response = await axios.get('https://107.20.240.135:8088/recurring-transactions',
             {
                 headers: {
                     "Accept": "*/*",
