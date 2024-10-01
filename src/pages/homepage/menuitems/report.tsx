@@ -6,7 +6,6 @@ import { Labels, Category } from "../../../lib/definitions";
 import { transactionTypeData } from "../../../lib/data";
 import { fetchBooks, fetchCategories } from "../../../lib/data";
 
-
 export default function Page() {
     const [booksList, setBooksList] = useState<Labels[]>([]);
     const [categoryList, setCategoryList] = useState<Category[]>([]);

@@ -24,8 +24,6 @@ import Category from './pages/homepage/menuitems/category.tsx';
 import Recurring from './pages/homepage/menuitems/recurring.tsx';
 import Report from './pages/homepage/menuitems/report.tsx';
 
-import ScreenTest from './pages/screentestpage.tsx';
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,10 +100,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "screentest",
-    element: <ScreenTest />
-  }
 ]);
 
 export default function App() {
