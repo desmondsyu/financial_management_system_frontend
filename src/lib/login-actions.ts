@@ -7,7 +7,7 @@ interface AuthData {
 
 export async function authCode(formData: AuthData): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/verify",
+        await axios.post("https://107.20.240.135:8088/fin-api/verify",
             formData,
             {
                 headers: {
@@ -32,7 +32,7 @@ interface RegisterData {
 
 export async function register(formData: RegisterData): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/register",
+        await axios.post("https://107.20.240.135:8088/fin-api/register",
             formData,
             {
                 headers: {
@@ -49,7 +49,7 @@ export async function register(formData: RegisterData): Promise<void> {
 
 export async function sendResetEmail(email: string): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/forgot-password",
+        await axios.post("https://107.20.240.135:8088/fin-api/forgot-password",
             {
                 email: email,
             },
@@ -68,7 +68,7 @@ export async function sendResetEmail(email: string): Promise<void> {
 
 export async function resetPassword(token: string | null, newPassword: string): Promise<void> {
     try {
-        await axios.post(`https://107.20.240.135:8088/reset-password?token=${token}`,
+        await axios.post(`https://107.20.240.135:8088/fin-api/reset-password?token=${token}`,
             {
                 password: newPassword,
             },
@@ -87,7 +87,7 @@ export async function resetPassword(token: string | null, newPassword: string): 
 
 export async function deleteUser(): Promise<void> {
     try {
-        await axios.delete("https://107.20.240.135:8088/users",
+        await axios.delete("https://107.20.240.135:8088/fin-api/users",
             {
                 headers: {
                     "Accept": "*/*",
