@@ -1,6 +1,7 @@
 import type { Labels, Category, TransactionType, TransactionPage, RecurringTransaction } from "./definitions";
 import axios from "axios";
 import { getUserFromStorage } from "./currentuser";
+import { javaApi } from "./apidomains";
 
 export const transactionTypeData: TransactionType[] = [
     {
@@ -49,7 +50,7 @@ export const frequency = [
 
 export async function fetchBooks(): Promise<Labels[]> {
     try {
-        const response = await axios.get("https://107.20.240.135:8088/fin-api/fin-api/labels",
+        const response = await axios.get(`${javaApi}/fin-api/labels`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -67,7 +68,7 @@ export async function fetchBooks(): Promise<Labels[]> {
 
 export async function fetchCategories(): Promise<Category[]> {
     try {
-        const response = await axios.get(`https://107.20.240.135:8088/fin-api/fin-api/transaction-groups?username=${getUserFromStorage()?.username}`,
+        const response = await axios.get(`${javaApi}/transaction-groups?username=${getUserFromStorage()?.username}`,
             {
                 headers: {
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
@@ -115,7 +116,7 @@ export async function fetchTransactions({
         if (type !== null) queryParams.append("type", type.toString());
         if (group !== null) queryParams.append("group", group);
 
-        const response = await axios.get(`https://107.20.240.135:8088/fin-api/transactions?${queryParams.toString()}`,
+        const response = await axios.get(`${javaApi}/transactions?${queryParams.toString()}`,
             {
                 headers: {
                     "Authorization": `Basic ${btoa(`${localStorage.getItem("authEmail")}:${localStorage.getItem("authPw")}`)}`,
@@ -153,7 +154,7 @@ export async function getReport({
         if (type !== null) queryParams.append("type", type.toString());
         if (group !== null) queryParams.append("group", group);
 
-        const response = await axios.get(`https://107.20.240.135:8088/fin-api/transactions/pdf?${queryParams.toString()}`,
+        const response = await axios.get(`${javaApi}/transactions/pdf?${queryParams.toString()}`,
             {
                 headers: {
                     "Accept": "*/*",
@@ -172,7 +173,7 @@ export async function getReport({
 
 export async function fetchRecurringRules(): Promise<RecurringTransaction[]> {
     try {
-        const response = await axios.get('https://107.20.240.135:8088/fin-api/recurring-transactions',
+        const response = await axios.get(`${javaApi}/recurring-transactions`,
             {
                 headers: {
                     "Accept": "*/*",

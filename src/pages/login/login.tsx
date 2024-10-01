@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import type { User } from '../../lib/definitions.ts';
 import dashboardImage from "../../ui/dashboard.png";
 import transactionImage from "../../ui/transactionpage.png";
+import { javaApi } from '../../lib/apidomains.ts';
 
 export default function Page() {
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +24,7 @@ export default function Page() {
         setError(null);
 
         try {
-            await axios.get("https://107.20.240.135:8088/fin-api/labels",
+            await axios.get(`${javaApi}/labels`,
                 {
                     headers: {
                         "Authorization": `Basic ${btoa(`${formData.email}:${formData.password}`)}`,
@@ -32,7 +33,7 @@ export default function Page() {
                 },
             );
 
-            const response = await axios("https://107.20.240.135:8088/fin-api/users",
+            const response = await axios(`${javaApi}/users`,
                 {
                     headers: {
                         "Accept": "*/*",

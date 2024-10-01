@@ -1,4 +1,5 @@
 import axios from "axios";
+import { javaApi } from "./apidomains";
 
 interface AuthData {
     email: string,
@@ -7,7 +8,7 @@ interface AuthData {
 
 export async function authCode(formData: AuthData): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/fin-api/verify",
+        await axios.post(`${javaApi}/verify`,
             formData,
             {
                 headers: {
@@ -32,7 +33,7 @@ interface RegisterData {
 
 export async function register(formData: RegisterData): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/fin-api/register",
+        await axios.post(`${javaApi}/register`,
             formData,
             {
                 headers: {
@@ -49,7 +50,7 @@ export async function register(formData: RegisterData): Promise<void> {
 
 export async function sendResetEmail(email: string): Promise<void> {
     try {
-        await axios.post("https://107.20.240.135:8088/fin-api/forgot-password",
+        await axios.post(`${javaApi}/forgot-password`,
             {
                 email: email,
             },
@@ -68,7 +69,7 @@ export async function sendResetEmail(email: string): Promise<void> {
 
 export async function resetPassword(token: string | null, newPassword: string): Promise<void> {
     try {
-        await axios.post(`https://107.20.240.135:8088/fin-api/reset-password?token=${token}`,
+        await axios.post(`${javaApi}/reset-password?token=${token}`,
             {
                 password: newPassword,
             },
@@ -87,7 +88,7 @@ export async function resetPassword(token: string | null, newPassword: string): 
 
 export async function deleteUser(): Promise<void> {
     try {
-        await axios.delete("https://107.20.240.135:8088/fin-api/users",
+        await axios.delete(`${javaApi}/users`,
             {
                 headers: {
                     "Accept": "*/*",

@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { SpendingData, TrendData, GroupData, TypeGroupData, LabelGroupData } from "./definitions";
+import { pythonApi } from "./apidomains";
 
 export interface TimeRange {
     from_year: number,
@@ -17,7 +18,7 @@ export interface TimeSpot {
 // Get spending analysis
 export async function getSpendingData(): Promise<SpendingData> {
     try {
-        const response = await axios.get("https://primary-mustang-eagerly.ngrok-free.app/spending/analysis",
+        const response = await axios.get(`${pythonApi}/spending/analysis`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
@@ -43,7 +44,7 @@ export async function getTrendData({ from_year, from_month, to_year, to_month }:
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/income-expense/in-range?${queryParams}`,
+        const response = await axios.get(`${pythonApi}/spending/income-expense/in-range?${queryParams}`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
@@ -68,7 +69,7 @@ export async function getGroupData({year, month, return_in_type}: TimeSpot): Pro
             return_in_type: return_in_type.toString(),
         });
 
-        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/transection-group/in-month/?${queryParams}`,
+        const response = await axios.get(`${pythonApi}/spending/transection-group/in-month/?${queryParams}`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
@@ -94,7 +95,7 @@ export async function getTrendGroupData({ from_year, from_month, to_year, to_mon
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/transaction-group/in-range?${queryParams}`,
+        const response = await axios.get(`${pythonApi}/spending/transaction-group/in-range?${queryParams}`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
@@ -120,7 +121,7 @@ export async function getTrendLabelData({ from_year, from_month, to_year, to_mon
             to_month: to_month.toString(),
         });
 
-        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/lable/in-range?${queryParams}`,
+        const response = await axios.get(`${pythonApi}/spending/lable/in-range?${queryParams}`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
@@ -139,7 +140,7 @@ export async function getTrendLabelData({ from_year, from_month, to_year, to_mon
 // get group spending in label
 export async function getLabelGroupData(id: number): Promise<GroupData[]>{
     try {
-        const response = await axios.get(`https://primary-mustang-eagerly.ngrok-free.app/spending/label/in-transaction-group?label_id=${id}`,
+        const response = await axios.get(`${pythonApi}/spending/label/in-transaction-group?label_id=${id}`,
             {
                 headers: {
                     "ngrok-skip-browser-warning": "1",
