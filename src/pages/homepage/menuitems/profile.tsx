@@ -27,7 +27,7 @@ export default function Page() {
     };
 
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full pb-12 md:pb-0">
             <div className="flex justify-center flex-col md:flex-row">
                 <div className="flex flex-col w-96 mr-5 ml-10 justify-center items-center md:w-48">
                     <img src={image} alt="profile-img" className="w-48 rounded-full border-8 border-grey bg-white md:w-72" />

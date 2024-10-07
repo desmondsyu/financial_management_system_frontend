@@ -21,7 +21,7 @@ export default function Recurring() {
     }, []);
 
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full pb-12 md:pb-0">
             <div className="flex justify-center flex-col w-96">
                 <div className="w-full">
                     <RuleList rules={rules} />

@@ -42,7 +42,7 @@ export function MonthIncomeCard() {
                 <p className="md:text-xl text-tremor-content-strong font-semibold">${monthIncome}</p>
             </Card>
             <div className="w-auto h-full block md:hidden text-gray-700 font-semibold">
-                <p>Imcome: ${monthIncome}</p>
+                <p>Income: ${monthIncome}</p>
             </div>
         </div>
     );

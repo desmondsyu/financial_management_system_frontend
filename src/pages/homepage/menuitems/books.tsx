@@ -59,7 +59,7 @@ export default function Page() {
     };
 
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full pb-12 md:pb-0">
             <div className="flex justify-center flex-col w-96">
                 <div className="flex flex-row justify-between items-center">
                     <div className="w-72">

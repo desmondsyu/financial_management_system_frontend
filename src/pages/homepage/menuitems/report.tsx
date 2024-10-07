@@ -60,7 +60,7 @@ export default function Page() {
     }
 
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full pb-12 md:pb-0">
             <div className="w-96 flex flex-col justify-center contents-center">
                 <form
                     onSubmit={onSubmit}>

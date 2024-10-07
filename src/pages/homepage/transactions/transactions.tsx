@@ -74,7 +74,7 @@ export default function Page() {
     }, [debouncedParams, fetchData]);
 
     return (
-        <div className="w-full flex justify-center pb-12 md:pb-0">
+        <div className="w-full flex justify-center pb-16 md:pb-0">
             <div className="w-[90%] flex flex-col justify-center contents-center sm:flex-row">
 
                 <div className="flex flex-col mb-3 w-full overflow-hidden sm:hidden">
