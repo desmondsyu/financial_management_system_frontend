@@ -100,8 +100,8 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                         >
                             {isEditing === category.id ? (
                                 <>
-                                    <div className="flex items-center space-x-2">
-                                        <div className="flex mr-5 ml-5">
+                                    <div className="flex justify-between items-center space-x-1">
+                                        <div className="flex mr-1 ml-5">
                                             <input
                                                 className="hidden"
                                                 id="income"
@@ -143,24 +143,29 @@ export default function CategoryList({ searchTerm, categories }: CategoryListPro
                                                 Expense
                                             </label>
                                         </div>
-                                        <input
-                                            type="text"
-                                            value={newName}
-                                            onChange={(e) => setNewName(e.target.value)}
-                                            className="flex-grow border border-gray-300 px-2 py-1 rounded"
-                                        />
-                                        <button
-                                            onClick={() => handleSave(category.id)}
-                                            className="text-green-500 hover:text-green-700"
-                                        >
-                                            <CheckIcon className="h-5 w-5" />
-                                        </button>
-                                        <button
-                                            onClick={handleCancel}
-                                            className="text-red-500 hover:text-red-700"
-                                        >
-                                            <XMarkIcon className="h-5 w-5" />
-                                        </button>
+                                        <div>
+                                            <input
+                                                type="text"
+                                                value={newName}
+                                                onChange={(e) => setNewName(e.target.value)}
+                                                className="w-full border border-gray-300 px-1 py-1 rounded"
+                                            />
+                                        </div>
+                                        <div className="flex space-x-1">
+                                            <button
+                                                onClick={() => handleSave(category.id)}
+                                                className="text-green-500 hover:text-green-700"
+                                            >
+                                                <CheckIcon className="h-5 w-5" />
+                                            </button>
+                                            <button
+                                                onClick={handleCancel}
+                                                className="text-red-500 hover:text-red-700"
+                                            >
+                                                <XMarkIcon className="h-5 w-5" />
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </>
                             ) : (

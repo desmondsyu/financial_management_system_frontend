@@ -13,6 +13,8 @@ const config = {
     
     extend: {
       colors: {
+        cashcalmtheme: '#f1efe7',
+        cashcalmselect: '#dcd4bd',
         // light mode
         tremor: {
           brand: {
