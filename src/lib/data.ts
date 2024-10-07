@@ -50,7 +50,7 @@ export const frequency = [
 
 export async function fetchBooks(): Promise<Labels[]> {
     try {
-        const response = await axios.get(`${javaApi}/fin-api/labels`,
+        const response = await axios.get(`${javaApi}/labels`,
             {
                 headers: {
                     "Content-Type": "application/json",
