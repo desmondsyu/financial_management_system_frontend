@@ -81,7 +81,7 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full flex justify-center contents-center">
+        <div className="w-full flex justify-center contents-center pb-12 md:pb-0">
             <div className="w-96">
                 <div className="flex items-center mb-4">
                     <ArrowLeftCircleIcon
@@ -223,9 +223,13 @@ export default function Page() {
                         </select>
                     </div>
 
-                    <div>
-                        <input type="checkbox" onChange={() => setRecurChecked(!recurChecked)} />
-                        <label>Recurring transaction</label>
+                    <div className="p-2.5">
+                        <input
+                         type="checkbox" 
+                         onChange={() => setRecurChecked(!recurChecked)} 
+                         className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500 focus:ring-2"
+                         />
+                        <label className="ml-2 text-md font-medium text-gray-900">Recurring transaction</label>
                     </div>
 
                     {recurChecked &&
