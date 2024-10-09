@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import type { User } from '../../lib/definitions.ts';
 import dashboardImage from "../../ui/dashboard.png";
 import transactionImage from "../../ui/transactionpage.png";
+import newImage from "../../ui/whole.png";
 import { javaApi } from '../../lib/apidomains.ts';
 
 export default function Page() {
@@ -58,8 +59,9 @@ export default function Page() {
     }
 
     const images = [
-        transactionImage,
-        dashboardImage,
+        // transactionImage,
+        // dashboardImage,
+        newImage,
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
