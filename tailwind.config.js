@@ -16,6 +16,7 @@ const config = {
         17: '68px',
         18: '72px',
         19: '76px',
+        21: '84px',
       },
       colors: {
         cashcalmtheme: '#f1efe7',
