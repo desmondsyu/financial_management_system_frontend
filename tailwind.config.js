@@ -10,8 +10,12 @@ const config = {
   theme: {
     transparent: 'transparent',
     current: 'currentColor',
-    
+
     extend: {
+      width: {
+        17: '68px',
+        18: '72px',
+      },
       colors: {
         cashcalmtheme: '#f1efe7',
         cashcalmselect: '#dcd4bd',
