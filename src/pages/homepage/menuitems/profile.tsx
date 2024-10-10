@@ -29,7 +29,7 @@ export default function Page() {
     return (
         <div className="flex justify-center items-center w-full pb-12 md:pb-0">
             <div className="flex justify-center flex-col md:flex-row">
-                <div className="flex flex-col w-96 mr-5 ml-10 justify-center items-center md:w-48">
+                <div className="flex flex-col w-96 m-0 md:mr-5 md:ml-10 justify-center items-center md:w-48 ">
                     <img src={image} alt="profile-img" className="w-48 rounded-full border-8 border-grey bg-white md:w-72" />
                     <button
                         className="mt-5 w-4/5 leading-10 text-md bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-105 disabled:bg-blue-300 disabled:cursor-not-allowed"
@@ -42,7 +42,7 @@ export default function Page() {
                         Delete Account
                     </button>
                 </div>
-                <div className="w-96 mr-10 ml-5">
+                <div className="w-96 m-0 md:mr-10 md:ml-5">
                     <Textfield type="email" label="Email" disabled={true} required={true} value={getUserFromStorage().email} />
                     <Textfield type="text" label="Username" disabled={true} required={true} value={getUserFromStorage().username} />
                     <Textfield type="date" label="Date of Birth" disabled={true} required={true} value={formatDate(getUserFromStorage().dob)} />
