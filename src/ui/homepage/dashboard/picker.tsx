@@ -11,7 +11,7 @@ export function YearPicker({ labelName, defaultValue, onChange }: {
         <div className="flex items-center space-x-1 mr-1">
             <label className="text-right w-16 text-xs font-normal text-gray-900">{labelName}</label>
             <select
-                className="w-20 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-21 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 defaultValue={defaultValue}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     const year = parseInt(e.target.value)
