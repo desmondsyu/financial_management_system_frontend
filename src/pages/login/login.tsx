@@ -75,7 +75,7 @@ export default function Page() {
     }, [images.length]);
 
     return (
-        <div className="flex w-screen h-screen justify-center">
+        <div className="flex w-screen h-screen justify-center bg-cashcalmtheme">
             <div className="w-2/3 px-5 m-5 justify-center items-center hidden lg:block">
                 <div className="relative w-full h-full">
                     {images.map((image, index) => (
