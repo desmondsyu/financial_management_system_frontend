@@ -8,10 +8,10 @@ export function YearPicker({ labelName, defaultValue, onChange }: {
     const [selectedYear, setSelectedYear] = useState<number>();
 
     return (
-        <div className="flex items-center space-x-1 mr-2">
-            <label className="text-right w-20 text-sm font-medium text-gray-900">{labelName}</label>
+        <div className="flex items-center space-x-1 mr-1">
+            <label className="text-right w-20 text-xs font-medium text-gray-900">{labelName}</label>
             <select
-                className="w-18 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-18 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 defaultValue={defaultValue}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     const year = parseInt(e.target.value)
@@ -35,9 +35,9 @@ export function MonthPicker({ labelName, defaultValue, onChange }: {
 
     return (
         <div className="flex items-center space-x-1 mr-3">
-            <label className="text-right w-24 text-sm font-medium text-gray-900">{labelName}</label>
+            <label className="text-right w-18 text-xs font-medium text-gray-900">{labelName}</label>
             <select
-                className="w-13 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-13 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 defaultValue={defaultValue}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     const month = parseInt(e.target.value);
