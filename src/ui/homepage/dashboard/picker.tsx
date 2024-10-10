@@ -35,7 +35,7 @@ export function MonthPicker({ labelName, defaultValue, onChange }: {
 
     return (
         <div className="flex items-center space-x-1 mr-3">
-            <label className="text-right w-18 text-xs font-normal text-gray-900">{labelName}</label>
+            <label className="text-right w-19 text-xs font-normal text-gray-900">{labelName}</label>
             <select
                 className="w-17 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 defaultValue={defaultValue}
