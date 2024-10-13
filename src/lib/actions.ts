@@ -157,7 +157,7 @@ export async function addTransaction(transcation: TransactionProp): Promise<Tran
 
 export async function editTransaction(transaction: TransactionProp): Promise<Transaction | null> {
     try {
-        const response = await axios.put(`h${javaApi}/transactions`,
+        const response = await axios.put(`${javaApi}/transactions`,
             transaction,
             {
                 headers: {
