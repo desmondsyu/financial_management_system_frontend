@@ -58,6 +58,7 @@ export default function Page() {
         }
     }
 
+    
     const images = [
         // transactionImage,
         // dashboardImage,
